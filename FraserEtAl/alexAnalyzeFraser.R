@@ -68,6 +68,10 @@ longQRPs <- QRPs %>% pivot_longer(cols = "File drawer":"Hide imputation", names_
 #longQRPs <- QRPs %>% pivot_longer(cols = "unreported variables":"fabrication", names_to="practice")
 #longQRPs <- QRPs %>% pivot_longer(cols=everything(), names_to="practice")
 
+#https://datavizpyr.com/rain-cloud-plots-using-half-violin-plot-with-jittered-data-points-in-r/
+#Load half violin plot: geom_flat_violin()
+source("https://raw.githubusercontent.com/datavizpyr/data/master/half_flat_violinplot.R")
+
 prevCloud <-  ggplot( drop_na(longQRPs), aes(x = practice, y = value) ) + 
   facet_grid(field~.) +
   theme_bw() + theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12)) +
