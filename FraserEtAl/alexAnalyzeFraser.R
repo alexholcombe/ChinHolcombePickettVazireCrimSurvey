@@ -67,19 +67,19 @@ longQRPs <- QRPs %>% pivot_longer(cols = "File drawer":"Hide imputation", names_
 #longQRPs <- QRPs %>% pivot_longer(cols = "unreported variables":"fabrication", names_to="practice")
 #longQRPs <- QRPs %>% pivot_longer(cols=everything(), names_to="practice")
 
-#order from least endorsed to most endorsed, as found in JAson Chin et al. criminology data
+#Order the practices in the same order as am doing for all the other datasets.
+#Order from least endorsed to most endorsed, as found in JAson Chin et al. criminology data.
 #"Hide imputation", "Hide problems", "Round p-values", "HARK", "Exclude data selectively", "Drop covariates selectively",
 # "Sample selectively", "File drawer", "Switch analysis selectively", "Underreport results" 
 
 longQRPs$practice <- as.factor(longQRPs$practice)
 levels( longQRPs$practice )
 
-practiceOrderDesiredNeverAscending <- c(6,5,7,4,2,1,8,3,9,10) 
-longQRPs$practiceLongName <- factor(longQRPs$practiceLongName,
-                                    levels = levels(longQRPs$practiceLongName)[practiceOrderDesiredNeverAscending])
-
+longQRPs$practice<- factor(longQRPs$practice,
+                          levels = c("Hide imputation", "Hide problems", "Round p-values", "HARK", 
+                                     "Exclude data selectively", "Drop covariates selectively","Sample selectively", 
+                                     "File drawer", "Switch analysis selectively", "Underreport models") )
   
-
 #https://datavizpyr.com/rain-cloud-plots-using-half-violin-plot-with-jittered-data-points-in-r/
 #Load half violin plot: geom_flat_violin()
 source("https://raw.githubusercontent.com/datavizpyr/data/master/half_flat_violinplot.R")
