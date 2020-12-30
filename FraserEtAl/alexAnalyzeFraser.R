@@ -1,5 +1,5 @@
 library(readr)
-fraser <- read_csv("FraserEtAl/combined.csv",col_names=T)
+fraser <- read_csv("FraserEtAl/Fraser-orig-OSF-files/combined.csv",col_names=T)
 #based on their "Paper analysis.R"
 
 #Hannah's questions:
@@ -62,11 +62,10 @@ library(dplyr)
 library(tidyr)
 library(ggplot2)
 
-                                  levels = levels(longQRPs$practiceLongName)[practiceOrderDesiredNeverAscending])
-
 
 #Pivot all columns except field
-longQRPs <- QRPs %>% pivot_longer(cols = "unreported variables":"fabrication", names_to="practice")
+longQRPs <- QRPs %>% pivot_longer(cols = "File drawer":"Hide imputation", names_to="practice")
+#longQRPs <- QRPs %>% pivot_longer(cols = "unreported variables":"fabrication", names_to="practice")
 #longQRPs <- QRPs %>% pivot_longer(cols=everything(), names_to="practice")
 
 prevCloud <-  ggplot( drop_na(longQRPs), aes(x = practice, y = value) ) + 
@@ -81,5 +80,5 @@ prevCloud <-  ggplot( drop_na(longQRPs), aes(x = practice, y = value) ) +
   labs(title='Perceived prevalence of QRPs',
        subtitle='What percent of eco/evos would you say have engaged in this practice on at least one occasion?')
 show(prevCloud)
-ggsave("Fraser_QRPperceivedPrevalenceCloud.png", width = 30, height = 20, units = "cm")
+ggsave("FraserEtAl/Fraser_QRPperceivedPrevalenceCloud.png", width = 30, height = 20, units = "cm")
 
