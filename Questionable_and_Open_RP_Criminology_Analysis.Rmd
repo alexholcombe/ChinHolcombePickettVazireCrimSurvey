@@ -943,7 +943,7 @@ longQRPs <- longQRPs %>% mutate(
  )
 longQRPs$practiceLongName <- as.factor(longQRPs$practiceLongName)
 
-practiceOrderDesiredNeverAscending <- c(6,5,7,4,2,1,8,3,9,10) 
+practiceOrderDesiredNeverAscending <- c(6,5,7,4,2,1,8,3,9,10) #order from least endorsed to most endorsed
 longQRPs$practiceLongName <- factor(longQRPs$practiceLongName,
                                     levels = levels(longQRPs$practiceLongName)[practiceOrderDesiredNeverAscending])
 
@@ -963,7 +963,6 @@ QRPsstacked<- ggplot( drop_na(longQRPs), aes(practiceLongName,fill=response)) +
 
 show(QRPsstacked)
 ggsave("figures/QRPsStackedBarChart.png", width = 30, height = 20, units = "cm")
-
 ```
 
 

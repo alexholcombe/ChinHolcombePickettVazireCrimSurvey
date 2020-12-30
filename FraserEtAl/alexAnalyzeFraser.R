@@ -62,11 +62,22 @@ library(dplyr)
 library(tidyr)
 library(ggplot2)
 
-
 #Pivot all columns except field
 longQRPs <- QRPs %>% pivot_longer(cols = "File drawer":"Hide imputation", names_to="practice")
 #longQRPs <- QRPs %>% pivot_longer(cols = "unreported variables":"fabrication", names_to="practice")
 #longQRPs <- QRPs %>% pivot_longer(cols=everything(), names_to="practice")
+
+#order from least endorsed to most endorsed, as found in JAson Chin et al. criminology data
+#"Hide imputation", "Hide data problems", "Round p-values", "HARK", "Exclude data selectively", "Drop covariates selectively",
+# "Sample selectively", "File drawer", "Switch analysis selectively", "Underreport results" 
+
+as.factor(longQRPs$practice)
+
+practiceOrderDesiredNeverAscending <- c(6,5,7,4,2,1,8,3,9,10) 
+longQRPs$practiceLongName <- factor(longQRPs$practiceLongName,
+                                    levels = levels(longQRPs$practiceLongName)[practiceOrderDesiredNeverAscending])
+
+  
 
 #https://datavizpyr.com/rain-cloud-plots-using-half-violin-plot-with-jittered-data-points-in-r/
 #Load half violin plot: geom_flat_violin()
