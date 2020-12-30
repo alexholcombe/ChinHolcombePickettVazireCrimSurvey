@@ -34,7 +34,7 @@ knitr::opts_chunk$set(echo = TRUE,
 
 #Grabs the de-identified data
 
-QORP <- read_csv("QORP_de-identified.csv")
+QORP <- read_csv("data_deidentified/QORP_de-identified.csv")
 
 #Recoding variables
 
@@ -313,7 +313,7 @@ career$freq <- round(career$freq, digits = 2)
 
 career
 
-write.csv(career, file = "demographics_careerlevel.csv")
+write.csv(career, file = "figures/demographics_careerlevel.csv")
 
 #Methods classes
 
@@ -372,7 +372,7 @@ classes <- bind_rows(classes_split, classes_all )
 
 classes
 
-write.csv(classes, file = "demographics_careerlevel.csv")
+write.csv(classes, file = "tables/demographics_careerlevel.csv")
 
 ```
 
@@ -432,7 +432,7 @@ selfuse_quant$var <- sub("fillingin", "Hide imputation", selfuse_quant$var)
 
 selfuse_quant
 
-write.csv(selfuse_quant, file = "selfuse_quant.csv")
+write.csv(selfuse_quant, file = "tables/selfuse_quant.csv")
 
 ##Self use percent - for table 2 and 3
 
@@ -483,7 +483,7 @@ selfusepercent_quant$var <- sub("fillingin", "Hide imputation", selfusepercent_q
 
 selfusepercent_quant
 
-write.csv(selfusepercent_quant, file = "selfusepercent_quant.csv")
+write.csv(selfusepercent_quant, file = "tables/selfusepercent_quant.csv")
 
 ```
 
@@ -545,7 +545,7 @@ selfuse_all <- selfuse_quant
 
 selfuse_all
 
-write.csv(selfuse_all, file = "selfuse_all.csv")
+write.csv(selfuse_all, file = "tables/selfuse_all.csv")
 
 ##Self use percent - for table 2 and 3
 
@@ -597,7 +597,7 @@ selfusepercent_all <- selfusepercent_quant
 
 selfusepercent_all
 
-write.csv(selfusepercent_all, file = "selfusepercent_all.csv")
+write.csv(selfusepercent_all, file = "tables/selfusepercent_all.csv")
 
 ```
 
@@ -652,7 +652,7 @@ selfuse_nonquant <- selfuse_quant
 
 selfuse_nonquant
 
-write.csv(selfuse_nonquant, file = "selfuse_nonquant.csv")
+write.csv(selfuse_nonquant, file = "tables/selfuse_nonquant.csv")
 
 ##Self use percent - for table 2 and 3
 
@@ -698,7 +698,7 @@ selfusepercent_nonquant <- selfusepercent_quant
 
 selfusepercent_nonquant
 
-write.csv(selfusepercent_nonquant, file = "selfusepercent_nonquant.csv")
+write.csv(selfusepercent_nonquant, file = "tables/selfusepercent_nonquant.csv")
 
 ```
 
@@ -750,7 +750,7 @@ endorse_quant$var <- sub("fillingin", "Hide imputation", endorse_quant$var)
 
 endorse_quant
 
-write.csv(endorse_quant, file = "endorse_quant.csv")
+write.csv(endorse_quant, file = "tables/endorse_quant.csv")
 
 
 ```
@@ -802,7 +802,7 @@ endorse_quant$var <- sub("fillingin", "Hide imputation", endorse_quant$var)
 endorse_all <- endorse_quant
 endorse_all
 
-write.csv(endorse_all, file = "endorse_all.csv")
+write.csv(endorse_all, file = "tables/endorse_all.csv")
 
 
 ```
@@ -849,7 +849,7 @@ endorse_quant$var <- sub("fillingin", "Hide imputation", endorse_quant$var)
 endorse_nonquant <- endorse_quant
 endorse_nonquant
 
-write.csv(endorse_nonquant, file = "endorse_nonquant.csv")
+write.csv(endorse_nonquant, file = "tables/endorse_nonquant.csv")
 
 
 ```
@@ -864,7 +864,7 @@ select_at(vars(ends_with("should"))) %>%
 map_df(~ broom::tidy(table(.)), .id = 'var')
 endorse_quant
 
-write.csv(endorse_quant_simine, file = "endorse_quant_simine.csv")
+write.csv(endorse_quant_simine, file = "tables/endorse_quant_simine.csv")
 
 #What the variables and levels mean:
 
@@ -951,7 +951,7 @@ longQRPs$response <- as.factor(longQRPs$response)
 longQRPs$response <- fct_relevel(longQRPs$response, "Almost always","Often","Rarely","Never")
 
 #plot after dropping NAs
-ggplot( drop_na(longQRPs), aes(practiceLongName,fill=response)) + 
+QRPsstacked<- ggplot( drop_na(longQRPs), aes(practiceLongName,fill=response)) + 
   geom_bar(position="fill") + #this is what changes it from counts to proportion
   xlab("QRP") + ylab("proportion") +
   #scale_colour_manual(values=c("chartreuse4","orangered4","darkorchid4","brown4"), aesthetics = "fill") +
@@ -960,6 +960,9 @@ ggplot( drop_na(longQRPs), aes(practiceLongName,fill=response)) +
   labs(title='Support for QRPs',
        subtitle='How frequently SHOULD criminologists use this practice?') +
   theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12)) #, legend.position = "top") +
+
+show(QRPsstacked)
+ggsave("figures/QRPsStackedBarChart.png", width = 30, height = 20, units = "cm")
 
 ```
 
@@ -1013,7 +1016,7 @@ OSPsStackedBarChart<- ggplot( drop_na(longOSPs), aes( x=practiceLongName,fill=re
   theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12)) #, legend.position = "top")
 
 show(OSPsStackedBarChart)
-ggsave("OSPsStackedBarChart.png", width = 30, height = 20, units = "cm")
+ggsave("figures/OSPsStackedBarChart.png", width = 30, height = 20, units = "cm")
 
 ```
 
@@ -1028,7 +1031,7 @@ tq<-drop_na(longQRPs) %>%
   relocate(practiceLongName,response,percentRounded)
 show(tq)
 #https://sejdemyr.github.io/r-tutorials/basics/tables-in-r/
-write.table(tq, file = "QRPsupportTable.txt", sep = "\t", quote = FALSE, row.names = T)
+write.table(tq, file = "tables/QRPsupportTable.txt", sep = "\t", quote = FALSE, row.names = T)
 
 ```
 
@@ -1043,7 +1046,7 @@ to<- drop_na(longOSPs) %>%
   mutate(percentRounded = round(proportion*100,1)) %>%
   relocate(practiceLongName,response,percentRounded)
 show(to)
-write.table(to, file = "OSPsupportTable.txt", sep = "\t", quote = FALSE, row.names = T)
+write.table(to, file = "tables/OSPsupportTable.txt", sep = "\t", quote = FALSE, row.names = T)
 
 ```
 
@@ -1241,7 +1244,7 @@ endorse_other_QRP <-
 
 show(endorse_other_QRP)
 
-ggsave("fig1_endorseother.png", width = 30, height = 20, units = "cm")
+ggsave("figures/fig1_endorseother.png", width = 30, height = 20, units = "cm")
 
 ```
 
@@ -1297,7 +1300,7 @@ others_QRP <-
 
 show(others_QRP)
 
-ggsave("fig1alt_other.png", width = 30, height = 20, units = "cm")
+ggsave("figures/fig1alt_other.png", width = 30, height = 20, units = "cm")
 
 ```
 
@@ -1495,7 +1498,7 @@ endorse_other_OSP <-
 
 endorse_other_OSP
 
-ggsave("fig2_endorseother.png", width = 30, height = 20, units = "cm")
+ggsave("figures/fig2_endorseother.png", width = 30, height = 20, units = "cm")
 
 
 ##Creates textured version
@@ -1566,7 +1569,7 @@ others_OSP <-
 
 others_OSP
 
-ggsave("fig2alt_other.png", width = 30, height = 20, units = "cm")
+ggsave("figures/fig2alt_other.png", width = 30, height = 20, units = "cm")
 
 ```
 
@@ -1615,7 +1618,7 @@ fig1_alt_other<-
       theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12)) 
 
 show(fig1_alt_other)
-ggsave("fig1alt_other.png", width = 30, height = 20, units = "cm")
+ggsave("figures/fig1alt_other.png", width = 30, height = 20, units = "cm")
 ```
 
 Now plot the actual data points with raincloud or similar. First plot a histogram to get a feel for the data.
@@ -1650,7 +1653,7 @@ QRPprevCloud <-  ggplot( drop_na(longQRPprevalence), aes(x = practiceLongName, y
       theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12)) 
 
 show(QRPprevCloud)
-ggsave("QRPperceivedPrevalenceCloud.png", width = 30, height = 20, units = "cm")
+ggsave("figures/QRPperceivedPrevalenceCloud.png", width = 30, height = 20, units = "cm")
 ```
 
 
@@ -1698,7 +1701,7 @@ fig2_alt_other<-
       theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12)) 
 
 show(fig2_alt_other)
-ggsave("fig2alt_other.png", width = 30, height = 20, units = "cm")
+ggsave("figures/fig2alt_other.png", width = 30, height = 20, units = "cm")
 ```
 
 Now plot the actual data points with raincloud or similar. First plot a histogram to get a feel for the data.
@@ -1732,7 +1735,7 @@ OSPprevCloud <-  ggplot( drop_na(longOSPprevalence), aes(x = practiceLongName, y
       theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12)) 
 
 show(OSPprevCloud)
-ggsave("OSPperceivedPrevalenceCloud.png", width = 30, height = 20, units = "cm")
+ggsave("figures/OSPperceivedPrevalenceCloud.png", width = 30, height = 20, units = "cm")
 ```
 
 #Figure 1 original version - QRP endorsement and perceived prevalence - All
@@ -1934,7 +1937,7 @@ endorse_other_QRP <-
 
 endorse_other_QRP
 
-ggsave("fig1all_endorseother.png", width = 30, height = 20, units = "cm")
+ggsave("figures/fig1all_endorseother.png", width = 30, height = 20, units = "cm")
 
 
 ```
@@ -2046,7 +2049,7 @@ endorse_other_QRP <-
 
 show(endorse_other_QRP)
 
-ggsave("fig1nonquant_endorseother.png", width = 30, height = 20, units = "cm")
+ggsave("figures/fig1nonquant_endorseother.png", width = 30, height = 20, units = "cm")
 
 
 ```
@@ -2244,7 +2247,7 @@ endorse_other_OSP <-
 
 endorse_other_OSP
 
-ggsave("fig2all_endorseother.png", width = 30, height = 20, units = "cm")
+ggsave("figures/fig2all_endorseother.png", width = 30, height = 20, units = "cm")
 
 
 ##Creates textured version
@@ -2415,7 +2418,7 @@ endorse_other_OSP <-
 
 endorse_other_OSP
 
-ggsave("fig2non_endorseother.png", width = 30, height = 20, units = "cm")
+ggsave("figures/fig2non_endorseother.png", width = 30, height = 20, units = "cm")
 
 
 ##Creates textured version
