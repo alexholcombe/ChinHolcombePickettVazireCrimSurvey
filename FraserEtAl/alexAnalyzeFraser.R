@@ -68,10 +68,11 @@ longQRPs <- QRPs %>% pivot_longer(cols = "File drawer":"Hide imputation", names_
 #longQRPs <- QRPs %>% pivot_longer(cols=everything(), names_to="practice")
 
 #order from least endorsed to most endorsed, as found in JAson Chin et al. criminology data
-#"Hide imputation", "Hide data problems", "Round p-values", "HARK", "Exclude data selectively", "Drop covariates selectively",
+#"Hide imputation", "Hide problems", "Round p-values", "HARK", "Exclude data selectively", "Drop covariates selectively",
 # "Sample selectively", "File drawer", "Switch analysis selectively", "Underreport results" 
 
-as.factor(longQRPs$practice)
+longQRPs$practice <- as.factor(longQRPs$practice)
+levels( longQRPs$practice )
 
 practiceOrderDesiredNeverAscending <- c(6,5,7,4,2,1,8,3,9,10) 
 longQRPs$practiceLongName <- factor(longQRPs$practiceLongName,

@@ -427,7 +427,7 @@ selfuse_quant$var <- sub("pvalround", "Round p-values", selfuse_quant$var)
 selfuse_quant$var <- sub("analysischanging", "Switch analysis selectively", selfuse_quant$var)
 selfuse_quant$var <- sub("outliers", "Exclude data selectively", selfuse_quant$var)
 selfuse_quant$var <- sub("aspredicted", "HARK", selfuse_quant$var) 
-selfuse_quant$var <- sub("hidingproblems", "Hide data problems", selfuse_quant$var)
+selfuse_quant$var <- sub("hidingproblems", "Hide problems", selfuse_quant$var)
 selfuse_quant$var <- sub("fillingin", "Hide imputation", selfuse_quant$var)
 
 selfuse_quant
@@ -478,7 +478,7 @@ selfusepercent_quant$var <- sub("pvalround", "Round p-values", selfusepercent_qu
 selfusepercent_quant$var <- sub("analysischanging", "Switch analysis selectively", selfusepercent_quant$var)
 selfusepercent_quant$var <- sub("outliers", "Exclude data selectively", selfusepercent_quant$var)
 selfusepercent_quant$var <- sub("aspredicted", "HARK", selfusepercent_quant$var) 
-selfusepercent_quant$var <- sub("hidingproblems", "Hide data problems", selfusepercent_quant$var)
+selfusepercent_quant$var <- sub("hidingproblems", "Hide problems", selfusepercent_quant$var)
 selfusepercent_quant$var <- sub("fillingin", "Hide imputation", selfusepercent_quant$var)
 
 selfusepercent_quant
@@ -538,7 +538,7 @@ selfuse_quant$var <- sub("pvalround", "Round p-values", selfuse_quant$var)
 selfuse_quant$var <- sub("analysischanging", "Switch analysis selectively", selfuse_quant$var)
 selfuse_quant$var <- sub("outliers", "Exclude data selectively", selfuse_quant$var)
 selfuse_quant$var <- sub("aspredicted", "HARK", selfuse_quant$var) 
-selfuse_quant$var <- sub("hidingproblems", "Hide data problems", selfuse_quant$var)
+selfuse_quant$var <- sub("hidingproblems", "Hide problems", selfuse_quant$var)
 selfuse_quant$var <- sub("fillingin", "Hide imputation", selfuse_quant$var)
 
 selfuse_all <- selfuse_quant
@@ -590,7 +590,7 @@ selfusepercent_quant$var <- sub("pvalround", "Round p-values", selfusepercent_qu
 selfusepercent_quant$var <- sub("analysischanging", "Switch analysis selectively", selfusepercent_quant$var)
 selfusepercent_quant$var <- sub("outliers", "Exclude data selectively", selfusepercent_quant$var)
 selfusepercent_quant$var <- sub("aspredicted", "HARK", selfusepercent_quant$var) 
-selfusepercent_quant$var <- sub("hidingproblems", "Hide data problems", selfusepercent_quant$var)
+selfusepercent_quant$var <- sub("hidingproblems", "Hide problems", selfusepercent_quant$var)
 selfusepercent_quant$var <- sub("fillingin", "Hide imputation", selfusepercent_quant$var)
 
 selfusepercent_all <- selfusepercent_quant
@@ -645,7 +645,7 @@ selfuse_quant$var <- sub("pAttempt replicationrints", "Post article publicly", s
 
 selfuse_quant$var <- sub("omittinganalyses", "Underreport results", selfuse_quant$var) 
 selfuse_quant$var <- sub("aspredicted", "HARK", selfuse_quant$var) 
-selfuse_quant$var <- sub("hidingproblems", "Hide data problems", selfuse_quant$var)
+selfuse_quant$var <- sub("hidingproblems", "Hide problems", selfuse_quant$var)
 selfuse_quant$var <- sub("fillingin", "Hide imputation", selfuse_quant$var)
 
 selfuse_nonquant <- selfuse_quant
@@ -691,7 +691,7 @@ selfuse_quant$var <- sub("pAttempt replicationrints", "Post article publicly", s
 
 selfuse_quant$var <- sub("omittinganalyses", "Underreport results", selfuse_quant$var) 
 selfuse_quant$var <- sub("aspredicted", "HARK", selfuse_quant$var) 
-selfuse_quant$var <- sub("hidingproblems", "Hide data problems", selfuse_quant$var)
+selfuse_quant$var <- sub("hidingproblems", "Hide problems", selfuse_quant$var)
 selfuse_quant$var <- sub("fillingin", "Hide imputation", selfuse_quant$var)
 
 selfusepercent_nonquant <- selfusepercent_quant
@@ -745,7 +745,7 @@ endorse_quant$var <- sub("pvalround", "Round p-values", endorse_quant$var)
 endorse_quant$var <- sub("analysischanging", "Switch analysis selectively", endorse_quant$var)
 endorse_quant$var <- sub("outliers", "Exclude data selectively", endorse_quant$var)
 endorse_quant$var <- sub("aspredicted", "HARK", endorse_quant$var) 
-endorse_quant$var <- sub("hidingproblems", "Hide data problems", endorse_quant$var)
+endorse_quant$var <- sub("hidingproblems", "Hide problems", endorse_quant$var)
 endorse_quant$var <- sub("fillingin", "Hide imputation", endorse_quant$var)
 
 endorse_quant
@@ -796,7 +796,7 @@ endorse_quant$var <- sub("pvalround", "Round p-values", endorse_quant$var)
 endorse_quant$var <- sub("analysischanging", "Switch analysis selectively", endorse_quant$var)
 endorse_quant$var <- sub("outliers", "Exclude data selectively", endorse_quant$var)
 endorse_quant$var <- sub("aspredicted", "HARK", endorse_quant$var) 
-endorse_quant$var <- sub("hidingproblems", "Hide data problems", endorse_quant$var)
+endorse_quant$var <- sub("hidingproblems", "Hide problems", endorse_quant$var)
 endorse_quant$var <- sub("fillingin", "Hide imputation", endorse_quant$var)
 
 endorse_all <- endorse_quant
@@ -843,7 +843,7 @@ endorse_quant$var <- sub("pAttempt replicationrints", "Post article publicly", e
 
 endorse_quant$var <- sub("omittinganalyses", "Underreport results", endorse_quant$var) 
 endorse_quant$var <- sub("aspredicted", "HARK", endorse_quant$var) 
-endorse_quant$var <- sub("hidingproblems", "Hide data problems", endorse_quant$var)
+endorse_quant$var <- sub("hidingproblems", "Hide problems", endorse_quant$var)
 endorse_quant$var <- sub("fillingin", "Hide imputation", endorse_quant$var)
 
 endorse_nonquant <- endorse_quant
@@ -936,7 +936,7 @@ longQRPs <- longQRPs %>% mutate(
     practice=="pvalround_should" ~ "Round p-values",
     practice=="analysischanging_should" ~ "Switch analysis selectively",
     practice=="outliers_should" ~ "Exclude data selectively",
-    practice=="hidingproblems_should" ~ "Hide data problems",
+    practice=="hidingproblems_should" ~ "Hide problems",
     practice=="fillingin_should" ~ "Hide imputation",
     TRUE ~ "ERROR! unknown practice"
   )
