@@ -86,3 +86,10 @@ prevCloud <-  ggplot( drop_na(longQRPs), aes(x = practice, y = value) ) +
 show(prevCloud)
 ggsave("FraserEtAl/Fraser_QRPperceivedPrevalenceCloud.png", width = 30, height = 20, units = "cm")
 
+
+#Also calculate correlation matrix
+corrmatrix = cor(drop_na(  QRPs %>% select(-field)  ))
+
+#install.packages("corrplot")
+library(corrplot)
+corrplot(corrmatrix)
