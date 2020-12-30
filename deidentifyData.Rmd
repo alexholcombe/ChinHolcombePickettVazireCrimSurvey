@@ -1,0 +1,94 @@
+---
+title: "QRP - Criminology Analysis"
+author: "Jason Chin & Alex O. Holcombe"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output: html_document
+---
+
+Setup
+```{r setup}
+rm(list = ls())
+
+#loads libraries for working with data
+library(tidyverse)
+library(haven)
+library(knitr)
+library(PropCIs)
+
+#loads the libraries that contains visual themes for the plots
+library(ggthemr)
+library(RColorBrewer)
+library(ggpattern)
+
+knitr::opts_chunk$set(echo = TRUE, 
+ echo=TRUE, eval=TRUE, warning=FALSE, message=FALSE)
+```
+
+
+Takes the raw, identifiable data and de-identifies it
+
+Only the de-identified file is shared, this code will not be relevant to others than the main team. Rather, it's recorded for transparency's sake.
+
+Do not run this unless you have the raw file
+
+```{r de-identify and delete random response}
+
+#Grabs raw data
+QORP_raw <- read_csv("data_raw/Research practices in Criminology_September 12, 2020_12.53 - Final Raw CSV.csv")
+
+#Stores number of rows before any changes
+praw <- as.tibble(1, 1)
+praw[1, 1] <- nrow(QORP_raw)
+
+#Deletes REDACTED's data: "I selected arbitrary answers out to two decimal places for all answers." - Email to Jason Chin (August 21, 2020)
+
+#REDACTED is very likely:
+QORP_raw[714,]
+
+##Deletes REDACTED
+QORP_raw <- QORP_raw[!(QORP_raw$ResponseId == "R_3mlc6VAAIwW1tbX"),]
+
+#Stores rows after deleting REDACTED researcher
+
+praw[2, 1] <- nrow(QORP_raw)
+
+#Deletes columns: response ID and email (people left this to be contacted about the results)
+
+QORP_raw <- select(QORP_raw, -c(ResponseId, Q100))
+
+#Removes the two header rows Qualtrics made (that further explain the variables)
+
+QORP_raw <- slice(QORP_raw, -(1:2))
+
+#Stores rows after deleting Eck and extra rows - this is the raw sample size
+
+praw[3, 1] <- nrow(QORP_raw)
+
+#Deletes folks that say "End and do not record my data" to the last question because they should not have their de-identified data posted online
+
+QORP_raw <- QORP_raw[!grepl("End and do not record my data", QORP_raw$Q18.4),]
+
+#Stores rows after deleting those who don't want their data included. This is the total sample size that will be analyzed
+
+praw[4,1] <- nrow(QORP_raw)
+
+#Stores total responses including Eck for response rate
+
+praw[5,1] <- praw[3,1] + 1
+
+#stores total response rate
+
+praw[6,1] <- praw[5,1] / 13770
+
+#Changes column `Duration (in seconds)' b/c .sav files cannot have variables with "()" in them
+
+QORP_raw <-
+  QORP_raw %>% rename(Duration = `Duration (in seconds)`)
+
+#outputs de-identified CSV/SAV file to be shared on OSF and other repositories
+
+write.csv(QORP_raw, file = file.path("data_deidentified","QORP_de-identified.csv") )
+write_sav(QORP_raw, file.path("data_deidentified","QORP_de-identified.sav") )
+
+```
+
