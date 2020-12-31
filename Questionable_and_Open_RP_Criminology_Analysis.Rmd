@@ -25,25 +25,21 @@ knitr::opts_chunk$set(echo = TRUE,
 ```
 
 
+Only the de-identified file was shared via github
 
-##Only the de-identified file was shared via github
 
-
-#Prepares the data
+Prepares the data
 ```{r data prep}
 
 #Grabs the de-identified data
-
 QORP <- read_csv("data_deidentified/QORP_de-identified.csv")
 
 #Recoding variables
-
 ##Recodes the quantitative vs other methods question as 1 (quant) or 0 (anything else) and turns it into a factor variable
 
 QORP$Q1.1 <- ifelse(QORP$Q1.1 == "Yes", 1, ifelse(QORP$Q1.1 == "No", 0, NA))
 
 ##Recodes "have you used the practice.." from yes/no to 1/0
-
 QORP$Q3.3 <- ifelse(QORP$Q3.3 == "Yes", 1, ifelse(QORP$Q3.3 == "No", 0, NA))
 QORP$Q4.3 <- ifelse(QORP$Q4.3 == "Yes", 1, ifelse(QORP$Q4.3 == "No", 0, NA))
 QORP$Q5.3 <- ifelse(QORP$Q5.3 == "Yes", 1, ifelse(QORP$Q5.3 == "No", 0, NA))
@@ -63,7 +59,6 @@ QORP$Q17.3 <- ifelse(QORP$Q17.3 == "Yes", 1, ifelse(QORP$Q17.3 == "No", 0, NA))
 ##Recodes "how often should..." variables (i.e., endorsement)
 
 ###Changes blanks into NAs
-
 QORP$Q3.6 <- na_if(QORP$Q3.6, "")
 QORP$Q4.6 <- na_if(QORP$Q4.6, "")
 QORP$Q5.6 <- na_if(QORP$Q5.6, "")
@@ -81,7 +76,6 @@ QORP$Q16.6 <- na_if(QORP$Q16.6, "")
 QORP$Q17.6 <- na_if(QORP$Q17.6, "")
 
 #Recodes the endorse variable to numbers
-
 QORP$Q3.6 <- recode(QORP$Q3.6, "Never" = 1, "Rarely" = 2, "Often" = 3, "Almost always" = 4)
 QORP$Q4.6 <- recode(QORP$Q4.6, "Never" = 1, "Rarely" = 2, "Often" = 3, "Almost always" = 4)
 QORP$Q5.6 <- recode(QORP$Q5.6, "Never" = 1, "Rarely" = 2, "Often" = 3, "Almost always" = 4)
@@ -101,23 +95,18 @@ QORP$Q17.6 <- recode(QORP$Q17.6, "Never" = 1, "Rarely" = 2, "Often" = 3, "Almost
 ##Recodes the grad student, ECR, mid-career, senior variable
 
 ###Changes blanks into NAs
-
 QORP$Q18.2 <- na_if(QORP$Q18.2, "")
 
 ###Recodes these variables as factors in a sensible order
-
 QORP$Q18.2 <- factor(QORP$Q18.2, levels = c("Graduate student", "Earlier career academic/researcher (including post-doctoral fellows)", "Mid-career academic/researcher", "Senior research academic/researcher"))
 
 ##Recodes the number of methods/stats classes variable
 
 ###Changes blanks into NAs
-
 QORP$Q18.3 <- na_if(QORP$Q18.3, "")
 
 ###Changes "10 or more" to 10 for ease of analysis
-
 QORP$Q18.3 <- ifelse(QORP$Q18.3 == "10 or more", 10, QORP$Q18.3)
-
 QORP$Q18.3 <- as.integer(QORP$Q18.3)
 
 #Renames the variables to something more understandable.AND NOTE 6.5 and 6.6 are switched
@@ -125,11 +114,11 @@ QORP$Q18.3 <- as.integer(QORP$Q18.3)
 ##Quant or Non-quant (Have you conducted quantitative research that involves null-hypothesis significance testing?)
 
 QORP <-
-  QORP %>% rename(quant_researcher = Q1.1)
+  QORP %>% dplyr::rename(quant_researcher = Q1.1)
 
 ##As predicted (Reporting an unexpected finding or a result from exploratory analysis as having been predicted from the start)
 QORP <-
-  QORP %>% rename(aspredicted_others = Q3.2, aspredicted_self_ever = Q3.3, aspredicted_self_percent = Q3.5, aspredicted_should = Q3.6)
+  QORP %>% dplyr::rename(aspredicted_others = Q3.2, aspredicted_self_ever = Q3.3, aspredicted_self_percent = Q3.5, aspredicted_should = Q3.6)
 
 ##Omitting analyses (Reporting a set of results as the complete set of analyses when other analyses were also conducted)
 QORP <-
@@ -313,7 +302,7 @@ career$freq <- round(career$freq, digits = 2)
 
 career
 
-write.csv(career, file = "figures/demographics_careerlevel.csv")
+write.csv(career, file = "tables/demographics_careerlevel.csv")
 
 #Methods classes
 
@@ -949,6 +938,10 @@ longQRPs$practiceLongName <- factor(longQRPs$practiceLongName,
 
 longQRPs$response <- as.factor(longQRPs$response)
 longQRPs$response <- fct_relevel(longQRPs$response, "Almost always","Often","Rarely","Never")
+
+#Save tibble so that separate file can plot all 5 datasets on the same graph
+saveRDS(longQRPs, file = "longQRPs.rds")
+
 
 #plot after dropping NAs
 QRPsstacked<- ggplot( drop_na(longQRPs), aes(practiceLongName,fill=response)) + 
