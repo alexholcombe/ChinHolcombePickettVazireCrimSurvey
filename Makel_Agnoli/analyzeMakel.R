@@ -25,32 +25,42 @@ colnames(gtibble) <- c("ONSV*", "Omitting nonSignificant covariates",
 library(tidyr)
 longQRPs <- gtibble %>% pivot_longer(cols=everything(), names_to="practice")
 
-# longQRPs <- longQRPs %>% mutate(
-#   practiceLongName = case_when(
-#     practice=="biasedreporting_should" ~ "File drawer",
-#     practice=="aspredicted_should" ~ "HARK",
-#     practice=="biasedcov_should" ~ "Drop covariates selectively",
-#     practice=="stopping_should" ~ "Sample selectively",
-#     practice=="omittinganalyses_should" ~ "Underreport results",
-#     practice=="pvalround_should" ~ "Round p-values",
-#     practice=="analysischanging_should" ~ "Switch analysis selectively",
-#     practice=="outliers_should" ~ "Exclude data selectively",
-#     practice=="hidingproblems_should" ~ "Hide data problems",
-#     practice=="fillingin_should" ~ "Hide imputation",
-#     TRUE ~ "ERROR! unknown practice"
-#   )
-# )
-# longQRPs$practiceLongName <- as.factor(longQRPs$practiceLongName)
+longQRPs$practice <- as.factor(longQRPs$practice)
 
-practiceOrderDesiredNeverAscending <- c(6,5,7,4,2,1,8,3,9,10) 
-longQRPs$practiceLongName <- factor(longQRPs$practiceLongName,
-                                    levels = levels(longQRPs$practiceLongName)[practiceOrderDesiredNeverAscending])
+#Give practice same name as for other studies
+longQRPs <- longQRPs %>% mutate(
+  practiceStandardName = case_when(
+    practice=="Analysis Gaming" ~ "Switch analysis selectively",
+    practice=="Data Exclusion ARKing" ~ "Exclude data selectively",
+    practice=="Data peeking" ~ "Sample selectively",
+    practice=="Filling in missing data" ~ "Hide imputation",
+    practice=="HARKing" ~ "HARK",
+    practice=="Hiding methodological problems" ~ "Hide problems",
+    practice=="Omitting analyses" ~ "Underreport results",
+    practice=="Omitting nonSignificant covariates" ~ "Drop covariates selectively",
+    practice=="ONSV*" ~ "Omit nonsignificant studies or variables",
+    practice=="Rounding p-values" ~ "Round p-values",
+    TRUE    ~ "ERROR! unknown practice"
+   )
+ )
+longQRPs$practiceStandardName <- as.factor(longQRPs$practiceStandardName)
+
+#Order the practices in the same order as am doing for all the other datasets.
+#Order from least endorsed to most endorsed, as found in Jason Chin et al. criminology data.
+#"Hide imputation", "Hide problems", "Round p-values", "HARK", "Exclude data selectively", "Drop covariates selectively",
+# "Sample selectively", "Omitting nonsignificant studies or variables", "Switch analysis selectively", "Underreport results" 
+
+longQRPs$practiceStandardName <- factor(longQRPs$practiceStandardName,
+                           levels = c("Hide imputation", "Hide problems", "Round p-values", "HARK", 
+                                      "Exclude data selectively", "Drop covariates selectively","Sample selectively", 
+                                      "Omit nonsignificant studies or variables", "Switch analysis selectively",
+                                      "Underreport results") )
 
 #https://datavizpyr.com/rain-cloud-plots-using-half-violin-plot-with-jittered-data-points-in-r/
 #Load half violin plot: geom_flat_violin()
 source("https://raw.githubusercontent.com/datavizpyr/data/master/half_flat_violinplot.R")
 
-QRPprevCloud <-  ggplot( drop_na(longQRPs), aes(x = practice, y = value) ) + 
+QRPprevCloud <-  ggplot( drop_na(longQRPs), aes(x = practiceStandardName, y = value) ) + 
   theme_bw() +
   geom_flat_violin(fill="gray32",color="gray32", position = position_nudge(x = .18, y = 0)) +
   geom_jitter(alpha=0.1, size=.5, width=0.15, height=0) +
@@ -63,6 +73,9 @@ QRPprevCloud <-  ggplot( drop_na(longQRPs), aes(x = practice, y = value) ) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12)) 
 show(QRPprevCloud)
 ggsave("Makel_Agnoli/Makel_QRPperceivedPrevalenceCloud.png", width = 30, height = 20, units = "cm")
+
+#Save tibble so that separate file can plot all 5 datasets on the same graph
+saveRDS(longQRPs, file = "Makel_Agnoli/Makel_longQRPs.rds")
 
 #OSPs
 htibble<- tibble(data.frame(data_h))
@@ -85,6 +98,7 @@ OSPprevCloud <-  ggplot( drop_na(longOSPs), aes(x = practice, y = value) ) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12)) 
 show(OSPprevCloud)
 ggsave("Makel_Agnoli/Makel_OSPperceivedPrevalenceCloud.png", width = 30, height = 20, units = "cm")
+
 
 #Also calculate correlation matrix
 all <- cbind(gtibble,htibble)

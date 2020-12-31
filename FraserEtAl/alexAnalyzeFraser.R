@@ -49,7 +49,7 @@ colnames(QRPs) <- c("field","unreported variables","unreported covariates","HARK
                     "undisclosed problems","fabrication")
 
 #Change the variable names to the labels we use on our graphs, except for this field it's "Underreport models" instead of "Underreport results".
-colnames(QRPs) <- c("field","File drawer","Drop covariates selectively","HARK","Underreport models",
+colnames(QRPs) <- c("field","Omit nonsignificant studies or variables","Drop covariates selectively","HARK","Underreport models",
                     "Round p-values","Exclude data selectively","Sample selectively","Switch analysis selectively",
                     "Hide problems","Hide imputation")
 
@@ -63,7 +63,7 @@ library(tidyr)
 library(ggplot2)
 
 #Pivot all columns except field
-longQRPs <- QRPs %>% pivot_longer(cols = "File drawer":"Hide imputation", names_to="practice")
+longQRPs <- QRPs %>% pivot_longer(cols = "Omit nonsignificant studies or variables":"Hide imputation", names_to="practice")
 #longQRPs <- QRPs %>% pivot_longer(cols = "unreported variables":"fabrication", names_to="practice")
 #longQRPs <- QRPs %>% pivot_longer(cols=everything(), names_to="practice")
 
@@ -78,7 +78,8 @@ levels( longQRPs$practice )
 longQRPs$practice<- factor(longQRPs$practice,
                           levels = c("Hide imputation", "Hide problems", "Round p-values", "HARK", 
                                      "Exclude data selectively", "Drop covariates selectively","Sample selectively", 
-                                     "File drawer", "Switch analysis selectively", "Underreport models") )
+                                     "Omit nonsignificant studies or variables", "Switch analysis selectively",
+                                     "Underreport models") )
   
 #https://datavizpyr.com/rain-cloud-plots-using-half-violin-plot-with-jittered-data-points-in-r/
 #Load half violin plot: geom_flat_violin()
@@ -98,6 +99,8 @@ prevCloud <-  ggplot( drop_na(longQRPs), aes(x = practice, y = value) ) +
 show(prevCloud)
 ggsave("FraserEtAl/Fraser_QRPperceivedPrevalenceCloud.png", width = 30, height = 20, units = "cm")
 
+#Save tibble so that separate file can plot all 5 datasets on the same graph
+saveRDS(longQRPs, file = "FraserEtAl/longQRPs.rds")
 
 #Also calculate correlation matrix
 corrmatrix = cor(drop_na(  QRPs %>% select(-field)  ))

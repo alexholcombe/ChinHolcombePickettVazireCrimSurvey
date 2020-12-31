@@ -419,7 +419,7 @@ selfuse_quant$var <- sub("opencode", "Share code", selfuse_quant$var)
 selfuse_quant$var <- sub("rep", "Attempt replication", selfuse_quant$var) 
 selfuse_quant$var <- sub("pAttempt replicationrints", "Post article publicly", selfuse_quant$var) 
 
-selfuse_quant$var <- sub("biasedAttempt replicationorting", "File drawer", selfuse_quant$var)
+selfuse_quant$var <- sub("biasedAttempt replicationorting", "Omit nonsignificant studies or variables", selfuse_quant$var)
 selfuse_quant$var <- sub("stopping", "Sample selectively", selfuse_quant$var) 
 selfuse_quant$var <- sub("biasedcov", "Drop covariates selectively", selfuse_quant$var) 
 selfuse_quant$var <- sub("omittinganalyses", "Underreport results", selfuse_quant$var) 
@@ -470,7 +470,7 @@ selfusepercent_quant$var <- sub("opencode", "Share code", selfusepercent_quant$v
 selfusepercent_quant$var <- sub("rep", "Attempt replication", selfusepercent_quant$var) 
 selfusepercent_quant$var <- sub("pAttempt replicationrints", "Post article publicly", selfusepercent_quant$var) 
 
-selfusepercent_quant$var <- sub("biasedAttempt replicationorting", "File drawer", selfusepercent_quant$var)
+selfusepercent_quant$var <- sub("biasedAttempt replicationorting", "Omit nonsignificant studies or variables", selfusepercent_quant$var)
 selfusepercent_quant$var <- sub("stopping", "Sample selectively", selfusepercent_quant$var) 
 selfusepercent_quant$var <- sub("biasedcov", "Drop covariates selectively", selfusepercent_quant$var) 
 selfusepercent_quant$var <- sub("omittinganalyses", "Underreport results", selfusepercent_quant$var) 
@@ -530,7 +530,7 @@ selfuse_quant$var <- sub("opencode", "Share code", selfuse_quant$var)
 selfuse_quant$var <- sub("rep", "Attempt replication", selfuse_quant$var) 
 selfuse_quant$var <- sub("pAttempt replicationrints", "Post article publicly", selfuse_quant$var) 
 
-selfuse_quant$var <- sub("biasedAttempt replicationorting", "File drawer", selfuse_quant$var)
+selfuse_quant$var <- sub("biasedAttempt replicationorting", "Omit nonsignificant studies or variables", selfuse_quant$var)
 selfuse_quant$var <- sub("stopping", "Sample selectively", selfuse_quant$var) 
 selfuse_quant$var <- sub("biasedcov", "Drop covariates selectively", selfuse_quant$var) 
 selfuse_quant$var <- sub("omittinganalyses", "Underreport results", selfuse_quant$var) 
@@ -582,7 +582,7 @@ selfusepercent_quant$var <- sub("opencode", "Share code", selfusepercent_quant$v
 selfusepercent_quant$var <- sub("rep", "Attempt replication", selfusepercent_quant$var) 
 selfusepercent_quant$var <- sub("pAttempt replicationrints", "Post article publicly", selfusepercent_quant$var) 
 
-selfusepercent_quant$var <- sub("biasedAttempt replicationorting", "File drawer", selfusepercent_quant$var)
+selfusepercent_quant$var <- sub("biasedAttempt replicationorting", "Omit nonsignificant studies or variables", selfusepercent_quant$var)
 selfusepercent_quant$var <- sub("stopping", "Sample selectively", selfusepercent_quant$var) 
 selfusepercent_quant$var <- sub("biasedcov", "Drop covariates selectively", selfusepercent_quant$var) 
 selfusepercent_quant$var <- sub("omittinganalyses", "Underreport results", selfusepercent_quant$var) 
@@ -737,7 +737,7 @@ endorse_quant$var <- sub("opencode", "Share code", endorse_quant$var)
 endorse_quant$var <- sub("rep", "Attempt replication", endorse_quant$var) 
 endorse_quant$var <- sub("pAttempt replicationrints", "Post article publicly", endorse_quant$var) 
 
-endorse_quant$var <- sub("biasedAttempt replicationorting", "File drawer", endorse_quant$var)
+endorse_quant$var <- sub("biasedAttempt replicationorting", "Omit nonsignificant studies or variables", endorse_quant$var)
 endorse_quant$var <- sub("stopping", "Sample selectively", endorse_quant$var) 
 endorse_quant$var <- sub("biasedcov", "Drop covariates selectively", endorse_quant$var) 
 endorse_quant$var <- sub("omittinganalyses", "Underreport results", endorse_quant$var) 
@@ -788,7 +788,7 @@ endorse_quant$var <- sub("opencode", "Share code", endorse_quant$var)
 endorse_quant$var <- sub("rep", "Attempt replication", endorse_quant$var) 
 endorse_quant$var <- sub("pAttempt replicationrints", "Post article publicly", endorse_quant$var) 
 
-endorse_quant$var <- sub("biasedAttempt replicationorting", "File drawer", endorse_quant$var)
+endorse_quant$var <- sub("biasedAttempt replicationorting", "Omit nonsignificant studies or variables", endorse_quant$var)
 endorse_quant$var <- sub("stopping", "Sample selectively", endorse_quant$var) 
 endorse_quant$var <- sub("biasedcov", "Drop covariates selectively", endorse_quant$var) 
 endorse_quant$var <- sub("omittinganalyses", "Underreport results", endorse_quant$var) 
@@ -928,7 +928,7 @@ longQRPs <- QRPs %>% pivot_longer(cols=everything(), names_to="practice", values
 
 longQRPs <- longQRPs %>% mutate(
   practiceLongName = case_when(
-    practice=="biasedreporting_should" ~ "File drawer",
+    practice=="biasedreporting_should" ~ "Omit nonsignificant studies or variables",
     practice=="aspredicted_should" ~ "HARK",
     practice=="biasedcov_should" ~ "Drop covariates selectively",
     practice=="stopping_should" ~ "Sample selectively",
@@ -1219,7 +1219,7 @@ endorse_other$var <- sub("_endorse", "", endorse_other$var)
 
 ####Changes the main QRP variable of interest to the standard QRP names
 
-endorse_other$var <- sub("biasedreporting", "File drawer", endorse_other$var)
+endorse_other$var <- sub("biasedreporting", "Omit nonsignificant studies or variables", endorse_other$var)
 endorse_other$var <- sub("stopping", "Sample selectively", endorse_other$var) 
 endorse_other$var <- sub("biasedcov", "Drop covariates selectively", endorse_other$var) 
 endorse_other$var <- sub("omittinganalyses", "Underreport results", endorse_other$var) 
@@ -1275,7 +1275,7 @@ others$var <- sub("_others", "", others$var)
 
 ####Changes the main QRP variable of interest to the standard QRP names
 
-others$var <- sub("biasedreporting", "File drawer", others$var)
+others$var <- sub("biasedreporting", "Omit nonsignificant studies or variables", others$var)
 others$var <- sub("stopping", "Sample selectively", others$var) 
 others$var <- sub("biasedcov", "Drop covariates selectively", others$var) 
 others$var <- sub("omittinganalyses", "Underreport results", others$var) 
@@ -1587,7 +1587,7 @@ longQRPprevalence <- QRPprevalence %>% pivot_longer(cols=everything(), names_to=
 
 longQRPprevalence <- longQRPprevalence %>% mutate(
   practiceLongName = case_when(
-    practice=="biasedreporting_others" ~ "File drawer",
+    practice=="biasedreporting_others" ~ "Omit nonsignificant studies or variables",
     practice=="aspredicted_others" ~ "HARK",
     practice=="biasedcov_others" ~ "Drop covariates selectively",
     practice=="stopping_others" ~ "Sample selectively",
@@ -1912,7 +1912,7 @@ endorse_other$var <- sub("_endorse", "", endorse_other$var)
 
 ####Changes the main QRP variable of interest to the standard QRP names
 
-endorse_other$var <- sub("biasedreporting", "File drawer", endorse_other$var)
+endorse_other$var <- sub("biasedreporting", "Omit nonsignificant studies or variables", endorse_other$var)
 endorse_other$var <- sub("stopping", "Sample selectively", endorse_other$var) 
 endorse_other$var <- sub("biasedcov", "Drop covariates selectively", endorse_other$var) 
 endorse_other$var <- sub("omittinganalyses", "Underreport results", endorse_other$var) 
