@@ -33,7 +33,7 @@ longAgnoli <- longAgnoli %>% mutate(
     practice=="not report all the dependent m" ~ "Not report all DVs (closest to Omit n.s. studies or variables)",
     practice=="report an unexpected result as" ~ "HARK",
     practice=="report in a selective manner o" ~ "Omit nonsignificant studies or variables",
-    practice=="Stop collecting data early tha" ~ "Stop collecting data early because sig (closest to Sample selectively)",
+    practice=="Stop collecting data early tha" ~ "Stop collecting data bc sig (closest to Sample selectively)",
     TRUE    ~ "ERROR! unknown practice"
   )
 )
@@ -49,7 +49,7 @@ longAgnoli$practiceStandardName <- factor(longAgnoli$practiceStandardName,
                                                    "Round p-values", 
                                                    "HARK", 
                                                    "Exclude data selectively",
-                                                   "Stop collecting data early because sig (closest to Sample selectively)", 
+                                                   "Stop collecting data bc sig (closest to Sample selectively)", 
                                                    "Not report all conditions (closest to Omit n.s. studies or variables)",
                                                    "Not report all DVs (closest to Omit n.s. studies or variables)",
                                                    "Sample selectively",

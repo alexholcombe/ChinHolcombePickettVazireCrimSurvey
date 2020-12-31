@@ -1,0 +1,79 @@
+---
+title: "QRP prevalence perception from multiple papers"
+author: "Jason Chin & Alex O. Holcombe"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output: html_document
+---
+
+```{r setup}
+#loads libraries for working with data
+library(tidyverse)
+library(readr)
+knitr::opts_chunk$set(echo = TRUE, 
+ echo=TRUE, eval=TRUE, warning=T, message=T)
+
+#https://datavizpyr.com/rain-cloud-plots-using-half-violin-plot-with-jittered-data-points-in-r/
+#Load half violin plot: geom_flat_violin()
+source("https://raw.githubusercontent.com/datavizpyr/data/master/half_flat_violinplot.R")
+```
+
+Load and bind together differnt studies' data
+
+```{r }
+Chin <- readRDS( "longQRPs.rds" )
+Chin <- Chin %>% rename( practiceStandardName = practiceLongName )
+Chin <- Chin %>% rename( value = response )
+
+Makel <- readRDS( file.path("Makel_Agnoli","Makel_longQRPs.rds") )
+
+Agnoli <- readRDS( file.path("Makel_Agnoli","Agnoli_LongQRPs.rds") )
+
+Chin$field <- "criminology"
+Makel$field<- "education"
+Agnoli$field<-"psychology"
+
+Chin$study <- "Chin (criminology)"
+Makel$study <- "Makel (education)"
+Agnoli$study <- "Agnoli (psychology)"
+
+Fraser <- readRDS( file.path("FraserEtAl","longQRPs.rds") )
+Fraser<- Fraser %>% mutate(
+    study = case_when(
+      field=="ecology" ~ "Fraser (ecology)",
+      field=="evolutionary biology" ~ "Fraser (evolutionary biology)",
+      TRUE ~ "ERROR! unknown field"
+  ))
+  
+Fraser <- Fraser %>% mutate( practiceStandardName = practice )
+
+CMAF <- rbind(Chin,Makel)
+CMAF <- rbind(CMAF,Agnoli)
+CMAF <- rbind(CMAF,Fraser)
+
+```
+
+```{r }
+levels(CMAF$practiceStandardName)
+practiceOrderDesiredNeverAscending <- c(1,14,2,3,4,11,5,6,7,12,8,9,10,16,13,15) #order from least endorsed to most endorsed
+CMAF$practiceStandardName <- factor(CMAF$practiceStandardName,
+                                    levels = levels(CMAF$practiceStandardName)[practiceOrderDesiredNeverAscending])
+```
+
+Plot
+```{r }
+
+
+QRPprevCloud <- ggplot( drop_na(CMAF),
+                        aes(x = practiceStandardName, y = value) ) + 
+  theme_bw() + facet_grid(study~.) +
+  geom_flat_violin(fill="gray32",color="gray32", position = position_nudge(x = .18, y = 0)) +
+  geom_jitter(alpha=0.1, size=.5, width=0.15, height=0) +
+  stat_summary(fun = mean, geom = "point", color='green4', size=4, alpha=0.82) +
+  stat_summary(fun.data = mean_cl_boot, fun.args=(conf.int=0.95), geom="errorbar", size=.9, width=0.1, color='green4', alpha=0.82) +
+  #geom_jitter(width=0.2, size=.2, alpha=0.1)+
+  xlab("QRP") + ylab("perceived % others use at least once") + ylim(0,100) +
+  labs(title='Perceived prevalence of QRPs used by a researcher on at least one occasion') +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12)) 
+show(QRPprevCloud)
+
+```
