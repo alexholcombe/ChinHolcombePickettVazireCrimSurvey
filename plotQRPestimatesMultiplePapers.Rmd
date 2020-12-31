@@ -68,10 +68,23 @@ CMAF$study <- factor(CMAF$study,
 
 ```
 
-Plot
+Plot including all fields, even ones that were only in Agnoli.
 ```{r }
+#Better to compare the distributions horizontally for the same study, but facet labels are too long to fit.
+# QRPprevCloud <- ggplot( drop_na(CMAF),
+#                         aes(x = study, y = value) ) + 
+#   theme_bw() + facet_grid(practiceStandardName ~.) +
+#   geom_flat_violin(fill="gray32",color="gray32", position = position_nudge(x = .18, y = 0)) +
+#   geom_jitter(alpha=0.1, size=.5, width=0.15, height=0) +
+#   stat_summary(fun = mean, geom = "point", color='green4', size=4, alpha=0.82) +
+#   stat_summary(fun.data = mean_cl_boot, fun.args=(conf.int=0.95), geom="errorbar", size=.9, width=0.1, color='green4', alpha=0.82) +
+#   #geom_jitter(width=0.2, size=.2, alpha=0.1)+
+#   xlab("QRP") + ylab("perceived % others use at least once") + ylim(0,100) +
+#   labs(title='Perceived prevalence of QRPs used by a researcher on at least one occasion') +
+#   theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12)) 
+# show(QRPprevCloud)
 
-QRPprevCloud <- ggplot( drop_na(CMAF),
+QRPprevCloudComplete <- ggplot( drop_na(CMAF),
                         aes(x = practiceStandardName, y = value) ) + 
   theme_bw() + facet_grid(study~.) +
   geom_flat_violin(fill="gray32",color="gray32", position = position_nudge(x = .18, y = 0)) +
@@ -82,6 +95,32 @@ QRPprevCloud <- ggplot( drop_na(CMAF),
   xlab("QRP") + ylab("perceived % others use at least once") + ylim(0,100) +
   labs(title='Perceived prevalence of QRPs used by a researcher on at least one occasion') +
   theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12)) 
-show(QRPprevCloud)
-ggsave( file.path("figures","MultipleStudiesPrevalencePerceptionDistributions.png"), width = 50, height = 30, units = "cm")
+show(QRPprevCloudComplete)
+ggsave( file.path("figures","MultipleStudiesPrevalencePerceptionDistributionsComplete.png"), width = 50, height = 30, units = "cm" )
+```
+
+Plot but don't include ones only in Agnoli.
+
+```{r }
+#Falsify data - John et al. had that, Agnoli et al, and Rabelo et al. 
+  
+omitExtraAgnoli <- CMAF %>% filter(practiceStandardName != "Mislead about demographic\nvariable effects") %>%
+      filter(practiceStandardName != "Not report all conditions\n(closest to Omit n.s. studies or variables)") %>%
+      filter(practiceStandardName != "Falsify data\n(closest to Hide imputation)") %>%
+      filter(practiceStandardName != "Not report all DVs\n(closest to Omit n.s. studies or variables)") %>%
+      filter(practiceStandardName != "Stop collecting data bc sig\n(closest to Sample selectively)"  )
+
+QRPprevCloudLess <- ggplot( drop_na(omitExtraAgnoli),
+                        aes(x = practiceStandardName, y = value) ) + 
+  theme_bw() + facet_grid(study~.) +
+  geom_flat_violin(fill="gray32",color="gray32", position = position_nudge(x = .18, y = 0)) +
+  geom_jitter(alpha=0.1, size=.5, width=0.15, height=0) +
+  stat_summary(fun = mean, geom = "point", color='green4', size=4, alpha=0.82) +
+  stat_summary(fun.data = mean_cl_boot, fun.args=(conf.int=0.95), geom="errorbar", size=.9, width=0.1, color='green4', alpha=0.82) +
+  #geom_jitter(width=0.2, size=.2, alpha=0.1)+
+  xlab("QRP") + ylab("perceived % others use at least once") + ylim(0,100) +
+  labs(title='Perceived prevalence of QRPs used by a researcher on at least one occasion') +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12)) 
+show(QRPprevCloudLess)
+ggsave( file.path("figures","MultipleStudiesPrevalencePerceptionDistributionsLess.png"), width = 50, height = 30, units = "cm" )
 ```
