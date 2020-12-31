@@ -25,15 +25,15 @@ levels(longAgnoli$practice)
 longAgnoli <- longAgnoli %>% mutate(
   practiceStandardName = case_when(
     practice=="“round” a p value (for example" ~ "Round p-values",
-    practice=="affirm that demographic variab" ~ "Mislead about demographic var effects",
+    practice=="affirm that demographic variab" ~ "Mislead about demographic\nvariable effects",
     practice=="Decide to collect more data af" ~ "Sample selectively",
     practice=="Decide whether to exclude some" ~ "Exclude data selectively",
-    practice=="Falsify the data"               ~ "Falsify data (closest to Hide imputation)",
-    practice=="not report all the conditions " ~ "Not report all conditions (closest to Omit n.s. studies or variables)",
-    practice=="not report all the dependent m" ~ "Not report all DVs (closest to Omit n.s. studies or variables)",
+    practice=="Falsify the data"               ~ "Falsify data\n(closest to Hide imputation)",
+    practice=="not report all the conditions " ~ "Not report all conditions\n(closest to Omit n.s. studies or variables)",
+    practice=="not report all the dependent m" ~ "Not report all DVs\n(closest to Omit n.s. studies or variables)",
     practice=="report an unexpected result as" ~ "HARK",
     practice=="report in a selective manner o" ~ "Omit nonsignificant studies or variables",
-    practice=="Stop collecting data early tha" ~ "Stop collecting data bc sig (closest to Sample selectively)",
+    practice=="Stop collecting data early tha" ~ "Stop collecting data bc sig\n(closest to Sample selectively)",
     TRUE    ~ "ERROR! unknown practice"
   )
 )
@@ -45,19 +45,20 @@ longAgnoli$practiceStandardName <- as.factor(longAgnoli$practiceStandardName)
 # "Sample selectively", "Omitting nonsignificant studies or variables", "Switch analysis selectively", "Underreport results" 
 
 longAgnoli$practiceStandardName <- factor(longAgnoli$practiceStandardName,
-                                        levels = c("Falsify data (closest to Hide imputation)",
+                                        levels = c("Falsify data\n(closest to Hide imputation)",
                                                    "Round p-values", 
                                                    "HARK", 
                                                    "Exclude data selectively",
-                                                   "Stop collecting data bc sig (closest to Sample selectively)", 
-                                                   "Not report all conditions (closest to Omit n.s. studies or variables)",
-                                                   "Not report all DVs (closest to Omit n.s. studies or variables)",
+                                                   "Stop collecting data bc sig\n(closest to Sample selectively)", 
+                                                   "Not report all conditions\n(closest to Omit n.s. studies or variables)",
+                                                   "Not report all DVs\n(closest to Omit n.s. studies or variables)",
                                                    "Sample selectively",
                                                    "Omit nonsignificant studies or variables",
-                                                   "Mislead about demographic var effects" ) )
+                                                   "Mislead about demographic\nvariable effects" ) )
 
 saveRDS(longAgnoli, file = "Makel_Agnoli/Agnoli_LongQRPs.rds")
-                                        
+
+#Plot with truncated Agnoli practice names                                    
 prevCloud <-  ggplot( drop_na(longAgnoli), aes(x = practice, y = value) ) + 
   theme_bw() +
   geom_flat_violin(fill="gray32",color="gray32", position = position_nudge(x = .18, y = 0)) +
@@ -93,4 +94,4 @@ corrmatrix = cor(drop_na(relevant))
 
 #install.packages("corrplot")
 library(corrplot)
-corrplot(corrmatrix)
+#corrplot(corrmatrix)

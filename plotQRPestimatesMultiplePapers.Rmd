@@ -83,5 +83,5 @@ QRPprevCloud <- ggplot( drop_na(CMAF),
   labs(title='Perceived prevalence of QRPs used by a researcher on at least one occasion') +
   theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12)) 
 show(QRPprevCloud)
-ggsave( file.path("figures","MultipleStudiesPrevalencePerceptionDistributions.png") )#, width = 30, height = 20, units = "cm"))
+ggsave( file.path("figures","MultipleStudiesPrevalencePerceptionDistributions.png"), width = 50, height = 30, units = "cm")
 ```
