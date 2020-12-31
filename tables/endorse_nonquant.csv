@@ -1,7 +1,7 @@
 "","var","estimate","statistic","p.value","parameter","conf.low","conf.high","method","alternative","sorter"
 "1","Underreport results",1.93,29.7820542324942,6.69719217742815e-73,187,1.8,2.05,"One Sample t-test","two.sided",1
 "2","HARK",1.87,23.7668638898634,1.2365094052658e-59,196,1.72,2.03,"One Sample t-test","two.sided",2
-"3","Hide data problems",1.61,22.3304614560663,6.39438506030778e-57,206,1.47,1.75,"One Sample t-test","two.sided",3
+"3","Hide problems",1.61,22.3304614560663,6.39438506030778e-57,206,1.47,1.75,"One Sample t-test","two.sided",3
 "4","Hide imputation",1.43,27.9658606633556,2.8719236325136e-69,190,1.33,1.53,"One Sample t-test","two.sided",4
 "5","Preregister study",2.48,41.0441192300415,6.21933693464116e-94,182,2.36,2.6,"One Sample t-test","two.sided",5
 "6","Share data",2.8,53.5882663309359,1.32997595512145e-125,213,2.7,2.9,"One Sample t-test","two.sided",6

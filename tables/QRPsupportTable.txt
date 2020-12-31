@@ -1,20 +1,20 @@
 practiceLongName	response	percentRounded	n	proportion
-1	Hide imputation	Almost always	1.2	8	0.0119047619047619
-2	Hide imputation	Often	4	27	0.0401785714285714
-3	Hide imputation	Rarely	13.2	89	0.132440476190476
-4	Hide imputation	Never	81.5	548	0.81547619047619
-5	Hide data problems	Almost always	7.9	54	0.0788321167883212
-6	Hide data problems	Often	2.9	20	0.0291970802919708
-7	Hide data problems	Rarely	14	96	0.14014598540146
-8	Hide data problems	Never	75.2	515	0.751824817518248
+1	Omit nonsignificant studies or variables	Almost always	6.6	43	0.0656488549618321
+2	Omit nonsignificant studies or variables	Often	13.6	89	0.13587786259542
+3	Omit nonsignificant studies or variables	Rarely	46.7	306	0.467175572519084
+4	Omit nonsignificant studies or variables	Never	33.1	217	0.331297709923664
+5	Hide problems	Almost always	7.9	54	0.0788321167883212
+6	Hide problems	Often	2.9	20	0.0291970802919708
+7	Hide problems	Rarely	14	96	0.14014598540146
+8	Hide problems	Never	75.2	515	0.751824817518248
 9	Round p-values	Almost always	5.5	37	0.0548961424332344
 10	Round p-values	Often	12.2	82	0.121661721068249
 11	Round p-values	Rarely	20.6	139	0.206231454005935
 12	Round p-values	Never	61.7	416	0.617210682492582
-13	HARK	Almost always	6.5	44	0.0654761904761905
-14	HARK	Often	11.5	77	0.114583333333333
-15	HARK	Rarely	27.2	183	0.272321428571429
-16	HARK	Never	54.8	368	0.547619047619048
+13	Hide imputation	Almost always	1.2	8	0.0119047619047619
+14	Hide imputation	Often	4	27	0.0401785714285714
+15	Hide imputation	Rarely	13.2	89	0.132440476190476
+16	Hide imputation	Never	81.5	548	0.81547619047619
 17	Exclude data selectively	Almost always	2.1	14	0.0209895052473763
 18	Exclude data selectively	Often	9	60	0.0899550224887556
 19	Exclude data selectively	Rarely	36.9	246	0.368815592203898
@@ -27,10 +27,10 @@ practiceLongName	response	percentRounded	n	proportion
 26	Sample selectively	Often	12.7	83	0.126717557251908
 27	Sample selectively	Rarely	49.8	326	0.497709923664122
 28	Sample selectively	Never	35.1	230	0.351145038167939
-29	File drawer	Almost always	6.6	43	0.0656488549618321
-30	File drawer	Often	13.6	89	0.13587786259542
-31	File drawer	Rarely	46.7	306	0.467175572519084
-32	File drawer	Never	33.1	217	0.331297709923664
+29	HARK	Almost always	6.5	44	0.0654761904761905
+30	HARK	Often	11.5	77	0.114583333333333
+31	HARK	Rarely	27.2	183	0.272321428571429
+32	HARK	Never	54.8	368	0.547619047619048
 33	Switch analysis selectively	Almost always	2	13	0.0195488721804511
 34	Switch analysis selectively	Often	16.4	109	0.16390977443609
 35	Switch analysis selectively	Rarely	54.1	360	0.541353383458647

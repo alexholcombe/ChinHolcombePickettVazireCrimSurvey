@@ -109,7 +109,7 @@ QORP$Q18.3 <- na_if(QORP$Q18.3, "")
 QORP$Q18.3 <- ifelse(QORP$Q18.3 == "10 or more", 10, QORP$Q18.3)
 QORP$Q18.3 <- as.integer(QORP$Q18.3)
 
-#Renames the variables to something more understandable.AND NOTE 6.5 and 6.6 are switched
+#dplyr::renames the variables to something more understandable.AND NOTE 6.5 and 6.6 are switched
 
 ##Quant or Non-quant (Have you conducted quantitative research that involves null-hypothesis significance testing?)
 
@@ -122,77 +122,77 @@ QORP <-
 
 ##Omitting analyses (Reporting a set of results as the complete set of analyses when other analyses were also conducted)
 QORP <-
-  QORP %>% rename(omittinganalyses_others = Q4.2, omittinganalyses_self_ever = Q4.3, omittinganalyses_self_percent = Q4.5, omittinganalyses_should = Q4.6)
+  QORP %>% dplyr::rename(omittinganalyses_others = Q4.2, omittinganalyses_self_ever = Q4.3, omittinganalyses_self_percent = Q4.5, omittinganalyses_should = Q4.6)
 
 ##Hiding problems (Not disclosing known problems in the method and analysis, or problems with the data quality, that potentially impact conclusions)
 
 QORP <-
-  QORP %>% rename(hidingproblems_others = Q5.2, hidingproblems_self_ever = Q5.3, hidingproblems_self_percent = Q5.5, hidingproblems_should = Q5.6)
+  QORP %>% dplyr::rename(hidingproblems_others = Q5.2, hidingproblems_self_ever = Q5.3, hidingproblems_self_percent = Q5.5, hidingproblems_should = Q5.6)
 
 ##Filling in missing data (Filling in missing data points without identifying those data as simulated)
 
 QORP <-
-  QORP %>% rename(fillingin_others = Q6.2, fillingin_self_ever = Q6.3, fillingin_self_percent = Q6.6, fillingin_should = Q6.5)
+  QORP %>% dplyr::rename(fillingin_others = Q6.2, fillingin_self_ever = Q6.3, fillingin_self_percent = Q6.6, fillingin_should = Q6.5)
 
 #Preregistering (Preregistering hypotheses and analysis plans prior to data collection)
 
 QORP <-
-  QORP %>% rename(prereg_others = Q7.2, prereg_self_ever = Q7.3, prereg_self_percent = Q7.5, prereg_should = Q7.6)
+  QORP %>% dplyr::rename(prereg_others = Q7.2, prereg_self_ever = Q7.3, prereg_self_percent = Q7.5, prereg_should = Q7.6)
 
 #Open data (Sharing data you collected to a publicly accessible, online repository)
 
 QORP <-
-  QORP %>% rename(opendata_others = Q8.2, opendata_self_ever = Q8.3, opendata_self_percent = Q8.5, opendata_should = Q8.6)
+  QORP %>% dplyr::rename(opendata_others = Q8.2, opendata_self_ever = Q8.3, opendata_self_percent = Q8.5, opendata_should = Q8.6)
 
 #Open code and materials (Sharing code or other research materials to a publicly accessible, online repository)
 
 QORP <-
-  QORP %>% rename(opencode_others = Q9.2, opencode_self_ever = Q9.3, opencode_self_percent = Q9.5, opencode_should = Q9.6)
+  QORP %>% dplyr::rename(opencode_others = Q9.2, opencode_self_ever = Q9.3, opencode_self_percent = Q9.5, opencode_should = Q9.6)
 
 #Replication (Sought to replicate the work of other researchers by following their methods as closely as possible with no intentional changes)
 
 QORP <-
-  QORP %>% rename(rep_others = Q10.2, rep_self_ever = Q10.3, rep_self_percent = Q10.5, rep_should = Q10.6)
+  QORP %>% dplyr::rename(rep_others = Q10.2, rep_self_ever = Q10.3, rep_self_percent = Q10.5, rep_should = Q10.6)
 
 #Preprints (Posted copies of your research so that it is not behind a paywall (e.g., on a publicly accessible, online preprint server))
 
 QORP <-
-  QORP %>% rename(preprints_others = Q11.2, preprints_self_ever = Q11.3, preprints_self_percent = Q11.5, preprints_should = Q11.6)
+  QORP %>% dplyr::rename(preprints_others = Q11.2, preprints_self_ever = Q11.3, preprints_self_percent = Q11.5, preprints_should = Q11.6)
 
 #Biased reporting (Not reporting studies or variables that failed to reach statistical significance (e.g. p < 0.05) or some other desired statistical threshold)
 
 QORP <-
-  QORP %>% rename(biasedreporting_others = Q12.2, biasedreporting_self_ever = Q12.3, biasedreporting_self_percent = Q12.5, biasedreporting_should = Q12.6)
+  QORP %>% dplyr::rename(biasedreporting_others = Q12.2, biasedreporting_self_ever = Q12.3, biasedreporting_self_percent = Q12.5, biasedreporting_should = Q12.6)
 
 #Biased covariate reporting (Not reporting covariates that failed to reach statistical significance (e.g. p < 0.05) or some other desired statistical threshold)
 
 QORP <-
-  QORP %>% rename(biasedcov_others = Q13.2, biasedcov_self_ever = Q13.3, biasedcov_self_percent = Q13.5, biasedcov_should = Q13.6)
+  QORP %>% dplyr::rename(biasedcov_others = Q13.2, biasedcov_self_ever = Q13.3, biasedcov_self_percent = Q13.5, biasedcov_should = Q13.6)
 
 #Rounding down p-values (Rounding-off a p-value or other quantity to meet a pre-specified threshold (e.g., reporting p = 0.054 as p = 0.05 or p = 0.013 as p = 0.01))
 
 QORP <-
-  QORP %>% rename(pvalround_others = Q14.2, pvalround_self_ever = Q14.3, pvalround_self_percent = Q14.5, pvalround_should = Q14.6)
+  QORP %>% dplyr::rename(pvalround_others = Q14.2, pvalround_self_ever = Q14.3, pvalround_self_percent = Q14.5, pvalround_should = Q14.6)
 
 #Data/outlier exclusion after peeking (Deciding to exclude data points after first checking the impact on statistical significance (e.g. p < 0.05) or some other desired statistical threshold)
 
 QORP <-
-  QORP %>% rename(outliers_others = Q15.2, outliers_self_ever = Q15.3, outliers_self_percent = Q15.5, outliers_should = Q15.6)
+  QORP %>% dplyr::rename(outliers_others = Q15.2, outliers_self_ever = Q15.3, outliers_self_percent = Q15.5, outliers_should = Q15.6)
 
 #Optional stopping (Collecting more data for a study after first inspecting whether the results are statistically significant (e.g. p < 0.05))
 
 QORP <-
-  QORP %>% rename(stopping_others = Q16.2, stopping_self_ever = Q16.3, stopping_self_percent = Q16.5, stopping_should = Q16.6)
+  QORP %>% dplyr::rename(stopping_others = Q16.2, stopping_self_ever = Q16.3, stopping_self_percent = Q16.5, stopping_should = Q16.6)
 
 #Analysis changing (Changing to another type of statistical analysis after the analysis initially chosen failed to reach statistical significance (e.g. p < 0.05) or some other desired statistical threshold)
 
 QORP <-
-  QORP %>% rename(analysischanging_others = Q17.2, analysischanging_self_ever = Q17.3, analysischanging_self_percent = Q17.5, analysischanging_should = Q17.6)
+  QORP %>% dplyr::rename(analysischanging_others = Q17.2, analysischanging_self_ever = Q17.3, analysischanging_self_percent = Q17.5, analysischanging_should = Q17.6)
 
 #Career level (Which of the following best describes your current position) and number of methods/stats classes (How many university courses (undergraduate or graduate) on methodology or statistics have you taken?)
 
 QORP <-
-  QORP %>% rename(career_level = Q18.2, classes = Q18.3)
+  QORP %>% dplyr::rename(career_level = Q18.2, classes = Q18.3)
 
 #Creates the endorse or not binary variables (Participant responded that the practice should be used either rarely, often, or almost always)
 QORP <-
@@ -244,27 +244,22 @@ QORP_nonquant <-
 
 ```
 
-#Demographics
+Demographics
 
 ```{r demographics}
 
 #Descriptive Analyses - All data
-
 ##Type of research they do
 
 ###Number of quantitative researchers vs non-quantitative vs NA
-
 QORP %>%
   group_by(quant_researcher) %>%
   summarise(n = n()) %>%
   mutate(freq = n / sum(n))
 
 ##Career level
-
 ###Participants at each career level - ALL
-
-career_all <-
-QORP %>%
+career_all <- QORP %>%
   drop_na(career_level) %>%
   group_by(career_level) %>%
   summarise(n = n()) %>%
@@ -939,10 +934,6 @@ longQRPs$practiceLongName <- factor(longQRPs$practiceLongName,
 longQRPs$response <- as.factor(longQRPs$response)
 longQRPs$response <- fct_relevel(longQRPs$response, "Almost always","Often","Rarely","Never")
 
-#Save tibble so that separate file can plot all 5 datasets on the same graph
-saveRDS(longQRPs, file = "longQRPs.rds")
-
-
 #plot after dropping NAs
 QRPsstacked<- ggplot( drop_na(longQRPs), aes(practiceLongName,fill=response)) + 
   geom_bar(position="fill") + #this is what changes it from counts to proportion
@@ -1051,7 +1042,7 @@ write.table(to, file = "tables/OSPsupportTable.txt", sep = "\t", quote = FALSE, 
 
 aspredicted_endorse <- QORP_quant %>% 
   summarise( sum=sum(aspredicted_endorse, na.rm = T), n=sum(!is.na(aspredicted_endorse)) ) %>%
-  rename(x=sum) %>% mutate(mean=x/n)
+  dplyr::rename(x=sum) %>% mutate(mean=x/n)
 aspredicted_endorseCI <- PropCIs::add4ci(aspredicted_endorse$x, aspredicted_endorse$n, conf.level=.95)
 
 endorse1 <-
@@ -1059,7 +1050,7 @@ tibble(var = "aspredicted_endorse", mean = aspredicted_endorse$mean, ymin = aspr
 
 omittinganalyses_endorse <- QORP_quant %>% 
   summarise( sum=sum(omittinganalyses_endorse, na.rm = T), n=sum(!is.na(omittinganalyses_endorse)) ) %>%
-  rename(x=sum) %>% mutate(mean=x/n)
+  dplyr::rename(x=sum) %>% mutate(mean=x/n)
 omittinganalyses_endorseCI <- PropCIs::add4ci(omittinganalyses_endorse$x, omittinganalyses_endorse$n, conf.level=.95)
 
 endorse2 <-
@@ -1067,7 +1058,7 @@ tibble(var = "omittinganalyses_endorse", mean = omittinganalyses_endorse$mean, y
 
 hidingproblems_endorse <- QORP_quant %>% 
   summarise( sum=sum(hidingproblems_endorse, na.rm = T), n=sum(!is.na(hidingproblems_endorse)) ) %>%
-  rename(x=sum) %>% mutate(mean=x/n)
+  dplyr::rename(x=sum) %>% mutate(mean=x/n)
 hidingproblems_endorseCI <- PropCIs::add4ci(hidingproblems_endorse$x, hidingproblems_endorse$n, conf.level=.95)
 
 endorse3 <-
@@ -1075,7 +1066,7 @@ tibble(var = "hidingproblems_endorse", mean = hidingproblems_endorse$mean, ymin 
 
 fillingin_endorse <- QORP_quant %>% 
   summarise( sum=sum(fillingin_endorse, na.rm = T), n=sum(!is.na(fillingin_endorse)) ) %>%
-  rename(x=sum) %>% mutate(mean=x/n)
+  dplyr::rename(x=sum) %>% mutate(mean=x/n)
 fillingin_endorseCI <- PropCIs::add4ci(fillingin_endorse$x, fillingin_endorse$n, conf.level=.95)
 
 endorse4 <-
@@ -1083,7 +1074,7 @@ tibble(var = "fillingin_endorse", mean = fillingin_endorse$mean, ymin = fillingi
 
 prereg_endorse <- QORP_quant %>% 
   summarise( sum=sum(prereg_endorse, na.rm = T), n=sum(!is.na(prereg_endorse)) ) %>%
-  rename(x=sum) %>% mutate(mean=x/n)
+  dplyr::rename(x=sum) %>% mutate(mean=x/n)
 prereg_endorseCI <- PropCIs::add4ci(prereg_endorse$x, prereg_endorse$n, conf.level=.95)
 
 endorse5 <-
@@ -1091,7 +1082,7 @@ tibble(var = "prereg_endorse", mean = prereg_endorse$mean, ymin = prereg_endorse
 
 opendata_endorse <- QORP_quant %>% 
   summarise( sum=sum(opendata_endorse, na.rm = T), n=sum(!is.na(opendata_endorse)) ) %>%
-  rename(x=sum) %>% mutate(mean=x/n)
+  dplyr::rename(x=sum) %>% mutate(mean=x/n)
 opendata_endorseCI <- PropCIs::add4ci(opendata_endorse$x, opendata_endorse$n, conf.level=.95)
 
 endorse6 <-
@@ -1099,7 +1090,7 @@ tibble(var = "opendata_endorse", mean = opendata_endorse$mean, ymin = opendata_e
 
 opencode_endorse <- QORP_quant %>% 
   summarise( sum=sum(opencode_endorse, na.rm = T), n=sum(!is.na(opencode_endorse)) ) %>%
-  rename(x=sum) %>% mutate(mean=x/n)
+  dplyr::rename(x=sum) %>% mutate(mean=x/n)
 opencode_endorseCI <- PropCIs::add4ci(opencode_endorse$x, opencode_endorse$n, conf.level=.95)
 
 endorse7 <-
@@ -1107,7 +1098,7 @@ tibble(var = "opencode_endorse", mean = opencode_endorse$mean, ymin = opencode_e
 
 rep_endorse <- QORP_quant %>% 
   summarise( sum=sum(rep_endorse, na.rm = T), n=sum(!is.na(rep_endorse)) ) %>%
-  rename(x=sum) %>% mutate(mean=x/n)
+  dplyr::rename(x=sum) %>% mutate(mean=x/n)
 rep_endorseCI <- PropCIs::add4ci(rep_endorse$x, rep_endorse$n, conf.level=.95)
 
 endorse8 <-
@@ -1115,7 +1106,7 @@ tibble(var = "rep_endorse", mean = rep_endorse$mean, ymin = rep_endorseCI$conf.i
 
 preprints_endorse <- QORP_quant %>% 
   summarise( sum=sum(preprints_endorse, na.rm = T), n=sum(!is.na(preprints_endorse)) ) %>%
-  rename(x=sum) %>% mutate(mean=x/n)
+  dplyr::rename(x=sum) %>% mutate(mean=x/n)
 preprints_endorseCI <- PropCIs::add4ci(preprints_endorse$x, preprints_endorse$n, conf.level=.95)
 
 endorse9 <-
@@ -1123,7 +1114,7 @@ tibble(var = "preprints_endorse", mean = preprints_endorse$mean, ymin = preprint
 
 biasedreporting_endorse <- QORP_quant %>% 
   summarise( sum=sum(biasedreporting_endorse, na.rm = T), n=sum(!is.na(biasedreporting_endorse)) ) %>%
-  rename(x=sum) %>% mutate(mean=x/n)
+  dplyr::rename(x=sum) %>% mutate(mean=x/n)
 biasedreporting_endorseCI <- PropCIs::add4ci(biasedreporting_endorse$x, biasedreporting_endorse$n, conf.level=.95)
 
 endorse10 <-
@@ -1131,7 +1122,7 @@ tibble(var = "biasedreporting_endorse", mean = biasedreporting_endorse$mean, ymi
 
 biasedcov_endorse <- QORP_quant %>% 
   summarise( sum=sum(biasedcov_endorse, na.rm = T), n=sum(!is.na(biasedcov_endorse)) ) %>%
-  rename(x=sum) %>% mutate(mean=x/n)
+  dplyr::rename(x=sum) %>% mutate(mean=x/n)
 biasedcov_endorseCI <- PropCIs::add4ci(biasedcov_endorse$x, biasedcov_endorse$n, conf.level=.95)
 
 endorse11 <-
@@ -1139,7 +1130,7 @@ tibble(var = "biasedcov_endorse", mean = biasedcov_endorse$mean, ymin = biasedco
 
 pvalround_endorse <- QORP_quant %>% 
   summarise( sum=sum(pvalround_endorse, na.rm = T), n=sum(!is.na(pvalround_endorse)) ) %>%
-  rename(x=sum) %>% mutate(mean=x/n)
+  dplyr::rename(x=sum) %>% mutate(mean=x/n)
 pvalround_endorseCI <- PropCIs::add4ci(pvalround_endorse$x, pvalround_endorse$n, conf.level=.95)
 
 endorse12 <-
@@ -1147,7 +1138,7 @@ tibble(var = "pvalround_endorse", mean = pvalround_endorse$mean, ymin = pvalroun
 
 outliers_endorse <- QORP_quant %>% 
   summarise( sum=sum(outliers_endorse, na.rm = T), n=sum(!is.na(outliers_endorse)) ) %>%
-  rename(x=sum) %>% mutate(mean=x/n)
+  dplyr::rename(x=sum) %>% mutate(mean=x/n)
 outliers_endorseCI <- PropCIs::add4ci(outliers_endorse$x, outliers_endorse$n, conf.level=.95)
 
 endorse13 <-
@@ -1155,7 +1146,7 @@ tibble(var = "outliers_endorse", mean = outliers_endorse$mean, ymin = outliers_e
 
 stopping_endorse <- QORP_quant %>% 
   summarise( sum=sum(stopping_endorse, na.rm = T), n=sum(!is.na(stopping_endorse)) ) %>%
-  rename(x=sum) %>% mutate(mean=x/n)
+  dplyr::rename(x=sum) %>% mutate(mean=x/n)
 stopping_endorseCI <- PropCIs::add4ci(stopping_endorse$x, stopping_endorse$n, conf.level=.95)
 
 endorse14 <-
@@ -1163,7 +1154,7 @@ tibble(var = "stopping_endorse", mean = stopping_endorse$mean, ymin = stopping_e
 
 analysischanging_endorse <- QORP_quant %>% 
   summarise( sum=sum(analysischanging_endorse, na.rm = T), n=sum(!is.na(analysischanging_endorse)) ) %>%
-  rename(x=sum) %>% mutate(mean=x/n)
+  dplyr::rename(x=sum) %>% mutate(mean=x/n)
 analysischanging_endorseCI <- PropCIs::add4ci(analysischanging_endorse$x, analysischanging_endorse$n, conf.level=.95)
 
 endorse15 <-
@@ -1198,7 +1189,7 @@ others <- arrange(others, sorter)
 others <- na.omit(others)
 others <- mutate(others, type = "others")
 others <- select(others, -p.value, -statistic, -parameter, -method, -alternative)
-others <- rename(others, mean=estimate, ymin = conf.high, ymax = conf.low)
+others <- dplyr::rename(others, mean=estimate, ymin = conf.high, ymax = conf.low)
 
 endorse_other <- rbind(endorse, others)
 
@@ -1220,7 +1211,7 @@ endorse_other$var <- sub("pvalround", "Round p-values", endorse_other$var)
 endorse_other$var <- sub("analysischanging", "Switch analysis selectively", endorse_other$var)
 endorse_other$var <- sub("outliers", "Exclude data selectively", endorse_other$var)
 endorse_other$var <- sub("aspredicted", "HARK", endorse_other$var) 
-endorse_other$var <- sub("hidingproblems", "Hide data problems", endorse_other$var)
+endorse_other$var <- sub("hidingproblems", "Hide problems", endorse_other$var)
 endorse_other$var <- sub("fillingin", "Hide imputation", endorse_other$var)
 
 ##Creates Figure 1
@@ -1258,7 +1249,7 @@ others <- arrange(others, sorter)
 others <- na.omit(others)
 others <- mutate(others, type = "others")
 others <- select(others, -p.value, -statistic, -parameter, -method, -alternative)
-others <- rename(others, mean=estimate, ymin = conf.high, ymax = conf.low)
+others <- dplyr::rename(others, mean=estimate, ymin = conf.high, ymax = conf.low)
 
 ###Changes the name of the main variables
 
@@ -1276,7 +1267,7 @@ others$var <- sub("pvalround", "Round p-values", others$var)
 others$var <- sub("analysischanging", "Switch analysis selectively", others$var)
 others$var <- sub("outliers", "Exclude data selectively", others$var)
 others$var <- sub("aspredicted", "HARK", others$var) 
-others$var <- sub("hidingproblems", "Hide data problems", others$var)
+others$var <- sub("hidingproblems", "Hide problems", others$var)
 others$var <- sub("fillingin", "Hide imputation", others$var)
 
 ##Creates Figure 1
@@ -1306,7 +1297,7 @@ ggsave("figures/fig1alt_other.png", width = 30, height = 20, units = "cm")
 
 aspredicted_endorse <- QORP_quant %>% 
   summarise( sum=sum(aspredicted_endorse, na.rm = T), n=sum(!is.na(aspredicted_endorse)) ) %>%
-  rename(x=sum) %>% mutate(mean=x/n)
+  dplyr::rename(x=sum) %>% mutate(mean=x/n)
 aspredicted_endorseCI <- PropCIs::add4ci(aspredicted_endorse$x, aspredicted_endorse$n, conf.level=.95)
 
 endorse1 <-
@@ -1314,7 +1305,7 @@ tibble(var = "aspredicted_endorse", mean = aspredicted_endorse$mean, ymin = aspr
 
 omittinganalyses_endorse <- QORP_quant %>% 
   summarise( sum=sum(omittinganalyses_endorse, na.rm = T), n=sum(!is.na(omittinganalyses_endorse)) ) %>%
-  rename(x=sum) %>% mutate(mean=x/n)
+  dplyr::rename(x=sum) %>% mutate(mean=x/n)
 omittinganalyses_endorseCI <- PropCIs::add4ci(omittinganalyses_endorse$x, omittinganalyses_endorse$n, conf.level=.95)
 
 endorse2 <-
@@ -1322,7 +1313,7 @@ tibble(var = "omittinganalyses_endorse", mean = omittinganalyses_endorse$mean, y
 
 hidingproblems_endorse <- QORP_quant %>% 
   summarise( sum=sum(hidingproblems_endorse, na.rm = T), n=sum(!is.na(hidingproblems_endorse)) ) %>%
-  rename(x=sum) %>% mutate(mean=x/n)
+  dplyr::rename(x=sum) %>% mutate(mean=x/n)
 hidingproblems_endorseCI <- PropCIs::add4ci(hidingproblems_endorse$x, hidingproblems_endorse$n, conf.level=.95)
 
 endorse3 <-
@@ -1330,7 +1321,7 @@ tibble(var = "hidingproblems_endorse", mean = hidingproblems_endorse$mean, ymin 
 
 fillingin_endorse <- QORP_quant %>% 
   summarise( sum=sum(fillingin_endorse, na.rm = T), n=sum(!is.na(fillingin_endorse)) ) %>%
-  rename(x=sum) %>% mutate(mean=x/n)
+  dplyr::rename(x=sum) %>% mutate(mean=x/n)
 fillingin_endorseCI <- PropCIs::add4ci(fillingin_endorse$x, fillingin_endorse$n, conf.level=.95)
 
 endorse4 <-
@@ -1338,7 +1329,7 @@ tibble(var = "fillingin_endorse", mean = fillingin_endorse$mean, ymin = fillingi
 
 prereg_endorse <- QORP_quant %>% 
   summarise( sum=sum(prereg_endorse, na.rm = T), n=sum(!is.na(prereg_endorse)) ) %>%
-  rename(x=sum) %>% mutate(mean=x/n)
+  dplyr::rename(x=sum) %>% mutate(mean=x/n)
 prereg_endorseCI <- PropCIs::add4ci(prereg_endorse$x, prereg_endorse$n, conf.level=.95)
 
 endorse5 <-
@@ -1346,7 +1337,7 @@ tibble(var = "prereg_endorse", mean = prereg_endorse$mean, ymin = prereg_endorse
 
 opendata_endorse <- QORP_quant %>% 
   summarise( sum=sum(opendata_endorse, na.rm = T), n=sum(!is.na(opendata_endorse)) ) %>%
-  rename(x=sum) %>% mutate(mean=x/n)
+  dplyr::rename(x=sum) %>% mutate(mean=x/n)
 opendata_endorseCI <- PropCIs::add4ci(opendata_endorse$x, opendata_endorse$n, conf.level=.95)
 
 endorse6 <-
@@ -1354,7 +1345,7 @@ tibble(var = "opendata_endorse", mean = opendata_endorse$mean, ymin = opendata_e
 
 opencode_endorse <- QORP_quant %>% 
   summarise( sum=sum(opencode_endorse, na.rm = T), n=sum(!is.na(opencode_endorse)) ) %>%
-  rename(x=sum) %>% mutate(mean=x/n)
+  dplyr::rename(x=sum) %>% mutate(mean=x/n)
 opencode_endorseCI <- PropCIs::add4ci(opencode_endorse$x, opencode_endorse$n, conf.level=.95)
 
 endorse7 <-
@@ -1362,7 +1353,7 @@ tibble(var = "opencode_endorse", mean = opencode_endorse$mean, ymin = opencode_e
 
 rep_endorse <- QORP_quant %>% 
   summarise( sum=sum(rep_endorse, na.rm = T), n=sum(!is.na(rep_endorse)) ) %>%
-  rename(x=sum) %>% mutate(mean=x/n)
+  dplyr::rename(x=sum) %>% mutate(mean=x/n)
 rep_endorseCI <- PropCIs::add4ci(rep_endorse$x, rep_endorse$n, conf.level=.95)
 
 endorse8 <-
@@ -1370,7 +1361,7 @@ tibble(var = "rep_endorse", mean = rep_endorse$mean, ymin = rep_endorseCI$conf.i
 
 preprints_endorse <- QORP_quant %>% 
   summarise( sum=sum(preprints_endorse, na.rm = T), n=sum(!is.na(preprints_endorse)) ) %>%
-  rename(x=sum) %>% mutate(mean=x/n)
+  dplyr::rename(x=sum) %>% mutate(mean=x/n)
 preprints_endorseCI <- PropCIs::add4ci(preprints_endorse$x, preprints_endorse$n, conf.level=.95)
 
 endorse9 <-
@@ -1378,7 +1369,7 @@ tibble(var = "preprints_endorse", mean = preprints_endorse$mean, ymin = preprint
 
 biasedreporting_endorse <- QORP_quant %>% 
   summarise( sum=sum(biasedreporting_endorse, na.rm = T), n=sum(!is.na(biasedreporting_endorse)) ) %>%
-  rename(x=sum) %>% mutate(mean=x/n)
+  dplyr::rename(x=sum) %>% mutate(mean=x/n)
 biasedreporting_endorseCI <- PropCIs::add4ci(biasedreporting_endorse$x, biasedreporting_endorse$n, conf.level=.95)
 
 endorse10 <-
@@ -1386,7 +1377,7 @@ tibble(var = "biasedreporting_endorse", mean = biasedreporting_endorse$mean, ymi
 
 biasedcov_endorse <- QORP_quant %>% 
   summarise( sum=sum(biasedcov_endorse, na.rm = T), n=sum(!is.na(biasedcov_endorse)) ) %>%
-  rename(x=sum) %>% mutate(mean=x/n)
+  dplyr::rename(x=sum) %>% mutate(mean=x/n)
 biasedcov_endorseCI <- PropCIs::add4ci(biasedcov_endorse$x, biasedcov_endorse$n, conf.level=.95)
 
 endorse11 <-
@@ -1394,7 +1385,7 @@ tibble(var = "biasedcov_endorse", mean = biasedcov_endorse$mean, ymin = biasedco
 
 pvalround_endorse <- QORP_quant %>% 
   summarise( sum=sum(pvalround_endorse, na.rm = T), n=sum(!is.na(pvalround_endorse)) ) %>%
-  rename(x=sum) %>% mutate(mean=x/n)
+  dplyr::rename(x=sum) %>% mutate(mean=x/n)
 pvalround_endorseCI <- PropCIs::add4ci(pvalround_endorse$x, pvalround_endorse$n, conf.level=.95)
 
 endorse12 <-
@@ -1402,7 +1393,7 @@ tibble(var = "pvalround_endorse", mean = pvalround_endorse$mean, ymin = pvalroun
 
 outliers_endorse <- QORP_quant %>% 
   summarise( sum=sum(outliers_endorse, na.rm = T), n=sum(!is.na(outliers_endorse)) ) %>%
-  rename(x=sum) %>% mutate(mean=x/n)
+  dplyr::rename(x=sum) %>% mutate(mean=x/n)
 outliers_endorseCI <- PropCIs::add4ci(outliers_endorse$x, outliers_endorse$n, conf.level=.95)
 
 endorse13 <-
@@ -1410,7 +1401,7 @@ tibble(var = "outliers_endorse", mean = outliers_endorse$mean, ymin = outliers_e
 
 stopping_endorse <- QORP_quant %>% 
   summarise( sum=sum(stopping_endorse, na.rm = T), n=sum(!is.na(stopping_endorse)) ) %>%
-  rename(x=sum) %>% mutate(mean=x/n)
+  dplyr::rename(x=sum) %>% mutate(mean=x/n)
 stopping_endorseCI <- PropCIs::add4ci(stopping_endorse$x, stopping_endorse$n, conf.level=.95)
 
 endorse14 <-
@@ -1418,7 +1409,7 @@ tibble(var = "stopping_endorse", mean = stopping_endorse$mean, ymin = stopping_e
 
 analysischanging_endorse <- QORP_quant %>% 
   summarise( sum=sum(analysischanging_endorse, na.rm = T), n=sum(!is.na(analysischanging_endorse)) ) %>%
-  rename(x=sum) %>% mutate(mean=x/n)
+  dplyr::rename(x=sum) %>% mutate(mean=x/n)
 analysischanging_endorseCI <- PropCIs::add4ci(analysischanging_endorse$x, analysischanging_endorse$n, conf.level=.95)
 
 endorse15 <-
@@ -1453,7 +1444,7 @@ others <- arrange(others, sorter)
 others <- na.omit(others)
 others <- mutate(others, type = "others")
 others <- select(others, -p.value, -statistic, -parameter, -method, -alternative)
-others <- rename(others, mean=estimate, ymin = conf.high, ymax = conf.low)
+others <- dplyr::rename(others, mean=estimate, ymin = conf.high, ymax = conf.low)
 
 endorse_other <- rbind(endorse, others)
 
@@ -1475,7 +1466,7 @@ endorse_other$var <- sub("pAttempt Replicationrints", "Post article publicly", e
 
 ####Changes the names of other variables
 
-endorse_other <- endorse_other %>% rename(Question = type)
+endorse_other <- endorse_other %>% dplyr::rename(Question = type)
 
 #Creates Figure 2
 
@@ -1532,7 +1523,7 @@ others <- arrange(others, sorter)
 others <- na.omit(others)
 others <- mutate(others, type = "others")
 others <- select(others, -p.value, -statistic, -parameter, -method, -alternative)
-others <- rename(others, mean=estimate, ymin = conf.high, ymax = conf.low)
+others <- dplyr::rename(others, mean=estimate, ymin = conf.high, ymax = conf.low)
 
 ##Changes the name of the main variables
 
@@ -1588,7 +1579,7 @@ longQRPprevalence <- longQRPprevalence %>% mutate(
     practice=="pvalround_others" ~ "Round p-values",
     practice=="analysischanging_others" ~ "Switch analysis selectively",
     practice=="outliers_others" ~ "Exclude data selectively",
-    practice=="hidingproblems_others" ~ "Hide data problems",
+    practice=="hidingproblems_others" ~ "Hide problems",
     practice=="fillingin_others" ~ "Hide imputation",
     TRUE ~ "ERROR! unknown practice"
   )
@@ -1630,6 +1621,9 @@ ggplot( drop_na(longQRPprevalence), aes(x = response) ) +
 #https://datavizpyr.com/rain-cloud-plots-using-half-violin-plot-with-jittered-data-points-in-r/
 #Load half violin plot: geom_flat_violin()
 source("https://raw.githubusercontent.com/datavizpyr/data/master/half_flat_violinplot.R")
+
+#Save tibble so that separate file can plot all 5 datasets on the same graph
+saveRDS(longQRPprevalence, file = "longQRPs.rds")
 
 QRPprevCloud <-  ggplot( drop_na(longQRPprevalence), aes(x = practiceLongName, y = response) ) + 
       theme_bw() +
@@ -1744,7 +1738,7 @@ ggsave("figures/OSPperceivedPrevalenceCloud.png", width = 30, height = 20, units
 
 aspredicted_endorse <- QORP %>% 
   summarise( sum=sum(aspredicted_endorse, na.rm = T), n=sum(!is.na(aspredicted_endorse)) ) %>%
-  rename(x=sum) %>% mutate(mean=x/n)
+  dplyr::rename(x=sum) %>% mutate(mean=x/n)
 aspredicted_endorseCI <- PropCIs::add4ci(aspredicted_endorse$x, aspredicted_endorse$n, conf.level=.95)
 
 endorse1 <-
@@ -1752,7 +1746,7 @@ tibble(var = "aspredicted_endorse", mean = aspredicted_endorse$mean, ymin = aspr
 
 omittinganalyses_endorse <- QORP %>% 
   summarise( sum=sum(omittinganalyses_endorse, na.rm = T), n=sum(!is.na(omittinganalyses_endorse)) ) %>%
-  rename(x=sum) %>% mutate(mean=x/n)
+  dplyr::rename(x=sum) %>% mutate(mean=x/n)
 omittinganalyses_endorseCI <- PropCIs::add4ci(omittinganalyses_endorse$x, omittinganalyses_endorse$n, conf.level=.95)
 
 endorse2 <-
@@ -1760,7 +1754,7 @@ tibble(var = "omittinganalyses_endorse", mean = omittinganalyses_endorse$mean, y
 
 hidingproblems_endorse <- QORP %>% 
   summarise( sum=sum(hidingproblems_endorse, na.rm = T), n=sum(!is.na(hidingproblems_endorse)) ) %>%
-  rename(x=sum) %>% mutate(mean=x/n)
+  dplyr::rename(x=sum) %>% mutate(mean=x/n)
 hidingproblems_endorseCI <- PropCIs::add4ci(hidingproblems_endorse$x, hidingproblems_endorse$n, conf.level=.95)
 
 endorse3 <-
@@ -1768,7 +1762,7 @@ tibble(var = "hidingproblems_endorse", mean = hidingproblems_endorse$mean, ymin 
 
 fillingin_endorse <- QORP %>% 
   summarise( sum=sum(fillingin_endorse, na.rm = T), n=sum(!is.na(fillingin_endorse)) ) %>%
-  rename(x=sum) %>% mutate(mean=x/n)
+  dplyr::rename(x=sum) %>% mutate(mean=x/n)
 fillingin_endorseCI <- PropCIs::add4ci(fillingin_endorse$x, fillingin_endorse$n, conf.level=.95)
 
 endorse4 <-
@@ -1776,7 +1770,7 @@ tibble(var = "fillingin_endorse", mean = fillingin_endorse$mean, ymin = fillingi
 
 prereg_endorse <- QORP %>% 
   summarise( sum=sum(prereg_endorse, na.rm = T), n=sum(!is.na(prereg_endorse)) ) %>%
-  rename(x=sum) %>% mutate(mean=x/n)
+  dplyr::rename(x=sum) %>% mutate(mean=x/n)
 prereg_endorseCI <- PropCIs::add4ci(prereg_endorse$x, prereg_endorse$n, conf.level=.95)
 
 endorse5 <-
@@ -1784,7 +1778,7 @@ tibble(var = "prereg_endorse", mean = prereg_endorse$mean, ymin = prereg_endorse
 
 opendata_endorse <- QORP %>% 
   summarise( sum=sum(opendata_endorse, na.rm = T), n=sum(!is.na(opendata_endorse)) ) %>%
-  rename(x=sum) %>% mutate(mean=x/n)
+  dplyr::rename(x=sum) %>% mutate(mean=x/n)
 opendata_endorseCI <- PropCIs::add4ci(opendata_endorse$x, opendata_endorse$n, conf.level=.95)
 
 endorse6 <-
@@ -1792,7 +1786,7 @@ tibble(var = "opendata_endorse", mean = opendata_endorse$mean, ymin = opendata_e
 
 opencode_endorse <- QORP %>% 
   summarise( sum=sum(opencode_endorse, na.rm = T), n=sum(!is.na(opencode_endorse)) ) %>%
-  rename(x=sum) %>% mutate(mean=x/n)
+  dplyr::rename(x=sum) %>% mutate(mean=x/n)
 opencode_endorseCI <- PropCIs::add4ci(opencode_endorse$x, opencode_endorse$n, conf.level=.95)
 
 endorse7 <-
@@ -1800,7 +1794,7 @@ tibble(var = "opencode_endorse", mean = opencode_endorse$mean, ymin = opencode_e
 
 rep_endorse <- QORP %>% 
   summarise( sum=sum(rep_endorse, na.rm = T), n=sum(!is.na(rep_endorse)) ) %>%
-  rename(x=sum) %>% mutate(mean=x/n)
+  dplyr::rename(x=sum) %>% mutate(mean=x/n)
 rep_endorseCI <- PropCIs::add4ci(rep_endorse$x, rep_endorse$n, conf.level=.95)
 
 endorse8 <-
@@ -1808,7 +1802,7 @@ tibble(var = "rep_endorse", mean = rep_endorse$mean, ymin = rep_endorseCI$conf.i
 
 preprints_endorse <- QORP %>% 
   summarise( sum=sum(preprints_endorse, na.rm = T), n=sum(!is.na(preprints_endorse)) ) %>%
-  rename(x=sum) %>% mutate(mean=x/n)
+  dplyr::rename(x=sum) %>% mutate(mean=x/n)
 preprints_endorseCI <- PropCIs::add4ci(preprints_endorse$x, preprints_endorse$n, conf.level=.95)
 
 endorse9 <-
@@ -1816,7 +1810,7 @@ tibble(var = "preprints_endorse", mean = preprints_endorse$mean, ymin = preprint
 
 biasedreporting_endorse <- QORP %>% 
   summarise( sum=sum(biasedreporting_endorse, na.rm = T), n=sum(!is.na(biasedreporting_endorse)) ) %>%
-  rename(x=sum) %>% mutate(mean=x/n)
+  dplyr::rename(x=sum) %>% mutate(mean=x/n)
 biasedreporting_endorseCI <- PropCIs::add4ci(biasedreporting_endorse$x, biasedreporting_endorse$n, conf.level=.95)
 
 endorse10 <-
@@ -1824,7 +1818,7 @@ tibble(var = "biasedreporting_endorse", mean = biasedreporting_endorse$mean, ymi
 
 biasedcov_endorse <- QORP %>% 
   summarise( sum=sum(biasedcov_endorse, na.rm = T), n=sum(!is.na(biasedcov_endorse)) ) %>%
-  rename(x=sum) %>% mutate(mean=x/n)
+  dplyr::rename(x=sum) %>% mutate(mean=x/n)
 biasedcov_endorseCI <- PropCIs::add4ci(biasedcov_endorse$x, biasedcov_endorse$n, conf.level=.95)
 
 endorse11 <-
@@ -1832,7 +1826,7 @@ tibble(var = "biasedcov_endorse", mean = biasedcov_endorse$mean, ymin = biasedco
 
 pvalround_endorse <- QORP %>% 
   summarise( sum=sum(pvalround_endorse, na.rm = T), n=sum(!is.na(pvalround_endorse)) ) %>%
-  rename(x=sum) %>% mutate(mean=x/n)
+  dplyr::rename(x=sum) %>% mutate(mean=x/n)
 pvalround_endorseCI <- PropCIs::add4ci(pvalround_endorse$x, pvalround_endorse$n, conf.level=.95)
 
 endorse12 <-
@@ -1840,7 +1834,7 @@ tibble(var = "pvalround_endorse", mean = pvalround_endorse$mean, ymin = pvalroun
 
 outliers_endorse <- QORP %>% 
   summarise( sum=sum(outliers_endorse, na.rm = T), n=sum(!is.na(outliers_endorse)) ) %>%
-  rename(x=sum) %>% mutate(mean=x/n)
+  dplyr::rename(x=sum) %>% mutate(mean=x/n)
 outliers_endorseCI <- PropCIs::add4ci(outliers_endorse$x, outliers_endorse$n, conf.level=.95)
 
 endorse13 <-
@@ -1848,7 +1842,7 @@ tibble(var = "outliers_endorse", mean = outliers_endorse$mean, ymin = outliers_e
 
 stopping_endorse <- QORP %>% 
   summarise( sum=sum(stopping_endorse, na.rm = T), n=sum(!is.na(stopping_endorse)) ) %>%
-  rename(x=sum) %>% mutate(mean=x/n)
+  dplyr::rename(x=sum) %>% mutate(mean=x/n)
 stopping_endorseCI <- PropCIs::add4ci(stopping_endorse$x, stopping_endorse$n, conf.level=.95)
 
 endorse14 <-
@@ -1856,7 +1850,7 @@ tibble(var = "stopping_endorse", mean = stopping_endorse$mean, ymin = stopping_e
 
 analysischanging_endorse <- QORP %>% 
   summarise( sum=sum(analysischanging_endorse, na.rm = T), n=sum(!is.na(analysischanging_endorse)) ) %>%
-  rename(x=sum) %>% mutate(mean=x/n)
+  dplyr::rename(x=sum) %>% mutate(mean=x/n)
 analysischanging_endorseCI <- PropCIs::add4ci(analysischanging_endorse$x, analysischanging_endorse$n, conf.level=.95)
 
 endorse15 <-
@@ -1891,7 +1885,7 @@ others <- arrange(others, sorter)
 others <- na.omit(others)
 others <- mutate(others, type = "others")
 others <- select(others, -p.value, -statistic, -parameter, -method, -alternative)
-others <- rename(others, mean=estimate, ymin = conf.high, ymax = conf.low)
+others <- dplyr::rename(others, mean=estimate, ymin = conf.high, ymax = conf.low)
 
 endorse_other <- rbind(endorse, others)
 
@@ -1913,7 +1907,7 @@ endorse_other$var <- sub("pvalround", "Round p-values", endorse_other$var)
 endorse_other$var <- sub("analysischanging", "Switch analysis selectively", endorse_other$var)
 endorse_other$var <- sub("outliers", "Exclude data selectively", endorse_other$var)
 endorse_other$var <- sub("aspredicted", "HARK", endorse_other$var) 
-endorse_other$var <- sub("hidingproblems", "Hide data problems", endorse_other$var)
+endorse_other$var <- sub("hidingproblems", "Hide problems", endorse_other$var)
 endorse_other$var <- sub("fillingin", "Hide imputation", endorse_other$var)
 
 ##Creates Figure 1
@@ -1944,7 +1938,7 @@ ggsave("figures/fig1all_endorseother.png", width = 30, height = 20, units = "cm"
 
 aspredicted_endorse <- QORP_nonquant %>% 
   summarise( sum=sum(aspredicted_endorse, na.rm = T), n=sum(!is.na(aspredicted_endorse)) ) %>%
-  rename(x=sum) %>% mutate(mean=x/n)
+  dplyr::rename(x=sum) %>% mutate(mean=x/n)
 aspredicted_endorseCI <- PropCIs::add4ci(aspredicted_endorse$x, aspredicted_endorse$n, conf.level=.95)
 
 endorse1 <-
@@ -1952,7 +1946,7 @@ tibble(var = "aspredicted_endorse", mean = aspredicted_endorse$mean, ymin = aspr
 
 omittinganalyses_endorse <- QORP_nonquant %>% 
   summarise( sum=sum(omittinganalyses_endorse, na.rm = T), n=sum(!is.na(omittinganalyses_endorse)) ) %>%
-  rename(x=sum) %>% mutate(mean=x/n)
+  dplyr::rename(x=sum) %>% mutate(mean=x/n)
 omittinganalyses_endorseCI <- PropCIs::add4ci(omittinganalyses_endorse$x, omittinganalyses_endorse$n, conf.level=.95)
 
 endorse2 <-
@@ -1960,7 +1954,7 @@ tibble(var = "omittinganalyses_endorse", mean = omittinganalyses_endorse$mean, y
 
 hidingproblems_endorse <- QORP_nonquant %>% 
   summarise( sum=sum(hidingproblems_endorse, na.rm = T), n=sum(!is.na(hidingproblems_endorse)) ) %>%
-  rename(x=sum) %>% mutate(mean=x/n)
+  dplyr::rename(x=sum) %>% mutate(mean=x/n)
 hidingproblems_endorseCI <- PropCIs::add4ci(hidingproblems_endorse$x, hidingproblems_endorse$n, conf.level=.95)
 
 endorse3 <-
@@ -1968,7 +1962,7 @@ tibble(var = "hidingproblems_endorse", mean = hidingproblems_endorse$mean, ymin 
 
 fillingin_endorse <- QORP_nonquant %>% 
   summarise( sum=sum(fillingin_endorse, na.rm = T), n=sum(!is.na(fillingin_endorse)) ) %>%
-  rename(x=sum) %>% mutate(mean=x/n)
+  dplyr::rename(x=sum) %>% mutate(mean=x/n)
 fillingin_endorseCI <- PropCIs::add4ci(fillingin_endorse$x, fillingin_endorse$n, conf.level=.95)
 
 endorse4 <-
@@ -1976,7 +1970,7 @@ tibble(var = "fillingin_endorse", mean = fillingin_endorse$mean, ymin = fillingi
 
 prereg_endorse <- QORP_nonquant %>% 
   summarise( sum=sum(prereg_endorse, na.rm = T), n=sum(!is.na(prereg_endorse)) ) %>%
-  rename(x=sum) %>% mutate(mean=x/n)
+  dplyr::rename(x=sum) %>% mutate(mean=x/n)
 prereg_endorseCI <- PropCIs::add4ci(prereg_endorse$x, prereg_endorse$n, conf.level=.95)
 
 ##Combines all of the above tibbles and deletes the smaller ones
@@ -2008,7 +2002,7 @@ others <- arrange(others, sorter)
 others <- na.omit(others)
 others <- mutate(others, type = "others")
 others <- select(others, -p.value, -statistic, -parameter, -method, -alternative)
-others <- rename(others, mean=estimate, ymin = conf.high, ymax = conf.low)
+others <- dplyr::rename(others, mean=estimate, ymin = conf.high, ymax = conf.low)
 
 endorse_other <- rbind(endorse, others)
 
@@ -2023,7 +2017,7 @@ endorse_other$var <- sub("_endorse", "", endorse_other$var)
 
 endorse_other$var <- sub("omittinganalyses", "Underreport results", endorse_other$var) 
 endorse_other$var <- sub("aspredicted", "HARK", endorse_other$var) 
-endorse_other$var <- sub("hidingproblems", "Hide data problems", endorse_other$var)
+endorse_other$var <- sub("hidingproblems", "Hide problems", endorse_other$var)
 endorse_other$var <- sub("fillingin", "Hide imputation", endorse_other$var)
 
 ##Creates Figure 1
@@ -2055,7 +2049,7 @@ ggsave("figures/fig1nonquant_endorseother.png", width = 30, height = 20, units =
 
 aspredicted_endorse <- QORP %>% 
   summarise( sum=sum(aspredicted_endorse, na.rm = T), n=sum(!is.na(aspredicted_endorse)) ) %>%
-  rename(x=sum) %>% mutate(mean=x/n)
+  dplyr::rename(x=sum) %>% mutate(mean=x/n)
 aspredicted_endorseCI <- PropCIs::add4ci(aspredicted_endorse$x, aspredicted_endorse$n, conf.level=.95)
 
 endorse1 <-
@@ -2063,7 +2057,7 @@ tibble(var = "aspredicted_endorse", mean = aspredicted_endorse$mean, ymin = aspr
 
 omittinganalyses_endorse <- QORP %>% 
   summarise( sum=sum(omittinganalyses_endorse, na.rm = T), n=sum(!is.na(omittinganalyses_endorse)) ) %>%
-  rename(x=sum) %>% mutate(mean=x/n)
+  dplyr::rename(x=sum) %>% mutate(mean=x/n)
 omittinganalyses_endorseCI <- PropCIs::add4ci(omittinganalyses_endorse$x, omittinganalyses_endorse$n, conf.level=.95)
 
 endorse2 <-
@@ -2071,7 +2065,7 @@ tibble(var = "omittinganalyses_endorse", mean = omittinganalyses_endorse$mean, y
 
 hidingproblems_endorse <- QORP %>% 
   summarise( sum=sum(hidingproblems_endorse, na.rm = T), n=sum(!is.na(hidingproblems_endorse)) ) %>%
-  rename(x=sum) %>% mutate(mean=x/n)
+  dplyr::rename(x=sum) %>% mutate(mean=x/n)
 hidingproblems_endorseCI <- PropCIs::add4ci(hidingproblems_endorse$x, hidingproblems_endorse$n, conf.level=.95)
 
 endorse3 <-
@@ -2079,7 +2073,7 @@ tibble(var = "hidingproblems_endorse", mean = hidingproblems_endorse$mean, ymin 
 
 fillingin_endorse <- QORP %>% 
   summarise( sum=sum(fillingin_endorse, na.rm = T), n=sum(!is.na(fillingin_endorse)) ) %>%
-  rename(x=sum) %>% mutate(mean=x/n)
+  dplyr::rename(x=sum) %>% mutate(mean=x/n)
 fillingin_endorseCI <- PropCIs::add4ci(fillingin_endorse$x, fillingin_endorse$n, conf.level=.95)
 
 endorse4 <-
@@ -2087,7 +2081,7 @@ tibble(var = "fillingin_endorse", mean = fillingin_endorse$mean, ymin = fillingi
 
 prereg_endorse <- QORP %>% 
   summarise( sum=sum(prereg_endorse, na.rm = T), n=sum(!is.na(prereg_endorse)) ) %>%
-  rename(x=sum) %>% mutate(mean=x/n)
+  dplyr::rename(x=sum) %>% mutate(mean=x/n)
 prereg_endorseCI <- PropCIs::add4ci(prereg_endorse$x, prereg_endorse$n, conf.level=.95)
 
 endorse5 <-
@@ -2095,7 +2089,7 @@ tibble(var = "prereg_endorse", mean = prereg_endorse$mean, ymin = prereg_endorse
 
 opendata_endorse <- QORP %>% 
   summarise( sum=sum(opendata_endorse, na.rm = T), n=sum(!is.na(opendata_endorse)) ) %>%
-  rename(x=sum) %>% mutate(mean=x/n)
+  dplyr::rename(x=sum) %>% mutate(mean=x/n)
 opendata_endorseCI <- PropCIs::add4ci(opendata_endorse$x, opendata_endorse$n, conf.level=.95)
 
 endorse6 <-
@@ -2103,7 +2097,7 @@ tibble(var = "opendata_endorse", mean = opendata_endorse$mean, ymin = opendata_e
 
 opencode_endorse <- QORP %>% 
   summarise( sum=sum(opencode_endorse, na.rm = T), n=sum(!is.na(opencode_endorse)) ) %>%
-  rename(x=sum) %>% mutate(mean=x/n)
+  dplyr::rename(x=sum) %>% mutate(mean=x/n)
 opencode_endorseCI <- PropCIs::add4ci(opencode_endorse$x, opencode_endorse$n, conf.level=.95)
 
 endorse7 <-
@@ -2111,7 +2105,7 @@ tibble(var = "opencode_endorse", mean = opencode_endorse$mean, ymin = opencode_e
 
 rep_endorse <- QORP %>% 
   summarise( sum=sum(rep_endorse, na.rm = T), n=sum(!is.na(rep_endorse)) ) %>%
-  rename(x=sum) %>% mutate(mean=x/n)
+  dplyr::rename(x=sum) %>% mutate(mean=x/n)
 rep_endorseCI <- PropCIs::add4ci(rep_endorse$x, rep_endorse$n, conf.level=.95)
 
 endorse8 <-
@@ -2119,7 +2113,7 @@ tibble(var = "rep_endorse", mean = rep_endorse$mean, ymin = rep_endorseCI$conf.i
 
 preprints_endorse <- QORP %>% 
   summarise( sum=sum(preprints_endorse, na.rm = T), n=sum(!is.na(preprints_endorse)) ) %>%
-  rename(x=sum) %>% mutate(mean=x/n)
+  dplyr::rename(x=sum) %>% mutate(mean=x/n)
 preprints_endorseCI <- PropCIs::add4ci(preprints_endorse$x, preprints_endorse$n, conf.level=.95)
 
 endorse9 <-
@@ -2127,7 +2121,7 @@ tibble(var = "preprints_endorse", mean = preprints_endorse$mean, ymin = preprint
 
 biasedreporting_endorse <- QORP %>% 
   summarise( sum=sum(biasedreporting_endorse, na.rm = T), n=sum(!is.na(biasedreporting_endorse)) ) %>%
-  rename(x=sum) %>% mutate(mean=x/n)
+  dplyr::rename(x=sum) %>% mutate(mean=x/n)
 biasedreporting_endorseCI <- PropCIs::add4ci(biasedreporting_endorse$x, biasedreporting_endorse$n, conf.level=.95)
 
 endorse10 <-
@@ -2135,7 +2129,7 @@ tibble(var = "biasedreporting_endorse", mean = biasedreporting_endorse$mean, ymi
 
 biasedcov_endorse <- QORP %>% 
   summarise( sum=sum(biasedcov_endorse, na.rm = T), n=sum(!is.na(biasedcov_endorse)) ) %>%
-  rename(x=sum) %>% mutate(mean=x/n)
+  dplyr::rename(x=sum) %>% mutate(mean=x/n)
 biasedcov_endorseCI <- PropCIs::add4ci(biasedcov_endorse$x, biasedcov_endorse$n, conf.level=.95)
 
 endorse11 <-
@@ -2143,7 +2137,7 @@ tibble(var = "biasedcov_endorse", mean = biasedcov_endorse$mean, ymin = biasedco
 
 pvalround_endorse <- QORP %>% 
   summarise( sum=sum(pvalround_endorse, na.rm = T), n=sum(!is.na(pvalround_endorse)) ) %>%
-  rename(x=sum) %>% mutate(mean=x/n)
+  dplyr::rename(x=sum) %>% mutate(mean=x/n)
 pvalround_endorseCI <- PropCIs::add4ci(pvalround_endorse$x, pvalround_endorse$n, conf.level=.95)
 
 endorse12 <-
@@ -2151,7 +2145,7 @@ tibble(var = "pvalround_endorse", mean = pvalround_endorse$mean, ymin = pvalroun
 
 outliers_endorse <- QORP %>% 
   summarise( sum=sum(outliers_endorse, na.rm = T), n=sum(!is.na(outliers_endorse)) ) %>%
-  rename(x=sum) %>% mutate(mean=x/n)
+  dplyr::rename(x=sum) %>% mutate(mean=x/n)
 outliers_endorseCI <- PropCIs::add4ci(outliers_endorse$x, outliers_endorse$n, conf.level=.95)
 
 endorse13 <-
@@ -2159,7 +2153,7 @@ tibble(var = "outliers_endorse", mean = outliers_endorse$mean, ymin = outliers_e
 
 stopping_endorse <- QORP %>% 
   summarise( sum=sum(stopping_endorse, na.rm = T), n=sum(!is.na(stopping_endorse)) ) %>%
-  rename(x=sum) %>% mutate(mean=x/n)
+  dplyr::rename(x=sum) %>% mutate(mean=x/n)
 stopping_endorseCI <- PropCIs::add4ci(stopping_endorse$x, stopping_endorse$n, conf.level=.95)
 
 endorse14 <-
@@ -2167,7 +2161,7 @@ tibble(var = "stopping_endorse", mean = stopping_endorse$mean, ymin = stopping_e
 
 analysischanging_endorse <- QORP_quant %>% 
   summarise( sum=sum(analysischanging_endorse, na.rm = T), n=sum(!is.na(analysischanging_endorse)) ) %>%
-  rename(x=sum) %>% mutate(mean=x/n)
+  dplyr::rename(x=sum) %>% mutate(mean=x/n)
 analysischanging_endorseCI <- PropCIs::add4ci(analysischanging_endorse$x, analysischanging_endorse$n, conf.level=.95)
 
 endorse15 <-
@@ -2202,7 +2196,7 @@ others <- arrange(others, sorter)
 others <- na.omit(others)
 others <- mutate(others, type = "others")
 others <- select(others, -p.value, -statistic, -parameter, -method, -alternative)
-others <- rename(others, mean=estimate, ymin = conf.high, ymax = conf.low)
+others <- dplyr::rename(others, mean=estimate, ymin = conf.high, ymax = conf.low)
 
 endorse_other <- rbind(endorse, others)
 
@@ -2224,7 +2218,7 @@ endorse_other$var <- sub("pAttempt Replicationrints", "Post article publicly", e
 
 ####Changes the names of other variables
 
-endorse_other <- endorse_other %>% rename(Question = type)
+endorse_other <- endorse_other %>% dplyr::rename(Question = type)
 
 #Creates Figure 2
 
@@ -2274,7 +2268,7 @@ ggsave("figures/fig2all_endorseother.png", width = 30, height = 20, units = "cm"
 
 aspredicted_endorse <- QORP_nonquant %>% 
   summarise( sum=sum(aspredicted_endorse, na.rm = T), n=sum(!is.na(aspredicted_endorse)) ) %>%
-  rename(x=sum) %>% mutate(mean=x/n)
+  dplyr::rename(x=sum) %>% mutate(mean=x/n)
 aspredicted_endorseCI <- PropCIs::add4ci(aspredicted_endorse$x, aspredicted_endorse$n, conf.level=.95)
 
 endorse1 <-
@@ -2282,7 +2276,7 @@ tibble(var = "aspredicted_endorse", mean = aspredicted_endorse$mean, ymin = aspr
 
 omittinganalyses_endorse <- QORP_nonquant %>% 
   summarise( sum=sum(omittinganalyses_endorse, na.rm = T), n=sum(!is.na(omittinganalyses_endorse)) ) %>%
-  rename(x=sum) %>% mutate(mean=x/n)
+  dplyr::rename(x=sum) %>% mutate(mean=x/n)
 omittinganalyses_endorseCI <- PropCIs::add4ci(omittinganalyses_endorse$x, omittinganalyses_endorse$n, conf.level=.95)
 
 endorse2 <-
@@ -2290,7 +2284,7 @@ tibble(var = "omittinganalyses_endorse", mean = omittinganalyses_endorse$mean, y
 
 hidingproblems_endorse <- QORP_nonquant %>% 
   summarise( sum=sum(hidingproblems_endorse, na.rm = T), n=sum(!is.na(hidingproblems_endorse)) ) %>%
-  rename(x=sum) %>% mutate(mean=x/n)
+  dplyr::rename(x=sum) %>% mutate(mean=x/n)
 hidingproblems_endorseCI <- PropCIs::add4ci(hidingproblems_endorse$x, hidingproblems_endorse$n, conf.level=.95)
 
 endorse3 <-
@@ -2298,7 +2292,7 @@ tibble(var = "hidingproblems_endorse", mean = hidingproblems_endorse$mean, ymin 
 
 fillingin_endorse <- QORP_nonquant %>% 
   summarise( sum=sum(fillingin_endorse, na.rm = T), n=sum(!is.na(fillingin_endorse)) ) %>%
-  rename(x=sum) %>% mutate(mean=x/n)
+  dplyr::rename(x=sum) %>% mutate(mean=x/n)
 fillingin_endorseCI <- PropCIs::add4ci(fillingin_endorse$x, fillingin_endorse$n, conf.level=.95)
 
 endorse4 <-
@@ -2306,7 +2300,7 @@ tibble(var = "fillingin_endorse", mean = fillingin_endorse$mean, ymin = fillingi
 
 prereg_endorse <- QORP_nonquant %>% 
   summarise( sum=sum(prereg_endorse, na.rm = T), n=sum(!is.na(prereg_endorse)) ) %>%
-  rename(x=sum) %>% mutate(mean=x/n)
+  dplyr::rename(x=sum) %>% mutate(mean=x/n)
 prereg_endorseCI <- PropCIs::add4ci(prereg_endorse$x, prereg_endorse$n, conf.level=.95)
 
 endorse5 <-
@@ -2314,7 +2308,7 @@ tibble(var = "prereg_endorse", mean = prereg_endorse$mean, ymin = prereg_endorse
 
 opendata_endorse <- QORP_nonquant %>% 
   summarise( sum=sum(opendata_endorse, na.rm = T), n=sum(!is.na(opendata_endorse)) ) %>%
-  rename(x=sum) %>% mutate(mean=x/n)
+  dplyr::rename(x=sum) %>% mutate(mean=x/n)
 opendata_endorseCI <- PropCIs::add4ci(opendata_endorse$x, opendata_endorse$n, conf.level=.95)
 
 endorse6 <-
@@ -2322,7 +2316,7 @@ tibble(var = "opendata_endorse", mean = opendata_endorse$mean, ymin = opendata_e
 
 opencode_endorse <- QORP_nonquant %>% 
   summarise( sum=sum(opencode_endorse, na.rm = T), n=sum(!is.na(opencode_endorse)) ) %>%
-  rename(x=sum) %>% mutate(mean=x/n)
+  dplyr::rename(x=sum) %>% mutate(mean=x/n)
 opencode_endorseCI <- PropCIs::add4ci(opencode_endorse$x, opencode_endorse$n, conf.level=.95)
 
 endorse7 <-
@@ -2330,7 +2324,7 @@ tibble(var = "opencode_endorse", mean = opencode_endorse$mean, ymin = opencode_e
 
 rep_endorse <- QORP_nonquant %>% 
   summarise( sum=sum(rep_endorse, na.rm = T), n=sum(!is.na(rep_endorse)) ) %>%
-  rename(x=sum) %>% mutate(mean=x/n)
+  dplyr::rename(x=sum) %>% mutate(mean=x/n)
 rep_endorseCI <- PropCIs::add4ci(rep_endorse$x, rep_endorse$n, conf.level=.95)
 
 endorse8 <-
@@ -2338,7 +2332,7 @@ tibble(var = "rep_endorse", mean = rep_endorse$mean, ymin = rep_endorseCI$conf.i
 
 preprints_endorse <- QORP_nonquant %>% 
   summarise( sum=sum(preprints_endorse, na.rm = T), n=sum(!is.na(preprints_endorse)) ) %>%
-  rename(x=sum) %>% mutate(mean=x/n)
+  dplyr::rename(x=sum) %>% mutate(mean=x/n)
 preprints_endorseCI <- PropCIs::add4ci(preprints_endorse$x, preprints_endorse$n, conf.level=.95)
 
 endorse9 <-
@@ -2373,7 +2367,7 @@ others <- arrange(others, sorter)
 others <- na.omit(others)
 others <- mutate(others, type = "others")
 others <- select(others, -p.value, -statistic, -parameter, -method, -alternative)
-others <- rename(others, mean=estimate, ymin = conf.high, ymax = conf.low)
+others <- dplyr::rename(others, mean=estimate, ymin = conf.high, ymax = conf.low)
 
 endorse_other <- rbind(endorse, others)
 
@@ -2395,7 +2389,7 @@ endorse_other$var <- sub("pAttempt Replicationrints", "Post article publicly", e
 
 ####Changes the names of other variables
 
-endorse_other <- endorse_other %>% rename(Question = type)
+endorse_other <- endorse_other %>% dplyr::rename(Question = type)
 
 #Creates Figure 2
 

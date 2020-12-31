@@ -1,5 +1,5 @@
 "","var","estimate","statistic","p.value","parameter","conf.low","conf.high","method","alternative","sorter"
-"1","File drawer",1.94,58.116631183048,1.72626884805965e-260,654,1.87,2,"One Sample t-test","two.sided",1
+"1","Omit nonsignificant studies or variables",1.94,58.116631183048,1.72626884805965e-260,654,1.87,2,"One Sample t-test","two.sided",1
 "2","Sample selectively",1.82,63.214707351501,9.13203550089592e-281,654,1.77,1.88,"One Sample t-test","two.sided",2
 "3","Drop covariates selectively",1.87,56.2904925581315,9.62915085188111e-254,658,1.8,1.93,"One Sample t-test","two.sided",3
 "4","Underreport results",2.07,68.677018706357,0,846,2.01,2.13,"One Sample t-test","two.sided",4
@@ -7,7 +7,7 @@
 "6","Switch analysis selectively",1.93,69.4192870263087,1.32859948816774e-306,664,1.87,1.98,"One Sample t-test","two.sided",6
 "7","Exclude data selectively",1.61,56.4249678051249,6.28091806193788e-256,666,1.56,1.67,"One Sample t-test","two.sided",7
 "8","HARK",1.74,53.217003643961,1.60674763336122e-275,868,1.67,1.8,"One Sample t-test","two.sided",8
-"9","Hide data problems",1.48,47.758064516129,6.84049127124052e-248,891,1.41,1.54,"One Sample t-test","two.sided",9
+"9","Hide problems",1.48,47.758064516129,6.84049127124052e-248,891,1.41,1.54,"One Sample t-test","two.sided",9
 "10","Hide imputation",1.29,61.4434073290611,3.32848665956856e-317,862,1.25,1.33,"One Sample t-test","two.sided",10
 "11","Preregister study",2.86,102.939678017536,0,847,2.81,2.91,"One Sample t-test","two.sided",11
 "12","Share data",2.95,126.791355420775,0,888,2.9,2.99,"One Sample t-test","two.sided",12
