@@ -10,7 +10,9 @@ relevant<- agnoli %>%
     dplyr::select_at(dplyr::vars(ends_with("have adopted this practice"),starts_with("In a research article")))
 #yields 10 variables, which is same number as in their plot
 
-shortNames <- gsub("^.*?In a research article, ","", colnames(relevant))
+#Delete  In a research article  from the column names
+shortNames <- gsub("^.*?In a research article, ", "", colnames(relevant))
+#Delete another phrase from the column names
 shortNames <- gsub(" : The percentage of psychological researchers that have adopted this practice","", shortNames)
 shorterNames<- substr(shortNames,1,30)
 
@@ -32,7 +34,7 @@ longAgnoli <- longAgnoli %>% mutate(
     practice=="not report all the conditions " ~ "Not report all conditions\n(closest to Omit n.s. studies or variables)",
     practice=="not report all the dependent m" ~ "Not report all DVs\n(closest to Omit n.s. studies or variables)",
     practice=="report an unexpected result as" ~ "HARK",
-    practice=="report in a selective manner o" ~ "Omit nonsignificant studies or variables",
+    practice=="report in a selective manner o" ~ "Reporting only studies that worked\n(closest to Omit n.s. studies or variables)",
     practice=="Stop collecting data early tha" ~ "Stop collecting data bc sig\n(closest to Sample selectively)",
     TRUE    ~ "ERROR! unknown practice"
   )
@@ -53,7 +55,7 @@ longAgnoli$practiceStandardName <- factor(longAgnoli$practiceStandardName,
                                                    "Not report all conditions\n(closest to Omit n.s. studies or variables)",
                                                    "Not report all DVs\n(closest to Omit n.s. studies or variables)",
                                                    "Sample selectively",
-                                                   "Omit nonsignificant studies or variables",
+                                                   "Reporting only studies that worked\n(closest to Omit n.s. studies or variables)",
                                                    "Mislead about demographic\nvariable effects" ) )
 
 saveRDS(longAgnoli, file = "Makel_Agnoli/Agnoli_LongQRPs.rds")

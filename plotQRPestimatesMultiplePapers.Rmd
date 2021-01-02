@@ -18,15 +18,15 @@ source("https://raw.githubusercontent.com/datavizpyr/data/master/half_flat_violi
 ```
 
 ```{r}
-brazilPath<-file.path("RabeloEtAl","Data")
-brazil<- readRDS(file.path(brazilPath,"prevalenceLongAfterAlexEditingAndRunningBrazilCode.rds"))
-table(brazil$QRP,brazil$QRP_type)
-brazilPr <- brazil %>% filter(QRP_type == "Prevalence estimate")
+BrazilPath<-file.path("RabeloEtAl","Data")
+Brazil<- readRDS(file.path(BrazilPath,"prevalenceLongAfterAlexEditingAndRunningBrazilCode.rds"))
+table(Brazil$QRP,Brazil$QRP_type)
+BrazilPr <- Brazil %>% filter(QRP_type == "Prevalence estimate")
 ```
 
-Plot Brazilian data
+Plot Brazilian data using their variable names
 ```{r}
-QRPprevCloudBrazil <- ggplot( drop_na(brazilPr),
+QRPprevCloudBrazil <- ggplot( drop_na(BrazilPr),
                                 aes(x = QRP, y = val) ) + 
   theme_bw() +
   geom_flat_violin(fill="gray32",color="gray32", position = position_nudge(x = .18, y = 0)) +
@@ -46,14 +46,16 @@ Probably should plot Brazil, Agnoli, and John on one plot, others on another.
 
 ```{r }
 #Give practice same name as for other studies
-brazil<- brazil %>% mutate(
+table(Brazil$QRP)
+
+Brazil<- Brazil %>% mutate(
   practiceStandardName = case_when(
     QRP=="Omitting measures" ~ "Not report all DVs\n(closest to Omit n.s. studies or variables)",
     QRP=="Collecting data based on results" ~ "Sample selectively",
     QRP=="Omitting conditions" ~ "Not report all conditions\n(closest to Omit n.s. studies or variables)",
     QRP=="Stopping data collection" ~ "Stop collecting data bc sig\n(closest to Sample selectively)",
     QRP=="Rounding off p-values" ~ "Round p-values",
-    QRP=="Reporting studies that worked" ~ "Reporting only studies that worked", #In a paper, selectively reporting studies that “worked”
+    QRP=="Reporting studies that worked" ~ "Reporting only studies that worked\n(closest to Omit n.s. studies or variables)", #In a paper, selectively reporting studies that “worked”
     QRP=="Excluding data based on results" ~ "Exclude data selectively",
     QRP=="A posteriori hypothesizing" ~ "HARK",
     QRP=="Demographics" ~ "Mislead about demographic\nvariable effects",
@@ -61,13 +63,13 @@ brazil<- brazil %>% mutate(
     TRUE    ~ "ERROR! unknown practice"
   )
 )
-brazil$practiceStandardName <- as.factor(brazil$practiceStandardName)
-
-brazilPr <- brazil %>% filter(QRP_type == "Prevalence estimate")
+Brazil$practiceStandardName <- as.factor(Brazil$practiceStandardName)
+BrazilPr <- Brazil %>% filter(QRP_type == "Prevalence estimate")
+#levels(Brazil$practiceStandardName)
 ```
 
 ```{r}
-QRPprevCloudBrazil <- ggplot( drop_na(brazilPr),
+QRPprevCloudBrazil <- ggplot( drop_na(BrazilPr),
                                 aes(x = practiceStandardName, y = val) ) + 
   theme_bw() +
   geom_flat_violin(fill="gray32",color="gray32", position = position_nudge(x = .18, y = 0)) +
@@ -79,6 +81,13 @@ QRPprevCloudBrazil <- ggplot( drop_na(brazilPr),
   labs(title='Perceived prevalence of QRPs used by a researcher on at least one occasion') +
   theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12)) 
 show(QRPprevCloudBrazil)
+```
+
+Eliminate columns so Brazilian dataframe has same column names as other datasets.
+```{r }
+Rabelo <- subset(BrazilPr, select = -c(A1_2:A10_2))
+Rabelo <- subset(Rabelo, select = -QRP_type)
+Rabelo <- Rabelo %>% dplyr::rename(value=val, practice=QRP)
 ```
 
 Load and bind together differnt studies' data
@@ -95,10 +104,12 @@ Agnoli <- readRDS( file.path("Makel_Agnoli","Agnoli_LongQRPs.rds") )
 Chin$field <- "criminology"
 Makel$field<- "education"
 Agnoli$field<-"psychology"
+Rabelo$field <- "psychology"
 
 Chin$study <- "Chin (criminology)"
 Makel$study <- "Makel (education)"
 Agnoli$study <- "Agnoli (psychology)"
+Rabelo$study <- "Rabelo (psychology)"
 
 Fraser <- readRDS( file.path("FraserEtAl","longQRPs.rds") )
 Fraser<- Fraser %>% mutate(
@@ -113,26 +124,34 @@ Fraser <- Fraser %>% mutate( practiceStandardName = practice )
 CMAF <- rbind(Chin,Makel)
 CMAF <- rbind(CMAF,Agnoli)
 CMAF <- rbind(CMAF,Fraser)
+CMAF <- rbind(CMAF,Rabelo)
+```
 
+```{r}
+#Fixed
+#setdiff(  unique(Rabelo$practiceStandardName), unique(Agnoli$practiceStandardName) )
+#setdiff(  unique(Agnoli$practiceStandardName), unique(Rabelo$practiceStandardName) )
+#Rabelo does not have "Omit nonsignificant studies or variables" but Agnoli does.
+#Agnoli has ""Reporting only studies that worked" but Rabelo does not.
 ```
 
 Reorder levels for more pleasing and logical ordering, of both practices and studies
 
 ```{r }
-#levels(CMAF$practiceStandardName)
-practiceOrderDesiredNeverAscending <- c(1,14,2,3,4,11,5,6,7,12,8,9,10,16,13,15) #order from least endorsed to most endorsed
+levels(CMAF$practiceStandardName)
+practiceOrderDesiredNeverAscending <- c(1,14,2,3,4,11,5,6,7,12,8,9,10,16,13,15,17) #order from least endorsed to most endorsed
 CMAF$practiceStandardName <- factor(CMAF$practiceStandardName,
                                     levels = levels(CMAF$practiceStandardName)[practiceOrderDesiredNeverAscending])
 
 CMAF$study <- as.factor(CMAF$study)
 levels(CMAF$study)
-studyOrderDesired <- c(1,5,2,3,4) #order from least endorsed to most endorsed
+studyOrderDesired <- c(1,6,5,2,3,4) #order from least endorsed to most endorsed
 CMAF$study <- factor(CMAF$study,
                      levels = levels(CMAF$study)[studyOrderDesired])
 
 ```
 
-Plot including all fields, even ones that were only in Agnoli.
+Plot including all fields, even ones that were only in Agnoli/Rabelo/John.
 ```{r }
 #Better to compare the distributions horizontally for the same study, but facet labels are too long to fit.
 # QRPprevCloud <- ggplot( drop_na(CMAF),
@@ -172,7 +191,8 @@ omitExtraAgnoli <- CMAF %>% filter(practiceStandardName != "Mislead about demogr
       filter(practiceStandardName != "Not report all conditions\n(closest to Omit n.s. studies or variables)") %>%
       filter(practiceStandardName != "Falsify data\n(closest to Hide imputation)") %>%
       filter(practiceStandardName != "Not report all DVs\n(closest to Omit n.s. studies or variables)") %>%
-      filter(practiceStandardName != "Stop collecting data bc sig\n(closest to Sample selectively)"  )
+      filter(practiceStandardName != "Stop collecting data bc sig\n(closest to Sample selectively)") %>%
+      filter(practiceStandardName != "Reporting only studies that worked\n(closest to Omit n.s. studies or variables)")  
 
 QRPprevCloudLess <- ggplot( drop_na(omitExtraAgnoli),
                         aes(x = practiceStandardName, y = value) ) + 
@@ -189,5 +209,42 @@ show(QRPprevCloudLess)
 ggsave( file.path("figures","MultipleStudiesPrevalencePerceptionDistributionsLess.png"), width = 50, height = 30, units = "cm" )
 ```
 
+Plot those in John tradition (Rabelo, Agnoli, John) separately. 
+Probably should simplify practice names.
 
+```{r }
+notJohnQuestions<- CMAF %>% filter(study!="Agnoli (psychology)" & study!="Rabelo (psychology)")
 
+QRPprevNotJohn <- ggplot( drop_na(notJohnQuestions),
+                        aes(x = practiceStandardName, y = value) ) + 
+  theme_bw() + facet_grid(study~.) +
+  geom_flat_violin(fill="gray32",color="gray32", position = position_nudge(x = .18, y = 0)) +
+  geom_jitter(alpha=0.1, size=.5, width=0.15, height=0) +
+  stat_summary(fun = mean, geom = "point", color='green4', size=4, alpha=0.82) +
+  stat_summary(fun.data = mean_cl_boot, fun.args=(conf.int=0.95), geom="errorbar", size=.9, width=0.1, color='green4', alpha=0.82) +
+  #geom_jitter(width=0.2, size=.2, alpha=0.1)+
+  xlab("QRP") + ylab("perceived % others use at least once") + ylim(0,100) +
+  labs(title='Perceived prevalence of QRPs used by a researcher on at least one occasion') +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12)) 
+show(QRPprevNotJohn)
+ggsave( file.path("figures","MultipleStudiesPrevPerceptNotJohnTradition.png"), width = 50, height = 30, units = "cm" )
+
+```
+
+John tradition only
+```{r }
+JohnTradition<- CMAF %>% filter(study=="Agnoli (psychology)" | study=="Rabelo (psychology)" )
+QRPprevJohnTrad <- ggplot( drop_na(JohnTradition),
+                        aes(x = practiceStandardName, y = value) ) + 
+  theme_bw() + facet_grid(study~.) +
+  geom_flat_violin(fill="gray32",color="gray32", position = position_nudge(x = .18, y = 0)) +
+  geom_jitter(alpha=0.1, size=.5, width=0.15, height=0) +
+  stat_summary(fun = mean, geom = "point", color='green4', size=4, alpha=0.82) +
+  stat_summary(fun.data = mean_cl_boot, fun.args=(conf.int=0.95), geom="errorbar", size=.9, width=0.1, color='green4', alpha=0.82) +
+  #geom_jitter(width=0.2, size=.2, alpha=0.1)+
+  xlab("QRP") + ylab("perceived % others use at least once") + ylim(0,100) +
+  labs(title='Perceived prevalence of QRPs used by a researcher on at least one occasion') +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12)) 
+show(QRPprevJohnTrad)
+
+```
