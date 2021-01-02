@@ -163,7 +163,7 @@ show(QRPprevCloudComplete)
 ggsave( file.path("figures","MultipleStudiesPrevalencePerceptionDistributionsComplete.png"), width = 50, height = 30, units = "cm" )
 ```
 
-Plot but don't include ones only in Agnoli.
+Plot but don't include ones only in Agnoli, Brazil, and John et al.
 
 ```{r }
 #Falsify data - John et al. had that, Agnoli et al, and Rabelo et al. 
