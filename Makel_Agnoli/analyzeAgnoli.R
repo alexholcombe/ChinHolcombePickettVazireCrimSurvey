@@ -34,7 +34,7 @@ longAgnoli <- longAgnoli %>% mutate(
     practice=="not report all the conditions " ~ "Not report all conditions\n(closest to Omit n.s. studies or variables)",
     practice=="not report all the dependent m" ~ "Not report all DVs\n(closest to Omit n.s. studies or variables)",
     practice=="report an unexpected result as" ~ "HARK",
-    practice=="report in a selective manner o" ~ "Reporting only studies that worked\n(closest to Omit n.s. studies or variables)",
+    practice=="report in a selective manner o" ~ "Report only studies that worked\n(closest to Omit n.s. studies or variables)",
     practice=="Stop collecting data early tha" ~ "Stop collecting data bc sig\n(closest to Sample selectively)",
     TRUE    ~ "ERROR! unknown practice"
   )
@@ -55,7 +55,7 @@ longAgnoli$practiceStandardName <- factor(longAgnoli$practiceStandardName,
                                                    "Not report all conditions\n(closest to Omit n.s. studies or variables)",
                                                    "Not report all DVs\n(closest to Omit n.s. studies or variables)",
                                                    "Sample selectively",
-                                                   "Reporting only studies that worked\n(closest to Omit n.s. studies or variables)",
+                                                   "Report only studies that worked\n(closest to Omit n.s. studies or variables)",
                                                    "Mislead about demographic\nvariable effects" ) )
 
 saveRDS(longAgnoli, file = "Makel_Agnoli/Agnoli_LongQRPs.rds")

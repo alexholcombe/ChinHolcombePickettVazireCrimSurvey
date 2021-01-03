@@ -55,7 +55,7 @@ Brazil<- Brazil %>% mutate(
     QRP=="Omitting conditions" ~ "Not report all conditions\n(closest to Omit n.s. studies or variables)",
     QRP=="Stopping data collection" ~ "Stop collecting data bc sig\n(closest to Sample selectively)",
     QRP=="Rounding off p-values" ~ "Round p-values",
-    QRP=="Reporting studies that worked" ~ "Reporting only studies that worked\n(closest to Omit n.s. studies or variables)", #In a paper, selectively reporting studies that “worked”
+    QRP=="Reporting studies that worked" ~ "Report only studies that worked\n(closest to Omit n.s. studies or variables)", #In a paper, selectively reporting studies that “worked”
     QRP=="Excluding data based on results" ~ "Exclude data selectively",
     QRP=="A posteriori hypothesizing" ~ "HARK",
     QRP=="Demographics" ~ "Mislead about demographic\nvariable effects",
@@ -132,7 +132,7 @@ CMAF <- rbind(CMAF,Rabelo)
 #setdiff(  unique(Rabelo$practiceStandardName), unique(Agnoli$practiceStandardName) )
 #setdiff(  unique(Agnoli$practiceStandardName), unique(Rabelo$practiceStandardName) )
 #Rabelo does not have "Omit nonsignificant studies or variables" but Agnoli does.
-#Agnoli has ""Reporting only studies that worked" but Rabelo does not.
+#Agnoli has ""Report only studies that worked" but Rabelo does not.
 ```
 
 Reorder levels for more pleasing and logical ordering, of both practices and studies
@@ -192,7 +192,7 @@ omitExtraAgnoli <- CMAF %>% filter(practiceStandardName != "Mislead about demogr
       filter(practiceStandardName != "Falsify data\n(closest to Hide imputation)") %>%
       filter(practiceStandardName != "Not report all DVs\n(closest to Omit n.s. studies or variables)") %>%
       filter(practiceStandardName != "Stop collecting data bc sig\n(closest to Sample selectively)") %>%
-      filter(practiceStandardName != "Reporting only studies that worked\n(closest to Omit n.s. studies or variables)")  
+      filter(practiceStandardName != "Report only studies that worked\n(closest to Omit n.s. studies or variables)")  
 
 QRPprevCloudLess <- ggplot( drop_na(omitExtraAgnoli),
                         aes(x = practiceStandardName, y = value) ) + 
@@ -228,14 +228,28 @@ QRPprevNotJohn <- ggplot( drop_na(notJohnQuestions),
   theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12)) 
 show(QRPprevNotJohn)
 ggsave( file.path("figures","MultipleStudiesPrevPerceptNotJohnTradition.png"), width = 50, height = 30, units = "cm" )
-
 ```
 
-John tradition only
+Plot John tradition only. First, get practice labels simpler by deleting parenthetical phrase.
 ```{r }
+
+#Delete everything after parenthesis (explanatory material) to make simpler labels option
+#https://stackoverflow.com/questions/5633533/regular-expression-for-matching-parentheses
+stdNamesWithoutExplanation<- gsub("[(].*","",CMAF$practiceStandardName)
+CMAF$stdNamesWithoutExplanation <- stdNamesWithoutExplanation
+CMAF$stdNamesWithoutExplanation <- as.factor(CMAF$stdNamesWithoutExplanation) 
+levels(CMAF$stdNamesWithoutExplanation)
+
+practiceOrderDesired <- c(11,9,12,3,8,2,13,4,  1,5,6,7,10,14,15,16,17) #try to match other studies sensible order
+CMAF$stdNamesWithoutExplanation <- factor(CMAF$stdNamesWithoutExplanation,
+                                    levels = levels(CMAF$stdNamesWithoutExplanation)[practiceOrderDesired])
+```
+
+```{r}
+
 JohnTradition<- CMAF %>% filter(study=="Agnoli (psychology)" | study=="Rabelo (psychology)" )
 QRPprevJohnTrad <- ggplot( drop_na(JohnTradition),
-                        aes(x = practiceStandardName, y = value) ) + 
+                        aes(x = stdNamesWithoutExplanation, y = value) ) + 
   theme_bw() + facet_grid(study~.) +
   geom_flat_violin(fill="gray32",color="gray32", position = position_nudge(x = .18, y = 0)) +
   geom_jitter(alpha=0.1, size=.5, width=0.15, height=0) +
@@ -246,5 +260,6 @@ QRPprevJohnTrad <- ggplot( drop_na(JohnTradition),
   labs(title='Perceived prevalence of QRPs used by a researcher on at least one occasion') +
   theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12)) 
 show(QRPprevJohnTrad)
+ggsave( file.path("figures","PrevPerceptJohnTradition.png"), width = 50, height = 30, units = "cm" )
 
 ```
