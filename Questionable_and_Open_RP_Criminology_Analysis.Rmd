@@ -1585,8 +1585,9 @@ longQRPprevalence <- longQRPprevalence %>% mutate(
   )
  )
 longQRPprevalence$practiceLongName <- as.factor(longQRPprevalence$practiceLongName)
+#levels(longQRPprevalence$practiceLongName)
 
-practiceOrderDesiredNeverAscending <- c(6,5,7,4,2,1,8,3,9,10) 
+practiceOrderDesiredNeverAscending <- c(4,5,7,3,2,1,8,9,10) 
 longQRPprevalence$practiceLongName <- factor(longQRPprevalence$practiceLongName,
                                     levels = levels(longQRPprevalence$practiceLongName)[practiceOrderDesiredNeverAscending])
 
@@ -1622,11 +1623,6 @@ ggplot( drop_na(longQRPprevalence), aes(x = response) ) +
 #Load half violin plot: geom_flat_violin()
 source("https://raw.githubusercontent.com/datavizpyr/data/master/half_flat_violinplot.R")
 
-longQRPs$practiceLongName <- as.factor(longQRPs$practiceLongName)
-
-practiceOrderDesiredNeverAscending <- c(6,5,7,4,2,1,8,3,9,10) #order from least endorsed to most endorsed
-longQRPs$practiceLongName <- factor(longQRPs$practiceLongName,
-                                    levels = levels(longQRPs$practiceLongName)[practiceOrderDesiredNeverAscending])
 
 #Save tibble so that separate file can plot all 5 datasets on the same graph
 saveRDS(longQRPprevalence, file = "longQRPs.rds")
