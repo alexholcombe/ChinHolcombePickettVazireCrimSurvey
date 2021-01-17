@@ -227,7 +227,7 @@ QRPprevNotJohn <- ggplot( drop_na(notJohnQuestions),
   labs(title='Perceived prevalence of QRPs used by a researcher on at least one occasion') +
   theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12)) 
 show(QRPprevNotJohn)
-ggsave( file.path("figures","MultipleStudiesPrevPerceptNotJohnTradition.png"), width = 50, height = 30, units = "cm" )
+ggsave( file.path("figures","Fig5_MultipleStudiesPrevPerceptNotJohnTradition.png"), width = 50, height = 30, units = "cm" )
 ```
 
 Plot John tradition only. First, get practice labels simpler by deleting parenthetical phrase.
@@ -246,6 +246,8 @@ CMAF$stdNamesWithoutExplanation <- factor(CMAF$stdNamesWithoutExplanation,
 #levels(CMAF$stdNamesWithoutExplanation)
 ```
 
+Figure 6
+
 ```{r}
 
 JohnTradition<- CMAF %>% filter(study=="Agnoli (psychology)" | study=="Rabelo (psychology)" )
@@ -261,6 +263,6 @@ QRPprevJohnTrad <- ggplot( drop_na(JohnTradition),
   labs(title='Perceived prevalence of QRPs used by a researcher on at least one occasion') +
   theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12)) 
 show(QRPprevJohnTrad)
-ggsave( file.path("figures","PrevPerceptJohnTradition.png"), width = 50, height = 30, units = "cm" )
+ggsave( file.path("figures","Fig6_PrevPerceptJohnTradition.png"), width = 50, height = 30, units = "cm" )
 
 ```
