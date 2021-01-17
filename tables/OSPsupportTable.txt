@@ -3,19 +3,19 @@ practiceLongName	response	percentRounded	n	proportion
 2	Share code	Often	57.7	383	0.576807228915663
 3	Share code	Rarely	14.8	98	0.147590361445783
 4	Share code	Never	2.4	16	0.0240963855421687
-5	Post article publicly	Almost always	35.1	230	0.351145038167939
-6	Post article publicly	Often	47.2	309	0.47175572519084
-7	Post article publicly	Rarely	13	85	0.129770992366412
-8	Post article publicly	Never	4.7	31	0.0473282442748092
-9	Share data	Almost always	19.9	134	0.198518518518519
-10	Share data	Often	61.5	415	0.614814814814815
-11	Share data	Rarely	16.9	114	0.168888888888889
-12	Share data	Never	1.8	12	0.0177777777777778
-13	Attempt replication	Almost always	5.1	34	0.0508982035928144
-14	Attempt replication	Often	74.6	498	0.745508982035928
-15	Attempt replication	Rarely	19.3	129	0.19311377245509
-16	Attempt replication	Never	1	7	0.0104790419161677
-17	Preregister study	Almost always	24.4	162	0.243609022556391
-18	Preregister study	Often	51.6	343	0.515789473684211
-19	Preregister study	Rarely	20.2	134	0.201503759398496
-20	Preregister study	Never	3.9	26	0.0390977443609023
+5	Share data	Almost always	19.9	134	0.198518518518519
+6	Share data	Often	61.5	415	0.614814814814815
+7	Share data	Rarely	16.9	114	0.168888888888889
+8	Share data	Never	1.8	12	0.0177777777777778
+9	Preregister study	Almost always	24.4	162	0.243609022556391
+10	Preregister study	Often	51.6	343	0.515789473684211
+11	Preregister study	Rarely	20.2	134	0.201503759398496
+12	Preregister study	Never	3.9	26	0.0390977443609023
+13	Post article publicly	Almost always	35.1	230	0.351145038167939
+14	Post article publicly	Often	47.2	309	0.47175572519084
+15	Post article publicly	Rarely	13	85	0.129770992366412
+16	Post article publicly	Never	4.7	31	0.0473282442748092
+17	Attempt replication	Almost always	5.1	34	0.0508982035928144
+18	Attempt replication	Often	74.6	498	0.745508982035928
+19	Attempt replication	Rarely	19.3	129	0.19311377245509
+20	Attempt replication	Never	1	7	0.0104790419161677

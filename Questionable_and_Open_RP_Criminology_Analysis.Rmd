@@ -1,9 +1,17 @@
 ---
 title: "QRP - Criminology Analysis"
-author: "Jason Chin & Alex O. Holcombe"
+author: "Jason M. Chin & Alex O. Holcombe"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output: html_document
 ---
+
+Find more information about this study at https://osf.io/qvcdg/
+
+Tables 2-5 of the manuscript can be reproduced with the STATA file at the OSF link above
+
+The statistics in Tables 1-3 are reproduced below on both the full sample and the non-quantitative sample
+
+Only the de-identified file was shared via Github and the Open Science Framework (OSF)
 
 #Setup
 ```{r setup}
@@ -16,7 +24,6 @@ library(knitr)
 library(PropCIs)
 
 #loads the libraries that contains visual themes for the plots
-library(ggthemr)
 library(RColorBrewer)
 library(ggpattern)
 
@@ -24,15 +31,12 @@ knitr::opts_chunk$set(echo = TRUE,
  echo=TRUE, eval=TRUE, warning=FALSE, message=FALSE)
 ```
 
-
-Only the de-identified file was shared via github
-
-
-Prepares the data
+Wranglle the data by reading in the de-identified data and recoding some of it.
 ```{r data prep}
 
 #Grabs the de-identified data
 QORP <- read_csv("data_deidentified/QORP_de-identified.csv")
+#QORP <- read_csv("QORP_de-identified.csv")
 
 #Recoding variables
 ##Recodes the quantitative vs other methods question as 1 (quant) or 0 (anything else) and turns it into a factor variable
@@ -226,9 +230,9 @@ filter(quant_researcher == 0)
 
 ```
 
-#Trims practices not asked about from non-quantitative sample 
+Delete from non-quantitative sample the practices not asked about from that sample.
 
-``` {r trim_nonquant}
+``` {r delete_nonquant}
 QORP_nonquant <- 
   QORP_nonquant %>% select(-contains("biasedreporting"))
 QORP_nonquant <- 
@@ -244,8 +248,7 @@ QORP_nonquant <-
 
 ```
 
-Demographics
-
+Demographics - full sample, quantitative sample, non-quantitative sample
 ```{r demographics}
 
 #Descriptive Analyses - All data
@@ -360,9 +363,7 @@ write.csv(classes, file = "tables/demographics_careerlevel.csv")
 
 ```
 
-
-
-#Descriptive statistics on QRP and OSP use - Table 1, Table 2, Table 3 - Quant researchers
+Descriptive statistics on QRP and OSP use - Table 1, Table 2, Table 3 - Quant researchers
 
 ``` {r main_descriptives}
 
@@ -403,7 +404,7 @@ selfuse_quant$var <- sub("opencode", "Share code", selfuse_quant$var)
 selfuse_quant$var <- sub("rep", "Attempt replication", selfuse_quant$var) 
 selfuse_quant$var <- sub("pAttempt replicationrints", "Post article publicly", selfuse_quant$var) 
 
-selfuse_quant$var <- sub("biasedAttempt replicationorting", "Omit nonsignificant studies or variables", selfuse_quant$var)
+selfuse_quant$var <- sub("biasedAttempt replicationorting", "Omit non-significant studies or variables", selfuse_quant$var)
 selfuse_quant$var <- sub("stopping", "Sample selectively", selfuse_quant$var) 
 selfuse_quant$var <- sub("biasedcov", "Drop covariates selectively", selfuse_quant$var) 
 selfuse_quant$var <- sub("omittinganalyses", "Underreport results", selfuse_quant$var) 
@@ -454,7 +455,7 @@ selfusepercent_quant$var <- sub("opencode", "Share code", selfusepercent_quant$v
 selfusepercent_quant$var <- sub("rep", "Attempt replication", selfusepercent_quant$var) 
 selfusepercent_quant$var <- sub("pAttempt replicationrints", "Post article publicly", selfusepercent_quant$var) 
 
-selfusepercent_quant$var <- sub("biasedAttempt replicationorting", "Omit nonsignificant studies or variables", selfusepercent_quant$var)
+selfusepercent_quant$var <- sub("biasedAttempt replicationorting", "Omit non-significant studies or variables", selfusepercent_quant$var)
 selfusepercent_quant$var <- sub("stopping", "Sample selectively", selfusepercent_quant$var) 
 selfusepercent_quant$var <- sub("biasedcov", "Drop covariates selectively", selfusepercent_quant$var) 
 selfusepercent_quant$var <- sub("omittinganalyses", "Underreport results", selfusepercent_quant$var) 
@@ -514,7 +515,7 @@ selfuse_quant$var <- sub("opencode", "Share code", selfuse_quant$var)
 selfuse_quant$var <- sub("rep", "Attempt replication", selfuse_quant$var) 
 selfuse_quant$var <- sub("pAttempt replicationrints", "Post article publicly", selfuse_quant$var) 
 
-selfuse_quant$var <- sub("biasedAttempt replicationorting", "Omit nonsignificant studies or variables", selfuse_quant$var)
+selfuse_quant$var <- sub("biasedAttempt replicationorting", "Omit non-significant studies or variables", selfuse_quant$var)
 selfuse_quant$var <- sub("stopping", "Sample selectively", selfuse_quant$var) 
 selfuse_quant$var <- sub("biasedcov", "Drop covariates selectively", selfuse_quant$var) 
 selfuse_quant$var <- sub("omittinganalyses", "Underreport results", selfuse_quant$var) 
@@ -566,7 +567,7 @@ selfusepercent_quant$var <- sub("opencode", "Share code", selfusepercent_quant$v
 selfusepercent_quant$var <- sub("rep", "Attempt replication", selfusepercent_quant$var) 
 selfusepercent_quant$var <- sub("pAttempt replicationrints", "Post article publicly", selfusepercent_quant$var) 
 
-selfusepercent_quant$var <- sub("biasedAttempt replicationorting", "Omit nonsignificant studies or variables", selfusepercent_quant$var)
+selfusepercent_quant$var <- sub("biasedAttempt replicationorting", "Omit non-significant studies or variables", selfusepercent_quant$var)
 selfusepercent_quant$var <- sub("stopping", "Sample selectively", selfusepercent_quant$var) 
 selfusepercent_quant$var <- sub("biasedcov", "Drop covariates selectively", selfusepercent_quant$var) 
 selfusepercent_quant$var <- sub("omittinganalyses", "Underreport results", selfusepercent_quant$var) 
@@ -686,12 +687,11 @@ write.csv(selfusepercent_nonquant, file = "tables/selfusepercent_nonquant.csv")
 
 ```
 
-
-#Descriptive statistics on QRP and ORP endorsement - Quantitative researchers
+Descriptive statistics on QRP and ORP Support - Quantitative researchers
 
 ``` {r endorsement_quant}
 
-##Endorsement - on the mean 1-4 measure
+##Support - on the mean 1-4 measure
 
 endorse_quant <-
 QORP_quant %>%
@@ -721,7 +721,7 @@ endorse_quant$var <- sub("opencode", "Share code", endorse_quant$var)
 endorse_quant$var <- sub("rep", "Attempt replication", endorse_quant$var) 
 endorse_quant$var <- sub("pAttempt replicationrints", "Post article publicly", endorse_quant$var) 
 
-endorse_quant$var <- sub("biasedAttempt replicationorting", "Omit nonsignificant studies or variables", endorse_quant$var)
+endorse_quant$var <- sub("biasedAttempt replicationorting", "Omit non-significant studies or variables", endorse_quant$var)
 endorse_quant$var <- sub("stopping", "Sample selectively", endorse_quant$var) 
 endorse_quant$var <- sub("biasedcov", "Drop covariates selectively", endorse_quant$var) 
 endorse_quant$var <- sub("omittinganalyses", "Underreport results", endorse_quant$var) 
@@ -739,11 +739,11 @@ write.csv(endorse_quant, file = "tables/endorse_quant.csv")
 
 ```
 
-#Descriptive statistics on QRP and ORP endorsement - All researchers
+Descriptive statistics on QRP and ORP support - All researchers
 
 ``` {r endorsement_all}
 
-##Endorsement - on the mean 1-4 measure
+##Support - on the mean 1-4 measure
 
 endorse_quant <-
 QORP %>%
@@ -772,7 +772,7 @@ endorse_quant$var <- sub("opencode", "Share code", endorse_quant$var)
 endorse_quant$var <- sub("rep", "Attempt replication", endorse_quant$var) 
 endorse_quant$var <- sub("pAttempt replicationrints", "Post article publicly", endorse_quant$var) 
 
-endorse_quant$var <- sub("biasedAttempt replicationorting", "Omit nonsignificant studies or variables", endorse_quant$var)
+endorse_quant$var <- sub("biasedAttempt replicationorting", "Omit non-significant studies or variables", endorse_quant$var)
 endorse_quant$var <- sub("stopping", "Sample selectively", endorse_quant$var) 
 endorse_quant$var <- sub("biasedcov", "Drop covariates selectively", endorse_quant$var) 
 endorse_quant$var <- sub("omittinganalyses", "Underreport results", endorse_quant$var) 
@@ -787,15 +787,13 @@ endorse_all <- endorse_quant
 endorse_all
 
 write.csv(endorse_all, file = "tables/endorse_all.csv")
-
-
 ```
 
-#Descriptive statistics on QRP and ORP endorsement - Non-quant
+Descriptive statistics on QRP and ORP support - Non-quant
 
 ``` {r endorsement_non}
 
-##Endorsement - on the mean 1-4 measure
+##Support - on the mean 1-4 measure
 
 endorse_quant <-
 QORP_nonquant %>%
@@ -838,46 +836,11 @@ write.csv(endorse_nonquant, file = "tables/endorse_nonquant.csv")
 
 ```
 
-#Descriptive statisics on endorsement - Requested by Simine
+Stacked bar graph of QRPs and OSPs - Not in manuscript
 
-``` {r endorsement_breakdown_quant}
+Create a tibble with practice (aspredicted, prereg, etc.) as one column and another column the participant's response for that (NA,1,2,3,4).  
 
-endorse_quant_simine <-
-QORP_quant %>%
-select_at(vars(ends_with("should"))) %>%
-map_df(~ broom::tidy(table(.)), .id = 'var')
-endorse_quant
-
-write.csv(endorse_quant_simine, file = "tables/endorse_quant_simine.csv")
-
-#What the variables and levels mean:
-
-##"Never" = 1, "Rarely" = 2, "Often" = 3, "Almost always" = 4
-
-##As predicted (Reporting an unexpected finding or a result from exploratory analysis as having been predicted from the start)
-##Omitting analyses (Reporting a set of results as the complete set of analyses when other analyses were also conducted)
-##Hiding problems (Not disclosing known problems in the method and analysis, or problems with the data quality, that potentially impact conclusions)
-##Filling in missing data (Filling in missing data points without identifying those data as simulated)
-##Preregistering (Preregistering hypotheses and analysis plans prior to data collection)
-##Open data (Sharing data you collected to a publicly accessible, online repository)
-##Open code and materials (Sharing code or other research materials to a publicly accessible, online repository)
-##Replication (Sought to replicate the work of other researchers by following their methods as closely as possible with no intentional changes)
-##Preprints (Posted copies of your research so that it is not behind a paywall (e.g., on a publicly accessible, online preprint server))
-##Biased reporting (Not reporting studies or variables that failed to reach statistical significance (e.g. p < 0.05) or some other desired statistical threshold)
-##Biased covariate reporting (Not reporting covariates that failed to reach statistical significance (e.g. p < 0.05) or some other desired statistical threshold)
-##Rounding down p-values (Rounding-off a p-value or other quantity to meet a pre-specified threshold (e.g., reporting p = 0.054 as p = 0.05 or p = 0.013 as p = 0.01))
-##Data/outlier exclusion after peeking (Deciding to exclude data points after first checking the impact on statistical significance (e.g. p < 0.05) or some other desired statistical threshold)
-##Optional stopping (Collecting more data for a study after first inspecting whether the results are statistically significant (e.g. p < 0.05))
-##Analysis changing (Changing to another type of statistical analysis after the analysis initially chosen failed to reach statistical significance (e.g. p < 0.05) or some other desired statistical threshold)
-
-
-```
-
-Stacked bar graph of QRPs and OSPs
-
-Ideally I would have a tibble with practice (aspredicted, prereg, etc.) as one column and another column the participant's response for that (NA,1,2,3,4).  
-
-This would mean converting the present wide format (where there is a separate column for each _should variable) to long format (where each _should instead gets a different row). Let's try to create that in a mini-example with just two variables.
+To do so, convert the present wide format (where there is a separate column for each _should variable) to long format (where each _should instead gets a different row). Let's try to create that in a mini-example with just two variables.
 
 ```{r stackedGraphOSPs}
 shoulds <- QORP_quant %>% select_at(vars(ends_with("should"))) #e.g. aspredicted_should, opencode_should, pvalround_should
@@ -900,19 +863,19 @@ ggplot( drop_na(longShoulds), aes(practice)) +  geom_bar(aes(fill=value))
 
 ```
 
-Plot QRPs and OSPs in separate stacked bar plots
-
+Figure 2. Stacked bar chart for support for QRPs
 ```{r stackedGraphQRPsOnly}
 
 QRPvarnames <- c("aspredicted_should","omittinganalyses_should","hidingproblems_should","fillingin_should","biasedreporting_should","stopping_should","biasedcov_should","pvalround_should","analysischanging_should","outliers_should")
 
 QRPs <- shoulds %>% select( all_of(QRPvarnames) )
 
+
 longQRPs <- QRPs %>% pivot_longer(cols=everything(), names_to="practice", values_to="response")
 
 longQRPs <- longQRPs %>% mutate(
   practiceLongName = case_when(
-    practice=="biasedreporting_should" ~ "Omit nonsignificant studies or variables",
+    practice=="biasedreporting_should" ~ "Omit non-significant\nstudies and variables",
     practice=="aspredicted_should" ~ "HARK",
     practice=="biasedcov_should" ~ "Drop covariates selectively",
     practice=="stopping_should" ~ "Sample selectively",
@@ -927,7 +890,9 @@ longQRPs <- longQRPs %>% mutate(
  )
 longQRPs$practiceLongName <- as.factor(longQRPs$practiceLongName)
 
-practiceOrderDesiredNeverAscending <- c(6,5,7,4,2,1,8,3,9,10) #order from least endorsed to most endorsed
+practiceOrderDesiredNeverAscending <- 1:10 
+practiceOrderDesiredNeverAscending <- c(4,5,7,3,2,1,8,6,9,10) 
+
 longQRPs$practiceLongName <- factor(longQRPs$practiceLongName,
                                     levels = levels(longQRPs$practiceLongName)[practiceOrderDesiredNeverAscending])
 
@@ -935,23 +900,26 @@ longQRPs$response <- as.factor(longQRPs$response)
 longQRPs$response <- fct_relevel(longQRPs$response, "Almost always","Often","Rarely","Never")
 
 #plot after dropping NAs
-QRPsstacked<- ggplot( drop_na(longQRPs), aes(practiceLongName,fill=response)) + 
+
+stackedQRPplot <- ggplot( drop_na(longQRPs), aes(practiceLongName,fill=response)) + 
   geom_bar(position="fill") + #this is what changes it from counts to proportion
   xlab("QRP") + ylab("proportion") +
-  #scale_colour_manual(values=c("chartreuse4","orangered4","darkorchid4","brown4"), aesthetics = "fill") +
+  theme_bw() + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank()) + #remove backgrund including grid lines
   #scale_fill_viridis_d(option = "magma", direction=-1) +
-  scale_fill_brewer(palette = "YlGn") + #https://ggplot2-book.org/scale-colour.html
+  scale_fill_brewer(palette = "Greys") + #https://ggplot2-book.org/scale-colour.html
   labs(title='Support for QRPs',
        subtitle='How frequently SHOULD criminologists use this practice?') +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12)) #, legend.position = "top") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 10)) + #, legend.position = "top")
+  scale_y_continuous(limits = c(0,1), expand = expansion(mult = c(0, 0))) #get rid of whitespace on top and bottom of axis limits https://stackoverflow.com/questions/22945651/how-to-remove-space-between-axis-area-plot-in-ggplot2/52318834#52318834
 
-show(QRPsstacked)
-ggsave("figures/QRPsStackedBarChart.png", width = 30, height = 20, units = "cm")
+show(stackedQRPplot)
+
+ggsave( file.path("figures","fig2_stackedGraphQRPsOnly.png"),
+        width = 30, height = 20, units = "cm")
 ```
 
 
-Stacked bar graph of OSPs
-
+Figure 4 - Stacked bar graph of OSPs 
 ```{r stackedGraphOSPsOnly}
 
 OSPvarnames <- c("prereg_should","opendata_should","opencode_should","rep_should","preprints_should")
@@ -982,28 +950,25 @@ longOSPs$response <- fct_relevel(longOSPs$response, "Almost always","Often","Rar
 
 #plot after dropping NAs
 
-#try to order plot in descending order of how common the "Often" response is.
-#Why use "Often" and not "Almost always"? 
-# Because it's not obvious that the most normative response is "Almost always", for example for Replication:
-#“Sought to replicate the work of other researchers by following their methods as closely as possible with no intentional changes.”
-practiceOrderDesired <- c(4,2,5,1,3) #ordered approximately by the sum of often and almost always
+practiceOrderDesired <- c(4,5,3,2,1) #ordered to match Figure 2
 longOSPs$practiceLongName <- factor(longOSPs$practiceLongName,
                                     levels = levels(longOSPs$practiceLongName)[practiceOrderDesired])
 
 OSPsStackedBarChart<- ggplot( drop_na(longOSPs), aes( x=practiceLongName,fill=response )) + 
   geom_bar(position="fill") + #this is what changes it from counts to proportion
-  xlab("OSP") + ylab("proportion") +
-  scale_fill_brewer(palette = "YlGn") +
+  xlab("OSP") + ylab("proportion") + theme_bw() +
+  scale_fill_brewer(palette = "Greys") +
   labs(title='Support for OSPs',
           subtitle ='How frequently SHOULD criminologists use this practice?') +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12)) #, legend.position = "top")
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 10)) + #, legend.position = "top")
+  scale_y_continuous(limits = c(0,1), expand = expansion(mult = c(0, 0)))
 
 show(OSPsStackedBarChart)
-ggsave("figures/OSPsStackedBarChart.png", width = 30, height = 20, units = "cm")
+ggsave(file.path("figures","fig4_stackedGraphOSPs.png"), width = 30, height = 20, units = "cm")
 
 ```
 
-Calculate the proportion of each response that is visualized in the above proportion plots - requested by Simine
+Calculate the proportion of each response that is visualized in the above proportion plots - requested by Simine and not in manuscript
 ```{r calcProportionQRPsupport}
 
 tq<-drop_na(longQRPs) %>%
@@ -1018,7 +983,7 @@ write.table(tq, file = "tables/QRPsupportTable.txt", sep = "\t", quote = FALSE, 
 
 ```
 
-Calculate the proportion of each response that is visualized in the above proportion plots - requested by Simine
+Calculate the proportion of each response that is visualized in the above proportion plots - requested by Simine and not in manuscript
 ```{r calcProportionOSPsupport}
 
 # https://stackoverflow.com/questions/24576515/relative-frequencies-proportions-with-dplyr
@@ -1029,211 +994,12 @@ to<- drop_na(longOSPs) %>%
   mutate(percentRounded = round(proportion*100,1)) %>%
   relocate(practiceLongName,response,percentRounded)
 show(to)
-write.table(to, file = "tables/OSPsupportTable.txt", sep = "\t", quote = FALSE, row.names = T)
+write.table(to, file = file.path("tables","OSPsupportTable.txt"), sep = "\t", quote = FALSE, row.names = T)
 
 ```
 
-#Figure 1 - QRP endorsement and perceived use - Quant Researchers
-
-```{r Figure1original}
-#Creates figure plotting quant. criminologists' support for using a QRP (should be used at least rarely) and their perceived prevalence (people who use at least once)
-
-##Creates each row of a tibble with the practice, the mean for the practice, and the lower and higher CIs
-
-aspredicted_endorse <- QORP_quant %>% 
-  summarise( sum=sum(aspredicted_endorse, na.rm = T), n=sum(!is.na(aspredicted_endorse)) ) %>%
-  dplyr::rename(x=sum) %>% mutate(mean=x/n)
-aspredicted_endorseCI <- PropCIs::add4ci(aspredicted_endorse$x, aspredicted_endorse$n, conf.level=.95)
-
-endorse1 <-
-tibble(var = "aspredicted_endorse", mean = aspredicted_endorse$mean, ymin = aspredicted_endorseCI$conf.int[1], ymax = aspredicted_endorseCI$conf.int[2])
-
-omittinganalyses_endorse <- QORP_quant %>% 
-  summarise( sum=sum(omittinganalyses_endorse, na.rm = T), n=sum(!is.na(omittinganalyses_endorse)) ) %>%
-  dplyr::rename(x=sum) %>% mutate(mean=x/n)
-omittinganalyses_endorseCI <- PropCIs::add4ci(omittinganalyses_endorse$x, omittinganalyses_endorse$n, conf.level=.95)
-
-endorse2 <-
-tibble(var = "omittinganalyses_endorse", mean = omittinganalyses_endorse$mean, ymin = omittinganalyses_endorseCI$conf.int[1], ymax = omittinganalyses_endorseCI$conf.int[2])
-
-hidingproblems_endorse <- QORP_quant %>% 
-  summarise( sum=sum(hidingproblems_endorse, na.rm = T), n=sum(!is.na(hidingproblems_endorse)) ) %>%
-  dplyr::rename(x=sum) %>% mutate(mean=x/n)
-hidingproblems_endorseCI <- PropCIs::add4ci(hidingproblems_endorse$x, hidingproblems_endorse$n, conf.level=.95)
-
-endorse3 <-
-tibble(var = "hidingproblems_endorse", mean = hidingproblems_endorse$mean, ymin = hidingproblems_endorseCI$conf.int[1], ymax = hidingproblems_endorseCI$conf.int[2])
-
-fillingin_endorse <- QORP_quant %>% 
-  summarise( sum=sum(fillingin_endorse, na.rm = T), n=sum(!is.na(fillingin_endorse)) ) %>%
-  dplyr::rename(x=sum) %>% mutate(mean=x/n)
-fillingin_endorseCI <- PropCIs::add4ci(fillingin_endorse$x, fillingin_endorse$n, conf.level=.95)
-
-endorse4 <-
-tibble(var = "fillingin_endorse", mean = fillingin_endorse$mean, ymin = fillingin_endorseCI$conf.int[1], ymax = fillingin_endorseCI$conf.int[2])
-
-prereg_endorse <- QORP_quant %>% 
-  summarise( sum=sum(prereg_endorse, na.rm = T), n=sum(!is.na(prereg_endorse)) ) %>%
-  dplyr::rename(x=sum) %>% mutate(mean=x/n)
-prereg_endorseCI <- PropCIs::add4ci(prereg_endorse$x, prereg_endorse$n, conf.level=.95)
-
-endorse5 <-
-tibble(var = "prereg_endorse", mean = prereg_endorse$mean, ymin = prereg_endorseCI$conf.int[1], ymax = prereg_endorseCI$conf.int[2])
-
-opendata_endorse <- QORP_quant %>% 
-  summarise( sum=sum(opendata_endorse, na.rm = T), n=sum(!is.na(opendata_endorse)) ) %>%
-  dplyr::rename(x=sum) %>% mutate(mean=x/n)
-opendata_endorseCI <- PropCIs::add4ci(opendata_endorse$x, opendata_endorse$n, conf.level=.95)
-
-endorse6 <-
-tibble(var = "opendata_endorse", mean = opendata_endorse$mean, ymin = opendata_endorseCI$conf.int[1], ymax = opendata_endorseCI$conf.int[2])
-
-opencode_endorse <- QORP_quant %>% 
-  summarise( sum=sum(opencode_endorse, na.rm = T), n=sum(!is.na(opencode_endorse)) ) %>%
-  dplyr::rename(x=sum) %>% mutate(mean=x/n)
-opencode_endorseCI <- PropCIs::add4ci(opencode_endorse$x, opencode_endorse$n, conf.level=.95)
-
-endorse7 <-
-tibble(var = "opencode_endorse", mean = opencode_endorse$mean, ymin = opencode_endorseCI$conf.int[1], ymax = opencode_endorseCI$conf.int[2])
-
-rep_endorse <- QORP_quant %>% 
-  summarise( sum=sum(rep_endorse, na.rm = T), n=sum(!is.na(rep_endorse)) ) %>%
-  dplyr::rename(x=sum) %>% mutate(mean=x/n)
-rep_endorseCI <- PropCIs::add4ci(rep_endorse$x, rep_endorse$n, conf.level=.95)
-
-endorse8 <-
-tibble(var = "rep_endorse", mean = rep_endorse$mean, ymin = rep_endorseCI$conf.int[1], ymax = rep_endorseCI$conf.int[2])
-
-preprints_endorse <- QORP_quant %>% 
-  summarise( sum=sum(preprints_endorse, na.rm = T), n=sum(!is.na(preprints_endorse)) ) %>%
-  dplyr::rename(x=sum) %>% mutate(mean=x/n)
-preprints_endorseCI <- PropCIs::add4ci(preprints_endorse$x, preprints_endorse$n, conf.level=.95)
-
-endorse9 <-
-tibble(var = "preprints_endorse", mean = preprints_endorse$mean, ymin = preprints_endorseCI$conf.int[1], ymax = preprints_endorseCI$conf.int[2])
-
-biasedreporting_endorse <- QORP_quant %>% 
-  summarise( sum=sum(biasedreporting_endorse, na.rm = T), n=sum(!is.na(biasedreporting_endorse)) ) %>%
-  dplyr::rename(x=sum) %>% mutate(mean=x/n)
-biasedreporting_endorseCI <- PropCIs::add4ci(biasedreporting_endorse$x, biasedreporting_endorse$n, conf.level=.95)
-
-endorse10 <-
-tibble(var = "biasedreporting_endorse", mean = biasedreporting_endorse$mean, ymin = biasedreporting_endorseCI$conf.int[1], ymax = biasedreporting_endorseCI$conf.int[2])
-
-biasedcov_endorse <- QORP_quant %>% 
-  summarise( sum=sum(biasedcov_endorse, na.rm = T), n=sum(!is.na(biasedcov_endorse)) ) %>%
-  dplyr::rename(x=sum) %>% mutate(mean=x/n)
-biasedcov_endorseCI <- PropCIs::add4ci(biasedcov_endorse$x, biasedcov_endorse$n, conf.level=.95)
-
-endorse11 <-
-tibble(var = "biasedcov_endorse", mean = biasedcov_endorse$mean, ymin = biasedcov_endorseCI$conf.int[1], ymax = biasedcov_endorseCI$conf.int[2])
-
-pvalround_endorse <- QORP_quant %>% 
-  summarise( sum=sum(pvalround_endorse, na.rm = T), n=sum(!is.na(pvalround_endorse)) ) %>%
-  dplyr::rename(x=sum) %>% mutate(mean=x/n)
-pvalround_endorseCI <- PropCIs::add4ci(pvalround_endorse$x, pvalround_endorse$n, conf.level=.95)
-
-endorse12 <-
-tibble(var = "pvalround_endorse", mean = pvalround_endorse$mean, ymin = pvalround_endorseCI$conf.int[1], ymax = pvalround_endorseCI$conf.int[2])
-
-outliers_endorse <- QORP_quant %>% 
-  summarise( sum=sum(outliers_endorse, na.rm = T), n=sum(!is.na(outliers_endorse)) ) %>%
-  dplyr::rename(x=sum) %>% mutate(mean=x/n)
-outliers_endorseCI <- PropCIs::add4ci(outliers_endorse$x, outliers_endorse$n, conf.level=.95)
-
-endorse13 <-
-tibble(var = "outliers_endorse", mean = outliers_endorse$mean, ymin = outliers_endorseCI$conf.int[1], ymax = outliers_endorseCI$conf.int[2])
-
-stopping_endorse <- QORP_quant %>% 
-  summarise( sum=sum(stopping_endorse, na.rm = T), n=sum(!is.na(stopping_endorse)) ) %>%
-  dplyr::rename(x=sum) %>% mutate(mean=x/n)
-stopping_endorseCI <- PropCIs::add4ci(stopping_endorse$x, stopping_endorse$n, conf.level=.95)
-
-endorse14 <-
-tibble(var = "stopping_endorse", mean = stopping_endorse$mean, ymin = stopping_endorseCI$conf.int[1], ymax = stopping_endorseCI$conf.int[2])
-
-analysischanging_endorse <- QORP_quant %>% 
-  summarise( sum=sum(analysischanging_endorse, na.rm = T), n=sum(!is.na(analysischanging_endorse)) ) %>%
-  dplyr::rename(x=sum) %>% mutate(mean=x/n)
-analysischanging_endorseCI <- PropCIs::add4ci(analysischanging_endorse$x, analysischanging_endorse$n, conf.level=.95)
-
-endorse15 <-
-tibble(var = "analysischanging_endorse", mean = analysischanging_endorse$mean, ymin = analysischanging_endorseCI$conf.int[1], ymax = analysischanging_endorseCI$conf.int[2])
-
-##Combines all of the above tibbles and deletes the smaller ones
-
-endorse <- bind_rows(endorse1, endorse2, endorse3, endorse4, endorse5, endorse6, endorse7, endorse8, endorse9, endorse10, endorse11, endorse12, endorse13, endorse14, endorse15)
-
-rm(endorse1, endorse2, endorse3, endorse4, endorse5, endorse6, endorse7, endorse8, endorse9, endorse10, endorse11, endorse12, endorse13, endorse14, endorse15)
-
-##Cleans up dataframe
-
-endorse <- mutate(endorse, mean = mean*100)
-endorse <- mutate(endorse, ymin = ymin*100)
-endorse <- mutate(endorse, ymax = ymax*100)
-endorse <- mutate(endorse, sorter = c(8,4,9,10,NA,NA,NA,NA,NA,1,3,5,7,2,6))
-endorse <- arrange(endorse, sorter)
-endorse <- na.omit(endorse)
-endorse <- mutate(endorse, type = "endorse")
-
-##Moving on to estimates of others
-###Using a T-test to get confidence intervals, and hope that is okay, but it might violate some assumptions
-
-others <-
-QORP_quant %>%
-select_at(vars(ends_with("others"))) %>%
-map_df(~ broom::tidy(t.test(.)), .id = 'var')
-
-others <- mutate(others, sorter = c(8,4,9,10,NA,NA,NA,NA,NA,1,3,5,7,2,6))
-others <- arrange(others, sorter)
-others <- na.omit(others)
-others <- mutate(others, type = "others")
-others <- select(others, -p.value, -statistic, -parameter, -method, -alternative)
-others <- dplyr::rename(others, mean=estimate, ymin = conf.high, ymax = conf.low)
-
-endorse_other <- rbind(endorse, others)
-
-
-###Changes the name of the main variables
-
-####Prepares the main QRP variable of interest by removing the parts that identify the statistic used (this is captured in the type variable instead)
-
-endorse_other$var <- sub("_others", "", endorse_other$var)
-endorse_other$var <- sub("_endorse", "", endorse_other$var)
-
-####Changes the main QRP variable of interest to the standard QRP names
-
-endorse_other$var <- sub("biasedreporting", "Omit nonsignificant studies or variables", endorse_other$var)
-endorse_other$var <- sub("stopping", "Sample selectively", endorse_other$var) 
-endorse_other$var <- sub("biasedcov", "Drop covariates selectively", endorse_other$var) 
-endorse_other$var <- sub("omittinganalyses", "Underreport results", endorse_other$var) 
-endorse_other$var <- sub("pvalround", "Round p-values", endorse_other$var) 
-endorse_other$var <- sub("analysischanging", "Switch analysis selectively", endorse_other$var)
-endorse_other$var <- sub("outliers", "Exclude data selectively", endorse_other$var)
-endorse_other$var <- sub("aspredicted", "HARK", endorse_other$var) 
-endorse_other$var <- sub("hidingproblems", "Hide problems", endorse_other$var)
-endorse_other$var <- sub("fillingin", "Hide imputation", endorse_other$var)
-
-##Creates Figure 1
-
-endorse_other_QRP <- 
-  ggplot(endorse_other, aes(fill = type, y = mean, x = reorder(var, sorter))) +
-  ylab("% support using at least rarely / perceived % others use at least once") +
-  xlab("QRP") + 
-  scale_fill_brewer(palette = "Paired", name = "", labels = c("Support using", "Perceived prevalence")) +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), legend.position = "top") +
-  geom_bar(position="dodge", stat="identity") +
-  geom_errorbar( aes(ymin = ymin, ymax = ymax), position=position_dodge(.9), colour="black", width = .2)  
-
-show(endorse_other_QRP)
-
-ggsave("figures/fig1_endorseother.png", width = 30, height = 20, units = "cm")
-
-```
-
-#Figure 1alt - QRP perceived use only - Quant researchers
-
-```{r Figure1alt}
+Figure - QRP perceived use only - Quant researchers - not in manuscript
+```{r figure_perceived}
 #Creates figure plotting quant. criminologists' perceived prevalence (people who use at least once)
 
 ##Estimates of others
@@ -1259,7 +1025,7 @@ others$var <- sub("_others", "", others$var)
 
 ####Changes the main QRP variable of interest to the standard QRP names
 
-others$var <- sub("biasedreporting", "Omit nonsignificant studies or variables", others$var)
+others$var <- sub("biasedreporting", "Omit non-significant studies or variables", others$var)
 others$var <- sub("stopping", "Sample selectively", others$var) 
 others$var <- sub("biasedcov", "Drop covariates selectively", others$var) 
 others$var <- sub("omittinganalyses", "Underreport results", others$var) 
@@ -1270,245 +1036,77 @@ others$var <- sub("aspredicted", "HARK", others$var)
 others$var <- sub("hidingproblems", "Hide problems", others$var)
 others$var <- sub("fillingin", "Hide imputation", others$var)
 
-##Creates Figure 1
+##Creates Figure
 
 others_QRP <- 
   ggplot(others, aes(fill = type, y = mean, x = reorder(var, mean), show.legend = FALSE)) +
   ylab("perceived % others use at least once") +
-  xlab("QRP") + 
+  xlab("QRP") + theme_bw() +
   scale_fill_brewer(palette = "Dark2", guide = FALSE) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12)) +
   geom_bar(position="dodge", stat="identity") +
-  geom_errorbar( aes(ymin = ymin, ymax = ymax), position=position_dodge(.9), colour="black", width = .2)  
+  geom_errorbar( aes(ymin = ymin, ymax = ymax), position=position_dodge(.9), colour="black", width = .2) +
+  scale_y_continuous(limits = c(0,100), expand = expansion(mult = c(0, 0))) #https://stackoverflow.com/questions/22945651/how-to-remove-space-between-axis-area-plot-in-ggplot2/52318834#52318834
 
 show(others_QRP)
 
-ggsave("figures/fig1alt_other.png", width = 30, height = 20, units = "cm")
+ggsave( file.path("figures","fig_perceived_quant.png"), width = 30, height = 20, units = "cm")
 
 ```
 
+Figure - QRP perceived use only - Quant researchers - Boostrapped CIs -  not in manuscript
 
-#Figure 2 - OSP endorsement and perceived use - Quant Researchers
+Same as above but with bootstrapped CIs
+#  Frank E Harrell Jr, with contributions from Charles Dupont and   many others. (2020). Hmisc: Harrell Miscellaneous. R package   version 4.4-1. https://CRAN.R-project.org/package=Hmisc
+```{r QRPprevalence}
 
-```{r figure2}
-#Creates figure plotting quant. criminologists' support for using an OSP (should be used at least rarely) and their perceived prevalence (people who use at least once)
+others <- QORP_quant %>% select_at(vars(ends_with("others")))
 
-##Creates each row of a tibble with the practice, the mean for the practice, and the lower and higher CIs
+QRPvarnames <- c("aspredicted_others","omittinganalyses_others","hidingproblems_others","fillingin_others","biasedreporting_others","stopping_others","biasedcov_others","pvalround_others","analysischanging_others","outliers_others")
 
-aspredicted_endorse <- QORP_quant %>% 
-  summarise( sum=sum(aspredicted_endorse, na.rm = T), n=sum(!is.na(aspredicted_endorse)) ) %>%
-  dplyr::rename(x=sum) %>% mutate(mean=x/n)
-aspredicted_endorseCI <- PropCIs::add4ci(aspredicted_endorse$x, aspredicted_endorse$n, conf.level=.95)
+QRPprevalence <- others %>% select( all_of(QRPvarnames) )
 
-endorse1 <-
-tibble(var = "aspredicted_endorse", mean = aspredicted_endorse$mean, ymin = aspredicted_endorseCI$conf.int[1], ymax = aspredicted_endorseCI$conf.int[2])
+#get into long instead of wide format, so ggplot and tidyverse can do all the magic it does
+longQRPprevalence <- QRPprevalence %>% pivot_longer(cols=everything(), names_to="practice", values_to="response")
 
-omittinganalyses_endorse <- QORP_quant %>% 
-  summarise( sum=sum(omittinganalyses_endorse, na.rm = T), n=sum(!is.na(omittinganalyses_endorse)) ) %>%
-  dplyr::rename(x=sum) %>% mutate(mean=x/n)
-omittinganalyses_endorseCI <- PropCIs::add4ci(omittinganalyses_endorse$x, omittinganalyses_endorse$n, conf.level=.95)
+longQRPprevalence <- longQRPprevalence %>% mutate(
+  practiceLongName = case_when(
+    practice=="biasedreporting_others" ~ "Omit non-significant\nstudies or variables",
+    practice=="aspredicted_others" ~ "HARK",
+    practice=="biasedcov_others" ~ "Drop covariates selectively",
+    practice=="stopping_others" ~ "Sample selectively",
+    practice=="omittinganalyses_others" ~ "Underreport results",
+    practice=="pvalround_others" ~ "Round p-values",
+    practice=="analysischanging_others" ~ "Switch analysis selectively",
+    practice=="outliers_others" ~ "Exclude data selectively",
+    practice=="hidingproblems_others" ~ "Hide problems",
+    practice=="fillingin_others" ~ "Hide imputation",
+    TRUE ~ "ERROR! unknown practice"
+  )
+ )
+longQRPprevalence$practiceLongName <- as.factor(longQRPprevalence$practiceLongName)
+#levels(longQRPprevalence$practiceLongName)
 
-endorse2 <-
-tibble(var = "omittinganalyses_endorse", mean = omittinganalyses_endorse$mean, ymin = omittinganalyses_endorseCI$conf.int[1], ymax = omittinganalyses_endorseCI$conf.int[2])
+practiceOrderDesiredNeverAscending <- c(4,5,7,3,2,1,8,6,9,10) 
+longQRPprevalence$practiceLongName <- factor(longQRPprevalence$practiceLongName,
+                                    levels = levels(longQRPprevalence$practiceLongName)[practiceOrderDesiredNeverAscending])
 
-hidingproblems_endorse <- QORP_quant %>% 
-  summarise( sum=sum(hidingproblems_endorse, na.rm = T), n=sum(!is.na(hidingproblems_endorse)) ) %>%
-  dplyr::rename(x=sum) %>% mutate(mean=x/n)
-hidingproblems_endorseCI <- PropCIs::add4ci(hidingproblems_endorse$x, hidingproblems_endorse$n, conf.level=.95)
+fig1_alt_other<- 
+  ggplot( drop_na(longQRPprevalence), aes(x = practiceLongName, y = response) ) + 
+        stat_summary(fun = mean, geom = "bar") + theme_bw() +
+        stat_summary(fun.data = mean_cl_boot, fun.args=(conf.int=0.95), geom = "errorbar", width = 0.4) +
+      xlab("QRP") + ylab("perceived % others use at least once") + ylim(0,100) +
+      scale_fill_brewer(palette = "YlGn") + #https://ggplot2-book.org/scale-colour.html
+      labs(title='Perceived prevalence of QRPs',
+        subtitle='What percent of criminologists would you say have engaged in this practice on at least one occasion?') +
+      theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12)) 
 
-endorse3 <-
-tibble(var = "hidingproblems_endorse", mean = hidingproblems_endorse$mean, ymin = hidingproblems_endorseCI$conf.int[1], ymax = hidingproblems_endorseCI$conf.int[2])
-
-fillingin_endorse <- QORP_quant %>% 
-  summarise( sum=sum(fillingin_endorse, na.rm = T), n=sum(!is.na(fillingin_endorse)) ) %>%
-  dplyr::rename(x=sum) %>% mutate(mean=x/n)
-fillingin_endorseCI <- PropCIs::add4ci(fillingin_endorse$x, fillingin_endorse$n, conf.level=.95)
-
-endorse4 <-
-tibble(var = "fillingin_endorse", mean = fillingin_endorse$mean, ymin = fillingin_endorseCI$conf.int[1], ymax = fillingin_endorseCI$conf.int[2])
-
-prereg_endorse <- QORP_quant %>% 
-  summarise( sum=sum(prereg_endorse, na.rm = T), n=sum(!is.na(prereg_endorse)) ) %>%
-  dplyr::rename(x=sum) %>% mutate(mean=x/n)
-prereg_endorseCI <- PropCIs::add4ci(prereg_endorse$x, prereg_endorse$n, conf.level=.95)
-
-endorse5 <-
-tibble(var = "prereg_endorse", mean = prereg_endorse$mean, ymin = prereg_endorseCI$conf.int[1], ymax = prereg_endorseCI$conf.int[2])
-
-opendata_endorse <- QORP_quant %>% 
-  summarise( sum=sum(opendata_endorse, na.rm = T), n=sum(!is.na(opendata_endorse)) ) %>%
-  dplyr::rename(x=sum) %>% mutate(mean=x/n)
-opendata_endorseCI <- PropCIs::add4ci(opendata_endorse$x, opendata_endorse$n, conf.level=.95)
-
-endorse6 <-
-tibble(var = "opendata_endorse", mean = opendata_endorse$mean, ymin = opendata_endorseCI$conf.int[1], ymax = opendata_endorseCI$conf.int[2])
-
-opencode_endorse <- QORP_quant %>% 
-  summarise( sum=sum(opencode_endorse, na.rm = T), n=sum(!is.na(opencode_endorse)) ) %>%
-  dplyr::rename(x=sum) %>% mutate(mean=x/n)
-opencode_endorseCI <- PropCIs::add4ci(opencode_endorse$x, opencode_endorse$n, conf.level=.95)
-
-endorse7 <-
-tibble(var = "opencode_endorse", mean = opencode_endorse$mean, ymin = opencode_endorseCI$conf.int[1], ymax = opencode_endorseCI$conf.int[2])
-
-rep_endorse <- QORP_quant %>% 
-  summarise( sum=sum(rep_endorse, na.rm = T), n=sum(!is.na(rep_endorse)) ) %>%
-  dplyr::rename(x=sum) %>% mutate(mean=x/n)
-rep_endorseCI <- PropCIs::add4ci(rep_endorse$x, rep_endorse$n, conf.level=.95)
-
-endorse8 <-
-tibble(var = "rep_endorse", mean = rep_endorse$mean, ymin = rep_endorseCI$conf.int[1], ymax = rep_endorseCI$conf.int[2])
-
-preprints_endorse <- QORP_quant %>% 
-  summarise( sum=sum(preprints_endorse, na.rm = T), n=sum(!is.na(preprints_endorse)) ) %>%
-  dplyr::rename(x=sum) %>% mutate(mean=x/n)
-preprints_endorseCI <- PropCIs::add4ci(preprints_endorse$x, preprints_endorse$n, conf.level=.95)
-
-endorse9 <-
-tibble(var = "preprints_endorse", mean = preprints_endorse$mean, ymin = preprints_endorseCI$conf.int[1], ymax = preprints_endorseCI$conf.int[2])
-
-biasedreporting_endorse <- QORP_quant %>% 
-  summarise( sum=sum(biasedreporting_endorse, na.rm = T), n=sum(!is.na(biasedreporting_endorse)) ) %>%
-  dplyr::rename(x=sum) %>% mutate(mean=x/n)
-biasedreporting_endorseCI <- PropCIs::add4ci(biasedreporting_endorse$x, biasedreporting_endorse$n, conf.level=.95)
-
-endorse10 <-
-tibble(var = "biasedreporting_endorse", mean = biasedreporting_endorse$mean, ymin = biasedreporting_endorseCI$conf.int[1], ymax = biasedreporting_endorseCI$conf.int[2])
-
-biasedcov_endorse <- QORP_quant %>% 
-  summarise( sum=sum(biasedcov_endorse, na.rm = T), n=sum(!is.na(biasedcov_endorse)) ) %>%
-  dplyr::rename(x=sum) %>% mutate(mean=x/n)
-biasedcov_endorseCI <- PropCIs::add4ci(biasedcov_endorse$x, biasedcov_endorse$n, conf.level=.95)
-
-endorse11 <-
-tibble(var = "biasedcov_endorse", mean = biasedcov_endorse$mean, ymin = biasedcov_endorseCI$conf.int[1], ymax = biasedcov_endorseCI$conf.int[2])
-
-pvalround_endorse <- QORP_quant %>% 
-  summarise( sum=sum(pvalround_endorse, na.rm = T), n=sum(!is.na(pvalround_endorse)) ) %>%
-  dplyr::rename(x=sum) %>% mutate(mean=x/n)
-pvalround_endorseCI <- PropCIs::add4ci(pvalround_endorse$x, pvalround_endorse$n, conf.level=.95)
-
-endorse12 <-
-tibble(var = "pvalround_endorse", mean = pvalround_endorse$mean, ymin = pvalround_endorseCI$conf.int[1], ymax = pvalround_endorseCI$conf.int[2])
-
-outliers_endorse <- QORP_quant %>% 
-  summarise( sum=sum(outliers_endorse, na.rm = T), n=sum(!is.na(outliers_endorse)) ) %>%
-  dplyr::rename(x=sum) %>% mutate(mean=x/n)
-outliers_endorseCI <- PropCIs::add4ci(outliers_endorse$x, outliers_endorse$n, conf.level=.95)
-
-endorse13 <-
-tibble(var = "outliers_endorse", mean = outliers_endorse$mean, ymin = outliers_endorseCI$conf.int[1], ymax = outliers_endorseCI$conf.int[2])
-
-stopping_endorse <- QORP_quant %>% 
-  summarise( sum=sum(stopping_endorse, na.rm = T), n=sum(!is.na(stopping_endorse)) ) %>%
-  dplyr::rename(x=sum) %>% mutate(mean=x/n)
-stopping_endorseCI <- PropCIs::add4ci(stopping_endorse$x, stopping_endorse$n, conf.level=.95)
-
-endorse14 <-
-tibble(var = "stopping_endorse", mean = stopping_endorse$mean, ymin = stopping_endorseCI$conf.int[1], ymax = stopping_endorseCI$conf.int[2])
-
-analysischanging_endorse <- QORP_quant %>% 
-  summarise( sum=sum(analysischanging_endorse, na.rm = T), n=sum(!is.na(analysischanging_endorse)) ) %>%
-  dplyr::rename(x=sum) %>% mutate(mean=x/n)
-analysischanging_endorseCI <- PropCIs::add4ci(analysischanging_endorse$x, analysischanging_endorse$n, conf.level=.95)
-
-endorse15 <-
-tibble(var = "analysischanging_endorse", mean = analysischanging_endorse$mean, ymin = analysischanging_endorseCI$conf.int[1], ymax = analysischanging_endorseCI$conf.int[2])
-
-##Combines all of the above tibbles and deletes the smaller ones
-
-endorse <- bind_rows(endorse1, endorse2, endorse3, endorse4, endorse5, endorse6, endorse7, endorse8, endorse9, endorse10, endorse11, endorse12, endorse13, endorse14, endorse15)
-
-rm(endorse1, endorse2, endorse3, endorse4, endorse5, endorse6, endorse7, endorse8, endorse9, endorse10, endorse11, endorse12, endorse13, endorse14, endorse15)
-
-##Cleans up dataframe
-
-endorse <- mutate(endorse, mean = mean*100)
-endorse <- mutate(endorse, ymin = ymin*100)
-endorse <- mutate(endorse, ymax = ymax*100)
-endorse <- mutate(endorse, sorter = c(NA,NA,NA,NA,1,2,3,4,5,NA,NA,NA,NA,NA,NA))
-endorse <- arrange(endorse, sorter)
-endorse <- na.omit(endorse)
-endorse <- mutate(endorse, type = "endorse")
-
-##Moving on to estimates of others
-###Using a T-test to get confidence intervals, and hope that is okay, but it might violate some assumptions
-
-others <-
-QORP_quant %>%
-select_at(vars(ends_with("others"))) %>%
-map_df(~ broom::tidy(t.test(.)), .id = 'var')
-
-others <- mutate(others, sorter = c(NA,NA,NA,NA,1,2,3,4,5,NA,NA,NA,NA,NA,NA))
-others <- arrange(others, sorter)
-others <- na.omit(others)
-others <- mutate(others, type = "others")
-others <- select(others, -p.value, -statistic, -parameter, -method, -alternative)
-others <- dplyr::rename(others, mean=estimate, ymin = conf.high, ymax = conf.low)
-
-endorse_other <- rbind(endorse, others)
-
-
-###Changes the name of the main variables
-
-####Prepares the main QRP variable of interest by removing the parts that identify the statistic used (this is captured in the type variable instead)
-
-endorse_other$var <- sub("_others", "", endorse_other$var)
-endorse_other$var <- sub("_endorse", "", endorse_other$var)
-
-####Changes the main QRP variable of interest to the standard QRP names
-
-endorse_other$var <- sub("prereg", "Preregister study", endorse_other$var)
-endorse_other$var <- sub("opendata", "Share data", endorse_other$var) 
-endorse_other$var <- sub("opencode", "Share code", endorse_other$var) 
-endorse_other$var <- sub("rep", "Attempt replication", endorse_other$var) 
-endorse_other$var <- sub("pAttempt Replicationrints", "Post article publicly", endorse_other$var) 
-
-####Changes the names of other variables
-
-endorse_other <- endorse_other %>% dplyr::rename(Question = type)
-
-#Creates Figure 2
-
-endorse_other_OSP <- 
-  ggplot(endorse_other, aes(fill = Question, y = mean, x = reorder(var, sorter))) +
-  ylab("% support using at least rare / perceived % using at least once") +
-  xlab("OSP") + 
-  scale_fill_brewer(palette = "Paired", name = "", labels = c("Support using", "Perceived prevalence")) +
-  theme( axis.text.x = element_text(angle = 45, hjust = 1, size = 12), legend.position = "top") +
-  geom_bar(position="dodge", stat="identity") +
-  geom_errorbar( aes(ymin = ymin, ymax = ymax), position=position_dodge(.9), colour="black", width = .2)  
-
-endorse_other_OSP
-
-ggsave("figures/fig2_endorseother.png", width = 30, height = 20, units = "cm")
-
-
-##Creates textured version
-
-#endorse_other_open_fig_pattern <-
- # endorse_other_OSP +
-  # geom_col_pattern(
-   # aes(pattern = Question),
-  #  fill = 'white',
-   # colour                   = 'black',
-  #  pattern_spacing = .015,
-  #  pattern_density          = 0.15,
-  #  pattern_fill    = 'black',
-  #  pattern_colour  = 'black',
-  #  position = "dodge"
-  #  ) +
-#  geom_errorbar( aes(ymin = ymin, ymax = ymax), position=position_dodge(.9), colour="black", width = .2)
-
-#endorse_other_open_fig_pattern
-
-#ggsave("fig2_endorseother_open_pattern.png", width = 30, height = 20, units = "cm")
-
+show(fig1_alt_other)
+ggsave(file.path("figures","fig_perceived_quant_bootstrapped.png"), width = 30, height = 20, units = "cm")
 ```
 
-#Figure 2alt - OSP Perceived use - Quant Researchers
-
-```{r figure2alt}
+Figure - OSP perceived use only - Quant researchers - not in manuscript
+```{r figure_perceived_OSP}
 
 #Estimates of others
 ##Using a T-test to get confidence intervals, and hope that is okay, but it might violate some assumptions
@@ -1539,7 +1137,7 @@ others$var <- sub("opencode", "Share code", others$var)
 others$var <- sub("rep", "Attempt replication", others$var) 
 others$var <- sub("pAttempt replicationrints", "Post article publicly", others$var) 
 
-#Creates Figure 2
+#Creates Figure
 
 others_OSP <- 
   ggplot(others, aes(fill = type, y = mean, x = reorder(var, mean))) +
@@ -1550,106 +1148,13 @@ others_OSP <-
   geom_bar(position="dodge", stat="identity") +
   geom_errorbar( aes(ymin = ymin, ymax = ymax), position=position_dodge(.9), colour="black", width = .2)  
 
-others_OSP
+show(others_OSP)
 
-ggsave("figures/fig2alt_other.png", width = 30, height = 20, units = "cm")
+ggsave(file.path("figures","fig_perceived_OSP_quant.png"), width = 30, height = 20, units = "cm")
 
 ```
 
-For participants estimating the prevalence of QRPs, they provide a percentage, and Jason used t-test to calculate error bar, which is not ideal. I will bootstrap from the raw data.
-
-```{r QRPprevalence}
-
-others <- QORP_quant %>% select_at(vars(ends_with("others")))
-
-QRPvarnames <- c("aspredicted_others","omittinganalyses_others","hidingproblems_others","fillingin_others","biasedreporting_others","stopping_others","biasedcov_others","pvalround_others","analysischanging_others","outliers_others")
-
-QRPprevalence <- others %>% select( all_of(QRPvarnames) )
-
-#get into long instead of wide format, so ggplot and tidyverse can do all the magic it does
-longQRPprevalence <- QRPprevalence %>% pivot_longer(cols=everything(), names_to="practice", values_to="response")
-
-longQRPprevalence <- longQRPprevalence %>% mutate(
-  practiceLongName = case_when(
-    practice=="biasedreporting_others" ~ "Omit nonsignificant studies or variables",
-    practice=="aspredicted_others" ~ "HARK",
-    practice=="biasedcov_others" ~ "Drop covariates selectively",
-    practice=="stopping_others" ~ "Sample selectively",
-    practice=="omittinganalyses_others" ~ "Underreport results",
-    practice=="pvalround_others" ~ "Round p-values",
-    practice=="analysischanging_others" ~ "Switch analysis selectively",
-    practice=="outliers_others" ~ "Exclude data selectively",
-    practice=="hidingproblems_others" ~ "Hide problems",
-    practice=="fillingin_others" ~ "Hide imputation",
-    TRUE ~ "ERROR! unknown practice"
-  )
- )
-longQRPprevalence$practiceLongName <- as.factor(longQRPprevalence$practiceLongName)
-#levels(longQRPprevalence$practiceLongName)
-
-practiceOrderDesiredNeverAscending <- c(4,5,7,3,2,1,8,9,10) 
-longQRPprevalence$practiceLongName <- factor(longQRPprevalence$practiceLongName,
-                                    levels = levels(longQRPprevalence$practiceLongName)[practiceOrderDesiredNeverAscending])
-
-fig1_alt_other<- 
-  ggplot( drop_na(longQRPprevalence), aes(x = practiceLongName, y = response) ) + 
-        stat_summary(fun = mean, geom = "bar") + theme_bw() +
-        stat_summary(fun.data = mean_cl_boot, fun.args=(conf.int=0.95), geom = "errorbar", width = 0.4) +
-      xlab("QRP") + ylab("perceived % others use at least once") + ylim(0,100) +
-      scale_fill_brewer(palette = "YlGn") + #https://ggplot2-book.org/scale-colour.html
-      labs(title='Perceived prevalence of QRPs',
-        subtitle='What percent of criminologists would you say have engaged in this practice on at least one occasion?') +
-      theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12)) 
-
-show(fig1_alt_other)
-ggsave("figures/fig1alt_other.png", width = 30, height = 20, units = "cm")
-```
-
-Now plot the actual data points with raincloud or similar. First plot a histogram to get a feel for the data.
-
-```{r QRPhistogram}
-ggplot( drop_na(longQRPprevalence), aes(x = response) ) + 
-      geom_histogram()+ facet_grid(practiceLongName~.) +
-      xlab("QRP") + ylab("perceived % others use at least once") + ylim(0,100) +
-      scale_fill_brewer(palette = "YlGn") + #https://ggplot2-book.org/scale-colour.html
-      labs(title='Perceived prevalence of QRPs',
-        subtitle='What percent of criminologists would you say have engaged in this practice on at least one occasion?') +
-      theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12)) 
-```
-
-
-```{r QRPcloud}
-#https://datavizpyr.com/rain-cloud-plots-using-half-violin-plot-with-jittered-data-points-in-r/
-#Load half violin plot: geom_flat_violin()
-source("https://raw.githubusercontent.com/datavizpyr/data/master/half_flat_violinplot.R")
-
-
-#Save tibble so that separate file can plot all 5 datasets on the same graph
-saveRDS(longQRPprevalence, file = "longQRPs.rds")
-
-QRPprevCloud <-  ggplot( drop_na(longQRPprevalence), aes(x = practiceLongName, y = response) ) + 
-      theme_bw() +
-      geom_flat_violin(fill="gray32",color="gray32", position = position_nudge(x = .18, y = 0)) +
-      geom_jitter(alpha=0.1, size=.5, width=0.15, height=0) +
-      stat_summary(fun = mean, geom = "point", color='green4', size=4, alpha=0.82) +
-      stat_summary(fun.data = mean_cl_boot, fun.args=(conf.int=0.95), geom="errorbar", size=.9, width=0.1, color='green4', alpha=0.82) +
-      #geom_jitter(width=0.2, size=.2, alpha=0.1)+
-      xlab("QRP") + ylab("perceived % others use at least once") + ylim(0,100) +
-      scale_fill_brewer(palette = "YlGn") + #https://ggplot2-book.org/scale-colour.html
-      labs(title='Perceived prevalence of QRPs',
-        subtitle='What percent of criminologists would you say have engaged in this practice on at least one occasion?') +
-      theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12)) 
-
-show(QRPprevCloud)
-ggsave("figures/QRPperceivedPrevalenceCloud.png", width = 30, height = 20, units = "cm")
-```
-
-
-For participants estimating the prevalence of OSPs, they provide a percentage, and Jason used t-test to calculate error bar, which is not ideal. I will now plot and bootstrap from the raw data, using the basic nonparametric bootstrap, based on:
-  Frank E Harrell Jr, with contributions from Charles Dupont and
-  many others. (2020). Hmisc: Harrell Miscellaneous. R package
-  version 4.4-1. https://CRAN.R-project.org/package=Hmisc
-
+Figure - OSP perceived use only - Quant researchers - bootstrapped CIs - not in manuscript
 ```{r OSPprevalence}
 
 others <- QORP_quant %>% select_at(vars(ends_with("others")))
@@ -1689,11 +1194,52 @@ fig2_alt_other<-
       theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12)) 
 
 show(fig2_alt_other)
-ggsave("figures/fig2alt_other.png", width = 30, height = 20, units = "cm")
+ggsave(file.path("figures","fig_perceived_OSP_quant_bootstrapped.png"), width = 30, height = 20, units = "cm")
 ```
 
-Now plot the actual data points with raincloud or similar. First plot a histogram to get a feel for the data.
 
+This part now turns to plotting the actual data points with raincloud or similar. First plot a histogram to get a feel for the data.
+
+QRPs
+```{r QRPhistogram}
+ggplot( drop_na(longQRPprevalence), aes(x = response) ) + 
+      geom_histogram()+ facet_grid(practiceLongName~.) +
+      xlab("QRP") + ylab("perceived % others use at least once") + ylim(0,100) +
+      scale_fill_brewer(palette = "YlGn") + #https://ggplot2-book.org/scale-colour.html
+      labs(title='Perceived prevalence of QRPs',
+        subtitle='What percent of criminologists would you say have engaged in this practice on at least one occasion?') +
+      theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12)) 
+```
+
+Figure 1 - Distributions of perceived prevalence for QRPs - quant researchers only
+```{r QRPcloud}
+#https://datavizpyr.com/rain-cloud-plots-using-half-violin-plot-with-jittered-data-points-in-r/
+#Load half violin plot: geom_flat_violin()
+source("https://raw.githubusercontent.com/datavizpyr/data/master/half_flat_violinplot.R")
+
+#Save tibble so that separate file can plot all 5 datasets on the same graph
+saveRDS(longQRPprevalence, file = "longQRPs.rds")
+
+QRPprevCloud <-  ggplot( drop_na(longQRPprevalence), aes(x = practiceLongName, y = response) ) + 
+      theme_bw() +
+      geom_flat_violin(fill="gray32",color="gray32", position = position_nudge(x = .18, y = 0)) +
+      geom_jitter(alpha=0.1, size=.5, width=0.15, height=0) +
+      stat_summary(fun = mean, geom = "point", color='green4', size=4, alpha=0.82) +
+      stat_summary(fun.data = mean_cl_boot, fun.args=(conf.int=0.95), geom="errorbar", size=.9, width=0.1, color='green4', alpha=0.82) +
+      #geom_jitter(width=0.2, size=.2, alpha=0.1)+
+      xlab("QRP") + ylab("perceived % others use at least once") + ylim(0,100) +
+      scale_fill_brewer(palette = "YlGn") + #https://ggplot2-book.org/scale-colour.html
+      labs(title='Perceived prevalence of QRPs',
+        subtitle='What percent of criminologists would you say have engaged in this practice on at least one occasion?') +
+      theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12))
+
+show(QRPprevCloud)
+ggsave( file.path("figures","Fig1_QRPperceivedPrevalenceCloud.png"), width = 30, height = 20, units = "cm")
+```
+
+OSPs
+
+Now plot the actual data points with raincloud or similar. First plot a histogram to get a feel for the data.
 ```{r OSPhistogram}
 ggplot( drop_na(longOSPprevalence), aes(x = response) ) + 
       geom_histogram()+ facet_grid(practiceLongName~.) +
@@ -1704,6 +1250,7 @@ ggplot( drop_na(longOSPprevalence), aes(x = response) ) +
       theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12)) 
 ```
 
+Figure 3 - Perceived prevalance of OSPs - quant only
 ```{r OSPcloud}
 #https://datavizpyr.com/rain-cloud-plots-using-half-violin-plot-with-jittered-data-points-in-r/
 #Load half violin plot: geom_flat_violin()
@@ -1723,715 +1270,7 @@ OSPprevCloud <-  ggplot( drop_na(longOSPprevalence), aes(x = practiceLongName, y
       theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12)) 
 
 show(OSPprevCloud)
-ggsave("figures/OSPperceivedPrevalenceCloud.png", width = 30, height = 20, units = "cm")
+ggsave( file.path("figures","OSPperceivedPrevalenceCloud.png"), width = 30, height = 20, units = "cm")
 ```
-
-#Figure 1 original version - QRP endorsement and perceived prevalence - All
-
-##Endorsement is currently proportion that say a practice should be used at least rarely. For that, add4ci provides an appropriate confidence interval because it provides the confidence interval on a proportion.
-
-##For perceived prevalence, however, the participants provided a number between 0 and 100, a continuous variable, so add4ci is not appropriate. Maybe bootstrap it.
-
-
-```{r Figure 1 all}
-#Creates figure plotting quant. criminologists' support for using a QRP (should be used at least rarely) and their perceived prevalence (people who use at least once)
-
-##Creates each row of a tibble with the practice, the mean for the practice, and the lower and higher CIs
-
-aspredicted_endorse <- QORP %>% 
-  summarise( sum=sum(aspredicted_endorse, na.rm = T), n=sum(!is.na(aspredicted_endorse)) ) %>%
-  dplyr::rename(x=sum) %>% mutate(mean=x/n)
-aspredicted_endorseCI <- PropCIs::add4ci(aspredicted_endorse$x, aspredicted_endorse$n, conf.level=.95)
-
-endorse1 <-
-tibble(var = "aspredicted_endorse", mean = aspredicted_endorse$mean, ymin = aspredicted_endorseCI$conf.int[1], ymax = aspredicted_endorseCI$conf.int[2])
-
-omittinganalyses_endorse <- QORP %>% 
-  summarise( sum=sum(omittinganalyses_endorse, na.rm = T), n=sum(!is.na(omittinganalyses_endorse)) ) %>%
-  dplyr::rename(x=sum) %>% mutate(mean=x/n)
-omittinganalyses_endorseCI <- PropCIs::add4ci(omittinganalyses_endorse$x, omittinganalyses_endorse$n, conf.level=.95)
-
-endorse2 <-
-tibble(var = "omittinganalyses_endorse", mean = omittinganalyses_endorse$mean, ymin = omittinganalyses_endorseCI$conf.int[1], ymax = omittinganalyses_endorseCI$conf.int[2])
-
-hidingproblems_endorse <- QORP %>% 
-  summarise( sum=sum(hidingproblems_endorse, na.rm = T), n=sum(!is.na(hidingproblems_endorse)) ) %>%
-  dplyr::rename(x=sum) %>% mutate(mean=x/n)
-hidingproblems_endorseCI <- PropCIs::add4ci(hidingproblems_endorse$x, hidingproblems_endorse$n, conf.level=.95)
-
-endorse3 <-
-tibble(var = "hidingproblems_endorse", mean = hidingproblems_endorse$mean, ymin = hidingproblems_endorseCI$conf.int[1], ymax = hidingproblems_endorseCI$conf.int[2])
-
-fillingin_endorse <- QORP %>% 
-  summarise( sum=sum(fillingin_endorse, na.rm = T), n=sum(!is.na(fillingin_endorse)) ) %>%
-  dplyr::rename(x=sum) %>% mutate(mean=x/n)
-fillingin_endorseCI <- PropCIs::add4ci(fillingin_endorse$x, fillingin_endorse$n, conf.level=.95)
-
-endorse4 <-
-tibble(var = "fillingin_endorse", mean = fillingin_endorse$mean, ymin = fillingin_endorseCI$conf.int[1], ymax = fillingin_endorseCI$conf.int[2])
-
-prereg_endorse <- QORP %>% 
-  summarise( sum=sum(prereg_endorse, na.rm = T), n=sum(!is.na(prereg_endorse)) ) %>%
-  dplyr::rename(x=sum) %>% mutate(mean=x/n)
-prereg_endorseCI <- PropCIs::add4ci(prereg_endorse$x, prereg_endorse$n, conf.level=.95)
-
-endorse5 <-
-tibble(var = "prereg_endorse", mean = prereg_endorse$mean, ymin = prereg_endorseCI$conf.int[1], ymax = prereg_endorseCI$conf.int[2])
-
-opendata_endorse <- QORP %>% 
-  summarise( sum=sum(opendata_endorse, na.rm = T), n=sum(!is.na(opendata_endorse)) ) %>%
-  dplyr::rename(x=sum) %>% mutate(mean=x/n)
-opendata_endorseCI <- PropCIs::add4ci(opendata_endorse$x, opendata_endorse$n, conf.level=.95)
-
-endorse6 <-
-tibble(var = "opendata_endorse", mean = opendata_endorse$mean, ymin = opendata_endorseCI$conf.int[1], ymax = opendata_endorseCI$conf.int[2])
-
-opencode_endorse <- QORP %>% 
-  summarise( sum=sum(opencode_endorse, na.rm = T), n=sum(!is.na(opencode_endorse)) ) %>%
-  dplyr::rename(x=sum) %>% mutate(mean=x/n)
-opencode_endorseCI <- PropCIs::add4ci(opencode_endorse$x, opencode_endorse$n, conf.level=.95)
-
-endorse7 <-
-tibble(var = "opencode_endorse", mean = opencode_endorse$mean, ymin = opencode_endorseCI$conf.int[1], ymax = opencode_endorseCI$conf.int[2])
-
-rep_endorse <- QORP %>% 
-  summarise( sum=sum(rep_endorse, na.rm = T), n=sum(!is.na(rep_endorse)) ) %>%
-  dplyr::rename(x=sum) %>% mutate(mean=x/n)
-rep_endorseCI <- PropCIs::add4ci(rep_endorse$x, rep_endorse$n, conf.level=.95)
-
-endorse8 <-
-tibble(var = "rep_endorse", mean = rep_endorse$mean, ymin = rep_endorseCI$conf.int[1], ymax = rep_endorseCI$conf.int[2])
-
-preprints_endorse <- QORP %>% 
-  summarise( sum=sum(preprints_endorse, na.rm = T), n=sum(!is.na(preprints_endorse)) ) %>%
-  dplyr::rename(x=sum) %>% mutate(mean=x/n)
-preprints_endorseCI <- PropCIs::add4ci(preprints_endorse$x, preprints_endorse$n, conf.level=.95)
-
-endorse9 <-
-tibble(var = "preprints_endorse", mean = preprints_endorse$mean, ymin = preprints_endorseCI$conf.int[1], ymax = preprints_endorseCI$conf.int[2])
-
-biasedreporting_endorse <- QORP %>% 
-  summarise( sum=sum(biasedreporting_endorse, na.rm = T), n=sum(!is.na(biasedreporting_endorse)) ) %>%
-  dplyr::rename(x=sum) %>% mutate(mean=x/n)
-biasedreporting_endorseCI <- PropCIs::add4ci(biasedreporting_endorse$x, biasedreporting_endorse$n, conf.level=.95)
-
-endorse10 <-
-tibble(var = "biasedreporting_endorse", mean = biasedreporting_endorse$mean, ymin = biasedreporting_endorseCI$conf.int[1], ymax = biasedreporting_endorseCI$conf.int[2])
-
-biasedcov_endorse <- QORP %>% 
-  summarise( sum=sum(biasedcov_endorse, na.rm = T), n=sum(!is.na(biasedcov_endorse)) ) %>%
-  dplyr::rename(x=sum) %>% mutate(mean=x/n)
-biasedcov_endorseCI <- PropCIs::add4ci(biasedcov_endorse$x, biasedcov_endorse$n, conf.level=.95)
-
-endorse11 <-
-tibble(var = "biasedcov_endorse", mean = biasedcov_endorse$mean, ymin = biasedcov_endorseCI$conf.int[1], ymax = biasedcov_endorseCI$conf.int[2])
-
-pvalround_endorse <- QORP %>% 
-  summarise( sum=sum(pvalround_endorse, na.rm = T), n=sum(!is.na(pvalround_endorse)) ) %>%
-  dplyr::rename(x=sum) %>% mutate(mean=x/n)
-pvalround_endorseCI <- PropCIs::add4ci(pvalround_endorse$x, pvalround_endorse$n, conf.level=.95)
-
-endorse12 <-
-tibble(var = "pvalround_endorse", mean = pvalround_endorse$mean, ymin = pvalround_endorseCI$conf.int[1], ymax = pvalround_endorseCI$conf.int[2])
-
-outliers_endorse <- QORP %>% 
-  summarise( sum=sum(outliers_endorse, na.rm = T), n=sum(!is.na(outliers_endorse)) ) %>%
-  dplyr::rename(x=sum) %>% mutate(mean=x/n)
-outliers_endorseCI <- PropCIs::add4ci(outliers_endorse$x, outliers_endorse$n, conf.level=.95)
-
-endorse13 <-
-tibble(var = "outliers_endorse", mean = outliers_endorse$mean, ymin = outliers_endorseCI$conf.int[1], ymax = outliers_endorseCI$conf.int[2])
-
-stopping_endorse <- QORP %>% 
-  summarise( sum=sum(stopping_endorse, na.rm = T), n=sum(!is.na(stopping_endorse)) ) %>%
-  dplyr::rename(x=sum) %>% mutate(mean=x/n)
-stopping_endorseCI <- PropCIs::add4ci(stopping_endorse$x, stopping_endorse$n, conf.level=.95)
-
-endorse14 <-
-tibble(var = "stopping_endorse", mean = stopping_endorse$mean, ymin = stopping_endorseCI$conf.int[1], ymax = stopping_endorseCI$conf.int[2])
-
-analysischanging_endorse <- QORP %>% 
-  summarise( sum=sum(analysischanging_endorse, na.rm = T), n=sum(!is.na(analysischanging_endorse)) ) %>%
-  dplyr::rename(x=sum) %>% mutate(mean=x/n)
-analysischanging_endorseCI <- PropCIs::add4ci(analysischanging_endorse$x, analysischanging_endorse$n, conf.level=.95)
-
-endorse15 <-
-tibble(var = "analysischanging_endorse", mean = analysischanging_endorse$mean, ymin = analysischanging_endorseCI$conf.int[1], ymax = analysischanging_endorseCI$conf.int[2])
-
-##Combines all of the above tibbles and deletes the smaller ones
-
-endorse <- bind_rows(endorse1, endorse2, endorse3, endorse4, endorse5, endorse6, endorse7, endorse8, endorse9, endorse10, endorse11, endorse12, endorse13, endorse14, endorse15)
-
-rm(endorse1, endorse2, endorse3, endorse4, endorse5, endorse6, endorse7, endorse8, endorse9, endorse10, endorse11, endorse12, endorse13, endorse14, endorse15)
-
-##Cleans up dataframe
-
-endorse <- mutate(endorse, mean = mean*100)
-endorse <- mutate(endorse, ymin = ymin*100)
-endorse <- mutate(endorse, ymax = ymax*100)
-endorse <- mutate(endorse, sorter = c(8,4,9,10,NA,NA,NA,NA,NA,1,3,5,7,2,6))
-endorse <- arrange(endorse, sorter)
-endorse <- na.omit(endorse)
-endorse <- mutate(endorse, type = "endorse")
-
-##Moving on to estimates of others
-###Using a T-test to get confidence intervals, and hope that is okay, but it might violate some assumptions
-
-others <-
-QORP %>%
-select_at(vars(ends_with("others"))) %>%
-map_df(~ broom::tidy(t.test(.)), .id = 'var')
-
-others <- mutate(others, sorter = c(8,4,9,10,NA,NA,NA,NA,NA,1,3,5,7,2,6))
-others <- arrange(others, sorter)
-others <- na.omit(others)
-others <- mutate(others, type = "others")
-others <- select(others, -p.value, -statistic, -parameter, -method, -alternative)
-others <- dplyr::rename(others, mean=estimate, ymin = conf.high, ymax = conf.low)
-
-endorse_other <- rbind(endorse, others)
-
-
-###Changes the name of the main variables
-
-####Prepares the main QRP variable of interest by removing the parts that identify the statistic used (this is captured in the type variable instead)
-
-endorse_other$var <- sub("_others", "", endorse_other$var)
-endorse_other$var <- sub("_endorse", "", endorse_other$var)
-
-####Changes the main QRP variable of interest to the standard QRP names
-
-endorse_other$var <- sub("biasedreporting", "Omit nonsignificant studies or variables", endorse_other$var)
-endorse_other$var <- sub("stopping", "Sample selectively", endorse_other$var) 
-endorse_other$var <- sub("biasedcov", "Drop covariates selectively", endorse_other$var) 
-endorse_other$var <- sub("omittinganalyses", "Underreport results", endorse_other$var) 
-endorse_other$var <- sub("pvalround", "Round p-values", endorse_other$var) 
-endorse_other$var <- sub("analysischanging", "Switch analysis selectively", endorse_other$var)
-endorse_other$var <- sub("outliers", "Exclude data selectively", endorse_other$var)
-endorse_other$var <- sub("aspredicted", "HARK", endorse_other$var) 
-endorse_other$var <- sub("hidingproblems", "Hide problems", endorse_other$var)
-endorse_other$var <- sub("fillingin", "Hide imputation", endorse_other$var)
-
-##Creates Figure 1
-
-endorse_other_QRP <- 
-  ggplot(endorse_other, aes(fill = type, y = mean, x = reorder(var, sorter))) +
-  ylab("% support using at least rarely / perceived % others use at least once") +
-  xlab("QRP") + 
-  scale_fill_brewer(palette = "Paired", name = "", labels = c("Support using", "Perceived prevalence")) +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), legend.position = "top") +
-  geom_bar(position="dodge", stat="identity") +
-  geom_errorbar( aes(ymin = ymin, ymax = ymax), position=position_dodge(.9), colour="black", width = .2)  
-
-endorse_other_QRP
-
-ggsave("figures/fig1all_endorseother.png", width = 30, height = 20, units = "cm")
-
-
-```
-#Figure 1 - QRP endorsement and perceived use - Non-quant Researchers
-
-
-```{r Figure 1 nonquant}
-
-#Creates figure plotting quant. criminologists' support for using a QRP (should be used at least rarely) and their perceived prevalence (people who use at least once)
-
-##Creates each row of a tibble with the practice, the mean for the practice, and the lower and higher CIs
-
-aspredicted_endorse <- QORP_nonquant %>% 
-  summarise( sum=sum(aspredicted_endorse, na.rm = T), n=sum(!is.na(aspredicted_endorse)) ) %>%
-  dplyr::rename(x=sum) %>% mutate(mean=x/n)
-aspredicted_endorseCI <- PropCIs::add4ci(aspredicted_endorse$x, aspredicted_endorse$n, conf.level=.95)
-
-endorse1 <-
-tibble(var = "aspredicted_endorse", mean = aspredicted_endorse$mean, ymin = aspredicted_endorseCI$conf.int[1], ymax = aspredicted_endorseCI$conf.int[2])
-
-omittinganalyses_endorse <- QORP_nonquant %>% 
-  summarise( sum=sum(omittinganalyses_endorse, na.rm = T), n=sum(!is.na(omittinganalyses_endorse)) ) %>%
-  dplyr::rename(x=sum) %>% mutate(mean=x/n)
-omittinganalyses_endorseCI <- PropCIs::add4ci(omittinganalyses_endorse$x, omittinganalyses_endorse$n, conf.level=.95)
-
-endorse2 <-
-tibble(var = "omittinganalyses_endorse", mean = omittinganalyses_endorse$mean, ymin = omittinganalyses_endorseCI$conf.int[1], ymax = omittinganalyses_endorseCI$conf.int[2])
-
-hidingproblems_endorse <- QORP_nonquant %>% 
-  summarise( sum=sum(hidingproblems_endorse, na.rm = T), n=sum(!is.na(hidingproblems_endorse)) ) %>%
-  dplyr::rename(x=sum) %>% mutate(mean=x/n)
-hidingproblems_endorseCI <- PropCIs::add4ci(hidingproblems_endorse$x, hidingproblems_endorse$n, conf.level=.95)
-
-endorse3 <-
-tibble(var = "hidingproblems_endorse", mean = hidingproblems_endorse$mean, ymin = hidingproblems_endorseCI$conf.int[1], ymax = hidingproblems_endorseCI$conf.int[2])
-
-fillingin_endorse <- QORP_nonquant %>% 
-  summarise( sum=sum(fillingin_endorse, na.rm = T), n=sum(!is.na(fillingin_endorse)) ) %>%
-  dplyr::rename(x=sum) %>% mutate(mean=x/n)
-fillingin_endorseCI <- PropCIs::add4ci(fillingin_endorse$x, fillingin_endorse$n, conf.level=.95)
-
-endorse4 <-
-tibble(var = "fillingin_endorse", mean = fillingin_endorse$mean, ymin = fillingin_endorseCI$conf.int[1], ymax = fillingin_endorseCI$conf.int[2])
-
-prereg_endorse <- QORP_nonquant %>% 
-  summarise( sum=sum(prereg_endorse, na.rm = T), n=sum(!is.na(prereg_endorse)) ) %>%
-  dplyr::rename(x=sum) %>% mutate(mean=x/n)
-prereg_endorseCI <- PropCIs::add4ci(prereg_endorse$x, prereg_endorse$n, conf.level=.95)
-
-##Combines all of the above tibbles and deletes the smaller ones
-
-endorse <- bind_rows(endorse1, endorse2, endorse3, endorse4)
-
-rm(endorse1, endorse2, endorse3, endorse4)
-
-##Cleans up dataframe
-
-endorse <- mutate(endorse, mean = mean*100)
-endorse <- mutate(endorse, ymin = ymin*100)
-endorse <- mutate(endorse, ymax = ymax*100)
-endorse <- mutate(endorse, sorter = c(2,1,3,4))
-endorse <- arrange(endorse, sorter)
-endorse <- na.omit(endorse)
-endorse <- mutate(endorse, type = "endorse")
-
-##Moving on to estimates of others
-###Using a T-test to get confidence intervals, and hope that is okay, but it might violate some assumptions
-
-others <-
-QORP_nonquant %>%
-select_at(vars(ends_with("others"))) %>%
-map_df(~ broom::tidy(t.test(.)), .id = 'var')
-
-others <- mutate(others, sorter = c(2,1,3,4,NA,NA,NA,NA,NA))
-others <- arrange(others, sorter)
-others <- na.omit(others)
-others <- mutate(others, type = "others")
-others <- select(others, -p.value, -statistic, -parameter, -method, -alternative)
-others <- dplyr::rename(others, mean=estimate, ymin = conf.high, ymax = conf.low)
-
-endorse_other <- rbind(endorse, others)
-
-###Changes the name of the main variables
-
-####Prepares the main QRP variable of interest by removing the parts that identify the statistic used (this is captured in the type variable instead)
-
-endorse_other$var <- sub("_others", "", endorse_other$var)
-endorse_other$var <- sub("_endorse", "", endorse_other$var)
-
-####Changes the main QRP variable of interest to the standard QRP names
-
-endorse_other$var <- sub("omittinganalyses", "Underreport results", endorse_other$var) 
-endorse_other$var <- sub("aspredicted", "HARK", endorse_other$var) 
-endorse_other$var <- sub("hidingproblems", "Hide problems", endorse_other$var)
-endorse_other$var <- sub("fillingin", "Hide imputation", endorse_other$var)
-
-##Creates Figure 1
-
-endorse_other_QRP <- 
-  ggplot(endorse_other, aes(fill = type, y = mean, x = reorder(var, sorter))) +
-  ylab("% support using at least rarely / perceived % others use at least once") +
-  xlab("QRP") + 
-  scale_fill_brewer(palette = "Paired", name = "", labels = c("Support using", "Perceived prevalence")) +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12), legend.position = "top") +
-  geom_bar(position="dodge", stat="identity") +
-  geom_errorbar( aes(ymin = ymin, ymax = ymax), position=position_dodge(.9), colour="black", width = .2)  +
-  labs(title = "Endorsement of, and perceived prevalence of, questionable research practices") +
-  labs(caption= "Confidence intervals calculated with the add2ci method of Agresti & Coull")
-
-show(endorse_other_QRP)
-
-ggsave("figures/fig1nonquant_endorseother.png", width = 30, height = 20, units = "cm")
-
-
-```
-
-#Figure 2 - OSP endorsement and perceived use - All Researchers
-
-```{r figure2_all}
-#Creates figure plotting quant. criminologists' support for using an OSP (should be used at least rarely) and their perceived prevalence (people who use at least once)
-
-##Creates each row of a tibble with the practice, the mean for the practice, and the lower and higher CIs
-
-aspredicted_endorse <- QORP %>% 
-  summarise( sum=sum(aspredicted_endorse, na.rm = T), n=sum(!is.na(aspredicted_endorse)) ) %>%
-  dplyr::rename(x=sum) %>% mutate(mean=x/n)
-aspredicted_endorseCI <- PropCIs::add4ci(aspredicted_endorse$x, aspredicted_endorse$n, conf.level=.95)
-
-endorse1 <-
-tibble(var = "aspredicted_endorse", mean = aspredicted_endorse$mean, ymin = aspredicted_endorseCI$conf.int[1], ymax = aspredicted_endorseCI$conf.int[2])
-
-omittinganalyses_endorse <- QORP %>% 
-  summarise( sum=sum(omittinganalyses_endorse, na.rm = T), n=sum(!is.na(omittinganalyses_endorse)) ) %>%
-  dplyr::rename(x=sum) %>% mutate(mean=x/n)
-omittinganalyses_endorseCI <- PropCIs::add4ci(omittinganalyses_endorse$x, omittinganalyses_endorse$n, conf.level=.95)
-
-endorse2 <-
-tibble(var = "omittinganalyses_endorse", mean = omittinganalyses_endorse$mean, ymin = omittinganalyses_endorseCI$conf.int[1], ymax = omittinganalyses_endorseCI$conf.int[2])
-
-hidingproblems_endorse <- QORP %>% 
-  summarise( sum=sum(hidingproblems_endorse, na.rm = T), n=sum(!is.na(hidingproblems_endorse)) ) %>%
-  dplyr::rename(x=sum) %>% mutate(mean=x/n)
-hidingproblems_endorseCI <- PropCIs::add4ci(hidingproblems_endorse$x, hidingproblems_endorse$n, conf.level=.95)
-
-endorse3 <-
-tibble(var = "hidingproblems_endorse", mean = hidingproblems_endorse$mean, ymin = hidingproblems_endorseCI$conf.int[1], ymax = hidingproblems_endorseCI$conf.int[2])
-
-fillingin_endorse <- QORP %>% 
-  summarise( sum=sum(fillingin_endorse, na.rm = T), n=sum(!is.na(fillingin_endorse)) ) %>%
-  dplyr::rename(x=sum) %>% mutate(mean=x/n)
-fillingin_endorseCI <- PropCIs::add4ci(fillingin_endorse$x, fillingin_endorse$n, conf.level=.95)
-
-endorse4 <-
-tibble(var = "fillingin_endorse", mean = fillingin_endorse$mean, ymin = fillingin_endorseCI$conf.int[1], ymax = fillingin_endorseCI$conf.int[2])
-
-prereg_endorse <- QORP %>% 
-  summarise( sum=sum(prereg_endorse, na.rm = T), n=sum(!is.na(prereg_endorse)) ) %>%
-  dplyr::rename(x=sum) %>% mutate(mean=x/n)
-prereg_endorseCI <- PropCIs::add4ci(prereg_endorse$x, prereg_endorse$n, conf.level=.95)
-
-endorse5 <-
-tibble(var = "prereg_endorse", mean = prereg_endorse$mean, ymin = prereg_endorseCI$conf.int[1], ymax = prereg_endorseCI$conf.int[2])
-
-opendata_endorse <- QORP %>% 
-  summarise( sum=sum(opendata_endorse, na.rm = T), n=sum(!is.na(opendata_endorse)) ) %>%
-  dplyr::rename(x=sum) %>% mutate(mean=x/n)
-opendata_endorseCI <- PropCIs::add4ci(opendata_endorse$x, opendata_endorse$n, conf.level=.95)
-
-endorse6 <-
-tibble(var = "opendata_endorse", mean = opendata_endorse$mean, ymin = opendata_endorseCI$conf.int[1], ymax = opendata_endorseCI$conf.int[2])
-
-opencode_endorse <- QORP %>% 
-  summarise( sum=sum(opencode_endorse, na.rm = T), n=sum(!is.na(opencode_endorse)) ) %>%
-  dplyr::rename(x=sum) %>% mutate(mean=x/n)
-opencode_endorseCI <- PropCIs::add4ci(opencode_endorse$x, opencode_endorse$n, conf.level=.95)
-
-endorse7 <-
-tibble(var = "opencode_endorse", mean = opencode_endorse$mean, ymin = opencode_endorseCI$conf.int[1], ymax = opencode_endorseCI$conf.int[2])
-
-rep_endorse <- QORP %>% 
-  summarise( sum=sum(rep_endorse, na.rm = T), n=sum(!is.na(rep_endorse)) ) %>%
-  dplyr::rename(x=sum) %>% mutate(mean=x/n)
-rep_endorseCI <- PropCIs::add4ci(rep_endorse$x, rep_endorse$n, conf.level=.95)
-
-endorse8 <-
-tibble(var = "rep_endorse", mean = rep_endorse$mean, ymin = rep_endorseCI$conf.int[1], ymax = rep_endorseCI$conf.int[2])
-
-preprints_endorse <- QORP %>% 
-  summarise( sum=sum(preprints_endorse, na.rm = T), n=sum(!is.na(preprints_endorse)) ) %>%
-  dplyr::rename(x=sum) %>% mutate(mean=x/n)
-preprints_endorseCI <- PropCIs::add4ci(preprints_endorse$x, preprints_endorse$n, conf.level=.95)
-
-endorse9 <-
-tibble(var = "preprints_endorse", mean = preprints_endorse$mean, ymin = preprints_endorseCI$conf.int[1], ymax = preprints_endorseCI$conf.int[2])
-
-biasedreporting_endorse <- QORP %>% 
-  summarise( sum=sum(biasedreporting_endorse, na.rm = T), n=sum(!is.na(biasedreporting_endorse)) ) %>%
-  dplyr::rename(x=sum) %>% mutate(mean=x/n)
-biasedreporting_endorseCI <- PropCIs::add4ci(biasedreporting_endorse$x, biasedreporting_endorse$n, conf.level=.95)
-
-endorse10 <-
-tibble(var = "biasedreporting_endorse", mean = biasedreporting_endorse$mean, ymin = biasedreporting_endorseCI$conf.int[1], ymax = biasedreporting_endorseCI$conf.int[2])
-
-biasedcov_endorse <- QORP %>% 
-  summarise( sum=sum(biasedcov_endorse, na.rm = T), n=sum(!is.na(biasedcov_endorse)) ) %>%
-  dplyr::rename(x=sum) %>% mutate(mean=x/n)
-biasedcov_endorseCI <- PropCIs::add4ci(biasedcov_endorse$x, biasedcov_endorse$n, conf.level=.95)
-
-endorse11 <-
-tibble(var = "biasedcov_endorse", mean = biasedcov_endorse$mean, ymin = biasedcov_endorseCI$conf.int[1], ymax = biasedcov_endorseCI$conf.int[2])
-
-pvalround_endorse <- QORP %>% 
-  summarise( sum=sum(pvalround_endorse, na.rm = T), n=sum(!is.na(pvalround_endorse)) ) %>%
-  dplyr::rename(x=sum) %>% mutate(mean=x/n)
-pvalround_endorseCI <- PropCIs::add4ci(pvalround_endorse$x, pvalround_endorse$n, conf.level=.95)
-
-endorse12 <-
-tibble(var = "pvalround_endorse", mean = pvalround_endorse$mean, ymin = pvalround_endorseCI$conf.int[1], ymax = pvalround_endorseCI$conf.int[2])
-
-outliers_endorse <- QORP %>% 
-  summarise( sum=sum(outliers_endorse, na.rm = T), n=sum(!is.na(outliers_endorse)) ) %>%
-  dplyr::rename(x=sum) %>% mutate(mean=x/n)
-outliers_endorseCI <- PropCIs::add4ci(outliers_endorse$x, outliers_endorse$n, conf.level=.95)
-
-endorse13 <-
-tibble(var = "outliers_endorse", mean = outliers_endorse$mean, ymin = outliers_endorseCI$conf.int[1], ymax = outliers_endorseCI$conf.int[2])
-
-stopping_endorse <- QORP %>% 
-  summarise( sum=sum(stopping_endorse, na.rm = T), n=sum(!is.na(stopping_endorse)) ) %>%
-  dplyr::rename(x=sum) %>% mutate(mean=x/n)
-stopping_endorseCI <- PropCIs::add4ci(stopping_endorse$x, stopping_endorse$n, conf.level=.95)
-
-endorse14 <-
-tibble(var = "stopping_endorse", mean = stopping_endorse$mean, ymin = stopping_endorseCI$conf.int[1], ymax = stopping_endorseCI$conf.int[2])
-
-analysischanging_endorse <- QORP_quant %>% 
-  summarise( sum=sum(analysischanging_endorse, na.rm = T), n=sum(!is.na(analysischanging_endorse)) ) %>%
-  dplyr::rename(x=sum) %>% mutate(mean=x/n)
-analysischanging_endorseCI <- PropCIs::add4ci(analysischanging_endorse$x, analysischanging_endorse$n, conf.level=.95)
-
-endorse15 <-
-tibble(var = "analysischanging_endorse", mean = analysischanging_endorse$mean, ymin = analysischanging_endorseCI$conf.int[1], ymax = analysischanging_endorseCI$conf.int[2])
-
-##Combines all of the above tibbles and deletes the smaller ones
-
-endorse <- bind_rows(endorse1, endorse2, endorse3, endorse4, endorse5, endorse6, endorse7, endorse8, endorse9, endorse10, endorse11, endorse12, endorse13, endorse14, endorse15)
-
-rm(endorse1, endorse2, endorse3, endorse4, endorse5, endorse6, endorse7, endorse8, endorse9, endorse10, endorse11, endorse12, endorse13, endorse14, endorse15)
-
-##Cleans up dataframe
-
-endorse <- mutate(endorse, mean = mean*100)
-endorse <- mutate(endorse, ymin = ymin*100)
-endorse <- mutate(endorse, ymax = ymax*100)
-endorse <- mutate(endorse, sorter = c(NA,NA,NA,NA,1,2,3,4,5,NA,NA,NA,NA,NA,NA))
-endorse <- arrange(endorse, sorter)
-endorse <- na.omit(endorse)
-endorse <- mutate(endorse, type = "endorse")
-
-##Moving on to estimates of others
-###Using a T-test to get confidence intervals, and hope that is okay, but it might violate some assumptions
-
-others <-
-QORP %>%
-select_at(vars(ends_with("others"))) %>%
-map_df(~ broom::tidy(t.test(.)), .id = 'var')
-
-others <- mutate(others, sorter = c(NA,NA,NA,NA,1,2,3,4,5,NA,NA,NA,NA,NA,NA))
-others <- arrange(others, sorter)
-others <- na.omit(others)
-others <- mutate(others, type = "others")
-others <- select(others, -p.value, -statistic, -parameter, -method, -alternative)
-others <- dplyr::rename(others, mean=estimate, ymin = conf.high, ymax = conf.low)
-
-endorse_other <- rbind(endorse, others)
-
-
-###Changes the name of the main variables
-
-####Prepares the main QRP variable of interest by removing the parts that identify the statistic used (this is captured in the type variable instead)
-
-endorse_other$var <- sub("_others", "", endorse_other$var)
-endorse_other$var <- sub("_endorse", "", endorse_other$var)
-
-####Changes the main QRP variable of interest to the standard QRP names
-
-endorse_other$var <- sub("prereg", "Preregister study", endorse_other$var)
-endorse_other$var <- sub("opendata", "Share data", endorse_other$var) 
-endorse_other$var <- sub("opencode", "Share code", endorse_other$var) 
-endorse_other$var <- sub("rep", "Attempt replication", endorse_other$var) 
-endorse_other$var <- sub("pAttempt Replicationrints", "Post article publicly", endorse_other$var) 
-
-####Changes the names of other variables
-
-endorse_other <- endorse_other %>% dplyr::rename(Question = type)
-
-#Creates Figure 2
-
-endorse_other_OSP <- 
-  ggplot(endorse_other, aes(fill = Question, y = mean, x = reorder(var, sorter))) +
-  ylab("% support using at least rare / perceived % using at least once") +
-  xlab("OSP") + 
-  scale_fill_brewer(palette = "Paired", name = "", labels = c("Support using", "Perceived prevalence")) +
-  theme( axis.text.x = element_text(angle = 45, hjust = 1, size = 12), legend.position = "top") +
-  geom_bar(position="dodge", stat="identity") +
-  geom_errorbar( aes(ymin = ymin, ymax = ymax), position=position_dodge(.9), colour="black", width = .2)  
-
-endorse_other_OSP
-
-ggsave("figures/fig2all_endorseother.png", width = 30, height = 20, units = "cm")
-
-
-##Creates textured version
-
-#endorse_other_open_fig_pattern <-
- # endorse_other_OSP +
-  # geom_col_pattern(
-   # aes(pattern = Question),
-  #  fill = 'white',
-   # colour                   = 'black',
-  #  pattern_spacing = .015,
-  #  pattern_density          = 0.15,
-  #  pattern_fill    = 'black',
-  #  pattern_colour  = 'black',
-  #  position = "dodge"
-  #  ) +
-#  geom_errorbar( aes(ymin = ymin, ymax = ymax), position=position_dodge(.9), colour="black", width = .2)
-
-#endorse_other_open_fig_pattern
-
-#ggsave("fig2_endorseother_open_pattern.png", width = 30, height = 20, units = "cm")
-
-```
-
-#Figure 2 - OSP endorsement and perceived use - Non-quant Researchers
-
-```{r figure2_non}
-
-#Creates figure plotting quant. criminologists' support for using an OSP (should be used at least rarely) and their perceived prevalence (people who use at least once)
-
-##Creates each row of a tibble with the practice, the mean for the practice, and the lower and higher CIs
-
-aspredicted_endorse <- QORP_nonquant %>% 
-  summarise( sum=sum(aspredicted_endorse, na.rm = T), n=sum(!is.na(aspredicted_endorse)) ) %>%
-  dplyr::rename(x=sum) %>% mutate(mean=x/n)
-aspredicted_endorseCI <- PropCIs::add4ci(aspredicted_endorse$x, aspredicted_endorse$n, conf.level=.95)
-
-endorse1 <-
-tibble(var = "aspredicted_endorse", mean = aspredicted_endorse$mean, ymin = aspredicted_endorseCI$conf.int[1], ymax = aspredicted_endorseCI$conf.int[2])
-
-omittinganalyses_endorse <- QORP_nonquant %>% 
-  summarise( sum=sum(omittinganalyses_endorse, na.rm = T), n=sum(!is.na(omittinganalyses_endorse)) ) %>%
-  dplyr::rename(x=sum) %>% mutate(mean=x/n)
-omittinganalyses_endorseCI <- PropCIs::add4ci(omittinganalyses_endorse$x, omittinganalyses_endorse$n, conf.level=.95)
-
-endorse2 <-
-tibble(var = "omittinganalyses_endorse", mean = omittinganalyses_endorse$mean, ymin = omittinganalyses_endorseCI$conf.int[1], ymax = omittinganalyses_endorseCI$conf.int[2])
-
-hidingproblems_endorse <- QORP_nonquant %>% 
-  summarise( sum=sum(hidingproblems_endorse, na.rm = T), n=sum(!is.na(hidingproblems_endorse)) ) %>%
-  dplyr::rename(x=sum) %>% mutate(mean=x/n)
-hidingproblems_endorseCI <- PropCIs::add4ci(hidingproblems_endorse$x, hidingproblems_endorse$n, conf.level=.95)
-
-endorse3 <-
-tibble(var = "hidingproblems_endorse", mean = hidingproblems_endorse$mean, ymin = hidingproblems_endorseCI$conf.int[1], ymax = hidingproblems_endorseCI$conf.int[2])
-
-fillingin_endorse <- QORP_nonquant %>% 
-  summarise( sum=sum(fillingin_endorse, na.rm = T), n=sum(!is.na(fillingin_endorse)) ) %>%
-  dplyr::rename(x=sum) %>% mutate(mean=x/n)
-fillingin_endorseCI <- PropCIs::add4ci(fillingin_endorse$x, fillingin_endorse$n, conf.level=.95)
-
-endorse4 <-
-tibble(var = "fillingin_endorse", mean = fillingin_endorse$mean, ymin = fillingin_endorseCI$conf.int[1], ymax = fillingin_endorseCI$conf.int[2])
-
-prereg_endorse <- QORP_nonquant %>% 
-  summarise( sum=sum(prereg_endorse, na.rm = T), n=sum(!is.na(prereg_endorse)) ) %>%
-  dplyr::rename(x=sum) %>% mutate(mean=x/n)
-prereg_endorseCI <- PropCIs::add4ci(prereg_endorse$x, prereg_endorse$n, conf.level=.95)
-
-endorse5 <-
-tibble(var = "prereg_endorse", mean = prereg_endorse$mean, ymin = prereg_endorseCI$conf.int[1], ymax = prereg_endorseCI$conf.int[2])
-
-opendata_endorse <- QORP_nonquant %>% 
-  summarise( sum=sum(opendata_endorse, na.rm = T), n=sum(!is.na(opendata_endorse)) ) %>%
-  dplyr::rename(x=sum) %>% mutate(mean=x/n)
-opendata_endorseCI <- PropCIs::add4ci(opendata_endorse$x, opendata_endorse$n, conf.level=.95)
-
-endorse6 <-
-tibble(var = "opendata_endorse", mean = opendata_endorse$mean, ymin = opendata_endorseCI$conf.int[1], ymax = opendata_endorseCI$conf.int[2])
-
-opencode_endorse <- QORP_nonquant %>% 
-  summarise( sum=sum(opencode_endorse, na.rm = T), n=sum(!is.na(opencode_endorse)) ) %>%
-  dplyr::rename(x=sum) %>% mutate(mean=x/n)
-opencode_endorseCI <- PropCIs::add4ci(opencode_endorse$x, opencode_endorse$n, conf.level=.95)
-
-endorse7 <-
-tibble(var = "opencode_endorse", mean = opencode_endorse$mean, ymin = opencode_endorseCI$conf.int[1], ymax = opencode_endorseCI$conf.int[2])
-
-rep_endorse <- QORP_nonquant %>% 
-  summarise( sum=sum(rep_endorse, na.rm = T), n=sum(!is.na(rep_endorse)) ) %>%
-  dplyr::rename(x=sum) %>% mutate(mean=x/n)
-rep_endorseCI <- PropCIs::add4ci(rep_endorse$x, rep_endorse$n, conf.level=.95)
-
-endorse8 <-
-tibble(var = "rep_endorse", mean = rep_endorse$mean, ymin = rep_endorseCI$conf.int[1], ymax = rep_endorseCI$conf.int[2])
-
-preprints_endorse <- QORP_nonquant %>% 
-  summarise( sum=sum(preprints_endorse, na.rm = T), n=sum(!is.na(preprints_endorse)) ) %>%
-  dplyr::rename(x=sum) %>% mutate(mean=x/n)
-preprints_endorseCI <- PropCIs::add4ci(preprints_endorse$x, preprints_endorse$n, conf.level=.95)
-
-endorse9 <-
-tibble(var = "preprints_endorse", mean = preprints_endorse$mean, ymin = preprints_endorseCI$conf.int[1], ymax = preprints_endorseCI$conf.int[2])
-
-##Combines all of the above tibbles and deletes the smaller ones
-
-endorse <- bind_rows(endorse1, endorse2, endorse3, endorse4, endorse5, endorse6, endorse7, endorse8, endorse9)
-
-rm(endorse1, endorse2, endorse3, endorse4, endorse5, endorse6, endorse7, endorse8, endorse9)
-
-##Cleans up dataframe
-
-endorse <- mutate(endorse, mean = mean*100)
-endorse <- mutate(endorse, ymin = ymin*100)
-endorse <- mutate(endorse, ymax = ymax*100)
-endorse <- mutate(endorse, sorter = c(NA,NA,NA,NA,1,2,3,4,5))
-endorse <- arrange(endorse, sorter)
-endorse <- na.omit(endorse)
-endorse <- mutate(endorse, type = "endorse")
-
-##Moving on to estimates of others
-###Using a T-test to get confidence intervals, and hope that is okay, but it might violate some assumptions
-
-others <-
-QORP_nonquant %>%
-select_at(vars(ends_with("others"))) %>%
-map_df(~ broom::tidy(t.test(.)), .id = 'var')
-
-others <- mutate(others, sorter = c(NA,NA,NA,NA,1,2,3,4,5))
-others <- arrange(others, sorter)
-others <- na.omit(others)
-others <- mutate(others, type = "others")
-others <- select(others, -p.value, -statistic, -parameter, -method, -alternative)
-others <- dplyr::rename(others, mean=estimate, ymin = conf.high, ymax = conf.low)
-
-endorse_other <- rbind(endorse, others)
-
-
-###Changes the name of the main variables
-
-####Prepares the main QRP variable of interest by removing the parts that identify the statistic used (this is captured in the type variable instead)
-
-endorse_other$var <- sub("_others", "", endorse_other$var)
-endorse_other$var <- sub("_endorse", "", endorse_other$var)
-
-####Changes the main QRP variable of interest to the standard QRP names
-
-endorse_other$var <- sub("prereg", "Preregister study", endorse_other$var)
-endorse_other$var <- sub("opendata", "Share data", endorse_other$var) 
-endorse_other$var <- sub("opencode", "Share code", endorse_other$var) 
-endorse_other$var <- sub("rep", "Attempt replication", endorse_other$var) 
-endorse_other$var <- sub("pAttempt Replicationrints", "Post article publicly", endorse_other$var) 
-
-####Changes the names of other variables
-
-endorse_other <- endorse_other %>% dplyr::rename(Question = type)
-
-#Creates Figure 2
-
-endorse_other_OSP <- 
-  ggplot(endorse_other, aes(fill = Question, y = mean, x = reorder(var, sorter))) +
-  ylab("% support using at least rare / perceived % using at least once") +
-  xlab("OSP") + 
-  scale_fill_brewer(palette = "Paired", name = "", labels = c("Support using", "Perceived prevalence")) +
-  theme( axis.text.x = element_text(angle = 45, hjust = 1, size = 12), legend.position = "top") +
-  geom_bar(position="dodge", stat="identity") +
-  geom_errorbar( aes(ymin = ymin, ymax = ymax), position=position_dodge(.9), colour="black", width = .2)  
-
-endorse_other_OSP
-
-ggsave("figures/fig2non_endorseother.png", width = 30, height = 20, units = "cm")
-
-
-##Creates textured version
-
-#endorse_other_open_fig_pattern <-
- # endorse_other_OSP +
-  # geom_col_pattern(
-   # aes(pattern = Question),
-  #  fill = 'white',
-   # colour                   = 'black',
-  #  pattern_spacing = .015,
-  #  pattern_density          = 0.15,
-  #  pattern_fill    = 'black',
-  #  pattern_colour  = 'black',
-  #  position = "dodge"
-  #  ) +
-#  geom_errorbar( aes(ymin = ymin, ymax = ymax), position=position_dodge(.9), colour="black", width = .2)
-
-#endorse_other_open_fig_pattern
-
-#ggsave("fig2_endorseother_open_pattern.png", width = 30, height = 20, units = "cm")
-
-```
-
-
-
 
 

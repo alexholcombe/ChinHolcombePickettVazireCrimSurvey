@@ -1,5 +1,5 @@
 "","var","estimate","statistic","p.value","parameter","conf.low","conf.high","method","alternative","sorter"
-"1","Omit nonsignificant studies or variables",1.94,58.116631183048,1.72626884805965e-260,654,1.87,2,"One Sample t-test","two.sided",1
+"1","Omit non-significant studies or variables",1.94,58.116631183048,1.72626884805965e-260,654,1.87,2,"One Sample t-test","two.sided",1
 "2","Sample selectively",1.82,63.214707351501,9.13203550089592e-281,654,1.77,1.88,"One Sample t-test","two.sided",2
 "3","Drop covariates selectively",1.87,56.2904925581315,9.62915085188111e-254,658,1.8,1.93,"One Sample t-test","two.sided",3
 "4","Underreport results",2.11,62.2317694397996,6.9441910260486e-278,658,2.04,2.18,"One Sample t-test","two.sided",4
