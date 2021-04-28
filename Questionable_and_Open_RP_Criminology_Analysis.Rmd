@@ -248,7 +248,7 @@ QORP_nonquant <-
 
 ```
 
-Demographics - full sample, quantitative sample, non-quantitative sample
+Demographics - full sample, quantitative sample, non-quantitative sample (for Table 1)
 ```{r demographics}
 
 #Descriptive Analyses - All data
@@ -331,6 +331,10 @@ QORP %>%
   group_by(classes) %>%
   summarise(n = n()) %>%
   mutate(freq = n / sum(n))
+  
+classes_quant$freq <- round(classes_quant$freq, digits = 2)
+
+write.csv(classes_quant, file = "tables/classes_quant.csv")
 
 ##Mean number of methods classes taken by quant vs non-quant researcher
 
@@ -363,7 +367,7 @@ write.csv(classes, file = "tables/demographics_careerlevel.csv")
 
 ```
 
-Descriptive statistics on QRP and OSP use - Table 1, Table 2, Table 3 - Quant researchers
+Descriptive statistics on QRP and OSP use - Table 2, Table 3, Table 4 - Quant researchers
 
 ``` {r main_descriptives}
 
