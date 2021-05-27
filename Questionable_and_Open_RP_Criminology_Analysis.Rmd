@@ -31,7 +31,7 @@ knitr::opts_chunk$set(echo = TRUE,
  echo=TRUE, eval=TRUE, warning=FALSE, message=FALSE)
 ```
 
-Wranglle the data by reading in the de-identified data and recoding some of it.
+Wrangle the data by reading in the de-identified data and recoding some of it.
 ```{r data prep}
 
 #Grabs the de-identified data
