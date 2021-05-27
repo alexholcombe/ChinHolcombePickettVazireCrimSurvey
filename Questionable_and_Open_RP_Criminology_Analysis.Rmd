@@ -476,6 +476,60 @@ write.csv(selfusepercent_quant, file = "tables/selfusepercent_quant.csv")
 
 ```
 
+#Table 3s - Perceived prev vs self-reported use at least once - requested by Reviewer #3
+
+``` {r prev_selfuse}
+
+others_quant<-
+QORP_quant %>%
+select_at(vars(ends_with("others"))) %>%
+map_df(~ broom::tidy(t.test(.)), .id = 'var')
+
+###Creates a variable to order this table in a consistent way and to be integrated with results from Table 3
+
+others_quant <- mutate(others_quant, sorter = c(1,2,3,4,NA,NA,NA,NA,NA,5,6,7,8,9,10))
+others_quant <- arrange(others_quant, sorter)
+
+###Rounds
+others_quant$estimate <- round(others_quant$estimate, digits = 0)
+others_quant$conf.low <- round(others_quant$conf.low, digits = 0)
+others_quant$conf.high <- round(others_quant$conf.high, digits = 0)
+
+#This is because the output has degrees of freedom
+others_quant$parameter <- others_quant$parameter + 1 
+
+###Provides prettier row names
+
+others_quant$var <- sub("_others", "", others_quant$var)
+
+###Provides proper practice names
+
+others_quant$var <- sub("prereg", "Preregister study", others_quant$var)
+others_quant$var <- sub("opendata", "Share data", others_quant$var) 
+others_quant$var <- sub("opencode", "Share code", others_quant$var) 
+others_quant$var <- sub("rep", "Attempt replication", others_quant$var) 
+others_quant$var <- sub("pAttempt replicationrints", "Post article publicly", others_quant$var) 
+
+others_quant$var <- sub("biasedAttempt replicationorting", "Omit nonsignificant studies or variables", others_quant$var)
+others_quant$var <- sub("stopping", "Sample selectively", others_quant$var) 
+others_quant$var <- sub("biasedcov", "Drop covariates selectively", others_quant$var) 
+others_quant$var <- sub("omittinganalyses", "Underreport results", others_quant$var) 
+others_quant$var <- sub("pvalround", "Round p-values", others_quant$var) 
+others_quant$var <- sub("analysischanging", "Switch analysis selectively", others_quant$var)
+others_quant$var <- sub("outliers", "Exclude data selectively", others_quant$var)
+others_quant$var <- sub("aspredicted", "HARK", others_quant$var) 
+others_quant$var <- sub("hidingproblems", "Hide problems", others_quant$var)
+others_quant$var <- sub("fillingin", "Hide imputation", others_quant$var)
+
+
+others_quant
+
+write.csv(others_quant, file = "tables/others_quant.csv")
+
+```
+
+
+
 
 #Descriptive statistics on QRP and OSP use - Table 1, Table 2, Table 3 - All researchers
 
